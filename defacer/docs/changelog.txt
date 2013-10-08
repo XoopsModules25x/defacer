@@ -1,0 +1,33 @@
+<b><u>Version 1.11 Final (2012-06-19)</u></b>
+
+- Converted to XOOPS 2.5.x GUI (mamba)
+- updated Icons to make them consistent with other modules
+
+<b><u>Version 1.10 Final (2012-05-22)</u></b>
+
+- Converted to XOOPS 2.5.x GUI (mamba)
+- updated Icons to make them consistent with other modules
+
+<b><u> Version 1.0 Final (2009-09-05)</u></b>
+
+- Added : jgrowl redirection.
+- Added : blocks anywhere.
+
+<b><u>Version 1.0 RC (2009-09-01)</u></b>
+
+- Improved : Refactored admin area.
+- Added : Defacer in xoopsLogger Extra.
+
+<b><u> Version 1.0 Beta (2008-11-08)</u></b>
+
+- Improved : More friendly admin area.
+- Improved : Less queries needed.
+- Improved : Less language definitions needed.
+- Added : Defacer in xoopsLogger.
+- Added : Settings to disable each Defacer actions.
+
+
+<b><u> Version 1.0 Alpha (2008-10-27)</u></b>
+- First public release of the module.
+
+
