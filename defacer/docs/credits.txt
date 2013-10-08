@@ -1,0 +1,6 @@
+Credits
+===============
+
+Originally developed by Ricardo Costa (Trabis, www.xuups.com)
+
+Updated to XOOPS 2.5.0 Standard GUI by Michael Beck (Mamba), with contributions by Gregory Mage (Mage)
