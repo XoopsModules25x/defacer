@@ -18,11 +18,11 @@
  * @version         $Id: page.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
 
-if (!class_exists('XoopsPersistableObjectHandler')) {
-    include dirname(__FILE__) . '/object.php';
-}
+//if (!class_exists('XoopsPersistableObjectHandler')) {
+//    include dirname(__FILE__) . '/object.php';
+//}
 
 /**
  * Class DefacerPage

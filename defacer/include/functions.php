@@ -18,7 +18,7 @@
  * @version         $Id: functions.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
 
 include_once dirname(__FILE__) . '/common.php';
 
