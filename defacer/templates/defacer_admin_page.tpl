@@ -12,7 +12,7 @@ function defacer_showDiv(type, id){
 }
 </script>
 <!--
-<div style="background-image: url(<{$xoops_url}>/modules/defacer/images/pages_big.png);
+<div style="background-image: url(<{$xoops_url}>/modules/defacer/assets/images/pages_big.png);
             background-repeat: no-repeat;
             background-position: left top;
             font-size: 20px;
@@ -53,15 +53,15 @@ function defacer_showDiv(type, id){
         <td align="left"><{$item.page_url}></td>
         <td><a href="admin_page.php?op=changestatus&itemid=<{$item.page_id}>"><img src="<{xoModuleIcons16 }><{$item.page_status}>.png" title="<{$smarty.const._AM_DEFACER_CHANGESTATUS}>" alt="<{$smarty.const._AM_DEFACER_CHANGESTATUS}>" /></a></td>
         <td>
-          <a href="admin_theme.php?op=edit&itemid=<{$item.page_id}>"><img src="<{$xoops_url}>/modules/defacer/images/themes_small.png" title="<{$smarty.const._AM_DEFACER_THEMEMAN}>" alt="<{$smarty.const._AM_DEFACER_THEMEMAN}>" /></a>
-          <a href="admin_meta.php?op=edit&itemid=<{$item.page_id}>"><img src="<{$xoops_url}>/modules/defacer/images/metas_small.png" title="<{$smarty.const._AM_DEFACER_METAMAN}>" alt="<{$smarty.const._AM_DEFACER_METAMAN}>" /></a>
-          <a href="admin_permission.php?op=edit&itemid=<{$item.page_id}>"><img src="<{$xoops_url}>/modules/defacer/images/permissions_small.png" title="<{$smarty.const._AM_DEFACER_PERMISSIONMAN}>" alt="<{$smarty.const._AM_DEFACER_PERMISSIONMAN}>" /></a>
+          <a href="admin_theme.php?op=edit&itemid=<{$item.page_id}>"><img src="<{$xoops_url}>/modules/defacer/assets/images/themes_small.png" title="<{$smarty.const._AM_DEFACER_THEMEMAN}>" alt="<{$smarty.const._AM_DEFACER_THEMEMAN}>" /></a>
+          <a href="admin_meta.php?op=edit&itemid=<{$item.page_id}>"><img src="<{$xoops_url}>/modules/defacer/assets/images/metas_small.png" title="<{$smarty.const._AM_DEFACER_METAMAN}>" alt="<{$smarty.const._AM_DEFACER_METAMAN}>" /></a>
+          <a href="admin_permission.php?op=edit&itemid=<{$item.page_id}>"><img src="<{$xoops_url}>/modules/defacer/assets/images/permissions_small.png" title="<{$smarty.const._AM_DEFACER_PERMISSIONMAN}>" alt="<{$smarty.const._AM_DEFACER_PERMISSIONMAN}>" /></a>
         </td>
         <td>
           <{if $item.page_vurl != '0'}>
             <a href="<{$item.page_vurl}>" rel="external"><img src="<{xoModuleIcons16 search.png}>" title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>" /></a>
           <{else}>
-            <img src="<{$xoops_url}>/modules/defacer/images/view_big_off.png" title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>" />
+            <img src="<{$xoops_url}>/modules/defacer/assets/images/view_big_off.png" title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>" />
           <{/if}>
       	  <a href="admin_page.php?op=edit&itemid=<{$item.page_id}>"><img src="<{xoModuleIcons16 edit.png}>" title="<{$smarty.const._EDIT}>" alt="<{$smarty.const._EDIT}>" /></a>
       	  <a href="admin_page.php?op=del&itemid=<{$item.page_id}>"><img src="<{xoModuleIcons16 delete.png}>" title="<{$smarty.const._DELETE}>" alt="<{$smarty.const._DELETE}>" /></a>

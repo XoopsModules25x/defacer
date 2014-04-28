@@ -50,6 +50,9 @@ class DefacerAbout
     var $_lang_by;
     var $_tpl;
 
+    /**
+     * @param string $aboutTitle
+     */
     function DefacerAbout($aboutTitle = 'About')
     {
         global $xoopsModule, $xoopsConfig;
@@ -81,9 +84,15 @@ class DefacerAbout
 
     }
 
+    /**
+     * @param $value
+     *
+     * @return mixed
+     */
     function sanitize($value)
     {
         $myts =& MyTextSanitizer::getInstance();
+
         return $myts->displayTarea($value, 1);
     }
 
@@ -170,10 +179,8 @@ class DefacerAbout
             fclose($handle);
         }
 
-        $this->_tpl->display('db:defacer_admin_about.html');
+        $this->_tpl->display('db:defacer_admin_about.tpl');
 
         xoops_cp_footer();
     }
 }
-
-?>

@@ -24,6 +24,9 @@ if (!class_exists('XoopsPersistableObjectHandler')) {
     include dirname(__FILE__) . '/object.php';
 }
 
+/**
+ * Class DefacerPage
+ */
 class DefacerPage extends XoopsObject
 {
 
@@ -42,13 +45,24 @@ class DefacerPage extends XoopsObject
     }
 }
 
+/**
+ * Class DefacerPageHandler
+ */
 class DefacerPageHandler extends XoopsPersistableObjectHandler
 {
+    /**
+     * @param $db
+     */
     function DefacerPageHandler(&$db)
     {
         $this->XoopsPersistableObjectHandler($db, 'defacer_page', 'DefacerPage', 'page_id', 'page_title');
     }
 
+    /**
+     * @param mixed|null $id
+     *
+     * @return DefacerPage|object
+     */
     function &get($id)
     {
         $id = intval($id);
@@ -59,15 +73,23 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
                 if ($numrows == 1) {
                     $obj = new DefacerPage();
                     $obj->assignVars($this->db->fetchArray($result));
+
                     return $obj;
                 }
             }
         }
 
         $obj = $this->create();
+
         return $obj;
     }
 
+    /**
+     * @param null $criteria
+     * @param bool $id_as_key
+     *
+     * @return array
+     */
     function getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
@@ -103,9 +125,15 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
             }
             unset($page);
         }
+
         return $ret;
     }
 
+    /**
+     * @param null $criteria
+     *
+     * @return int
+     */
     function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
@@ -122,9 +150,15 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         list($count) = $this->db->fetchRow($result);
+
         return $count;
     }
 
+    /**
+     * @param null $criteria
+     *
+     * @return array
+     */
     function getList($criteria = null)
     {
         $pages = $this->getObjects($criteria, true);
@@ -132,19 +166,33 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         foreach (array_keys($pages) as $i) {
             $ret[$i] = $pages[$i]->getVar('name') . ' -> ' . $pages[$i]->getVar('page_title');
         }
+
         return $ret;
     }
 
+    /**
+     * @param $page
+     * @param $field_name
+     * @param $field_value
+     *
+     * @return bool
+     */
     function updateByField(&$page, $field_name, $field_value)
     {
         $page->unsetNew();
         $page->setVar($field_name, $field_value);
+
         return $this->insert($page);
     }
 
+    /**
+     * @param null $value
+     *
+     * @return string
+     */
     function getPageSelOptions($value=null)
     {
-        if (!is_array($value)){
+        if (!is_array($value)) {
             $value = array($value);
         }
         $module_handler =& xoops_gethandler('module');
@@ -152,19 +200,19 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         $criteria->add(new Criteria('isactive', 1));
         $module_list =& $module_handler->getObjects($criteria);
         $mods = '';
-        foreach ($module_list as $module){
+        foreach ($module_list as $module) {
             $mods .= '<optgroup label="'.$module->getVar('name').'">';
             $criteria = new CriteriaCompo(new Criteria('page_moduleid', $module->getVar('mid')));
             $criteria->add(new Criteria('page_status', 1));
             $pages =& $this->getObjects($criteria);
             $sel = '';
-            if (in_array($module->getVar('mid').'-0',$value)){
+            if (in_array($module->getVar('mid').'-0',$value)) {
                 $sel = ' selected=selected';
             }
             $mods .= '<option value="'.$module->getVar('mid').'-0"'.$sel.'>'._AM_ALLPAGES.'</option>';
-            foreach ($pages as $page){
+            foreach ($pages as $page) {
                 $sel = '';
-                if (in_array($module->getVar('mid').'-'.$page->getVar('page_id'),$value)){
+                if (in_array($module->getVar('mid').'-'.$page->getVar('page_id'),$value)) {
                     $sel = ' selected=selected';
                 }
                 $mods .= '<option value="'.$module->getVar('mid').'-'.$page->getVar('page_id').'"'.$sel.'>'.$page->getVar('page_title').'</option>';
@@ -177,16 +225,16 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         $criteria->add(new Criteria('page_status', 1));
         $pages =& $this->getObjects($criteria);
         $cont = '';
-        if (count($pages) > 0){
+        if (count($pages) > 0) {
             $cont = '<optgroup label="'.$module->getVar('name').'">';
             $sel = '';
-            if (in_array($module->getVar('mid').'-0',$value)){
+            if (in_array($module->getVar('mid').'-0',$value)) {
                 $sel = ' selected=selected';
             }
             $cont .= '<option value="'.$module->getVar('mid').'-0"'.$sel.'>'._AM_ALLPAGES.'</option>';
-            foreach ($pages as $page){
+            foreach ($pages as $page) {
                 $sel = '';
-                if (in_array($module->getVar('mid').'-'.$page->getVar('page_id'),$value)){
+                if (in_array($module->getVar('mid').'-'.$page->getVar('page_id'),$value)) {
                     $sel = ' selected=selected';
                 }
                 $cont .= '<option value="'.$module->getVar('mid').'-'.$page->getVar('page_id').'"'.$sel.'>'.$page->getVar('page_title').'</option>';
@@ -194,10 +242,10 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
             $cont .= '</optgroup>';
         }
         $sel = $sel1 = '';
-        if (in_array('0-1',$value)){
+        if (in_array('0-1',$value)) {
             $sel = ' selected=selected';
         }
-        if (in_array('0-0',$value)){
+        if (in_array('0-0',$value)) {
             $sel1 = ' selected=selected';
         }
         $ret = '<option value="0-1"'.$sel.'>'._AM_TOPPAGE.'</option><option value="0-0"'.$sel1.'>'._AM_ALLPAGES.'</option>';
@@ -206,4 +254,3 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         return $ret;
     }
 }
-?>

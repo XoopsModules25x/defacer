@@ -65,4 +65,3 @@ if (is_object($defacer->getModule()) && $defacer->getModule()->getVar('isactive'
 
     $GLOBALS['xoopsLogger']->stopTime('Defacer Header');
 }
-?>

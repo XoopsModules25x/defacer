@@ -20,6 +20,9 @@
 
 defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
+/**
+ * Class DefacerDefacer
+ */
 class DefacerDefacer
 {
     var $dirname;
@@ -29,18 +32,27 @@ class DefacerDefacer
     var $debug;
     var $debugArray = array();
 
+    /**
+     * @param $debug
+     */
     function DefacerDefacer($debug)
     {
         $this->debug = $debug;
         $this->dirname = basename(dirname(dirname(__FILE__)));
     }
 
-    function &getInstance($debug = false)
+    /**
+     * @param bool $debug
+     *
+     * @return DefacerDefacer
+     */
+    static function &getInstance($debug = false)
     {
         static $instance = false;
         if (!$instance) {
             $instance = new DefacerDefacer($debug);
         }
+
         return $instance;
     }
 
@@ -49,9 +61,15 @@ class DefacerDefacer
         if ($this->module == null) {
             $this->initModule();
         }
+
         return $this->module;
     }
 
+    /**
+     * @param null $name
+     *
+     * @return null
+     */
     function getConfig($name = null)
     {
         if ($this->config == null) {
@@ -59,18 +77,27 @@ class DefacerDefacer
         }
         if (!$name) {
             $this->addLog("Getting all config");
+
             return $this->config;
         }
 
         if (!isset($this->config[$name])) {
             $this->addLog("ERROR :: Config '{$name}' does not exist");
+
             return null;
         }
 
         $this->addLog("Getting config '{$name}' : " .$this->config[$name]);
+
         return $this->config[$name];
     }
 
+    /**
+     * @param null $name
+     * @param null $value
+     *
+     * @return mixed
+     */
     function setConfig($name = null, $value = null)
     {
         if ($this->config == null) {
@@ -80,9 +107,15 @@ class DefacerDefacer
         $this->config[$name] = $value;
 
         $this->addLog("Setting config '{$name}' : " . $this->config[$name]);
+
         return $this->config[$name];
     }
 
+    /**
+     * @param $name
+     *
+     * @return bool
+     */
     function &getHandler($name)
     {
         $ret = false;
@@ -92,10 +125,11 @@ class DefacerDefacer
 
         if (!isset($this->handler[$name . '_handler'])) {
             $this->addLog("ERROR :: Handler '{$name}' does not exist");
-        }  else {
+        } else {
             $this->addLog("Getting handler '{$name}'");
             $ret = $this->handler[$name . '_handler'];
         }
+
         return $ret;
     }
 
@@ -124,12 +158,18 @@ class DefacerDefacer
         }
     }
 
+    /**
+     * @param $name
+     */
     function initHandler($name)
     {
         $this->addLog('INIT ' . $name . ' HANDLER');
         $this->handler[$name . '_handler'] =& xoops_getModuleHandler($name, $this->dirname);
     }
 
+    /**
+     * @param $log
+     */
     function addLog($log)
     {
         if ($this->debug) {
@@ -139,4 +179,3 @@ class DefacerDefacer
         }
     }
 }
-?>

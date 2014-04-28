@@ -23,42 +23,34 @@ defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 /**
  * General Information
  */
-$modversion['name'] = _MI_DEFACER_MD_NAME;
-$modversion['version'] = 1.11;
-$modversion['description'] = _MI_DEFACER_MD_DSC;
-$modversion['author'] = "Trabis (www.xuups.com)";
-$modversion['credits'] = "Trabis (http://www.xuups.com), The ImpressCMS Project (http://www.impresscms.org/) & TheRplima (http://community.impresscms.org/userinfo.php?uid=106)";
-$modversion['help'] = 'page=help';
-$modversion['license'] = 'GNU GPL';
-$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html/';
-$modversion['official'] = 0;
-$modversion['dirname'] = basename(dirname(__FILE__));
-
+$modversion['name']           = _MI_DEFACER_MD_NAME;
+$modversion['version']        = 1.12;
+$modversion['description']    = _MI_DEFACER_MD_DSC;
+$modversion['author']         = "Trabis (www.xuups.com)";
+$modversion['credits']        = "Trabis (http://www.xuups.com), The ImpressCMS Project (http://www.impresscms.org/) & TheRplima (http://community.impresscms.org/userinfo.php?uid=106)";
+$modversion['help']           = 'page=help';
+$modversion['license']        = 'GNU GPL';
+$modversion['license_url']    = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']       = 0;
+$modversion['dirname']        = basename(dirname(__FILE__));
 $modversion['dirmoduleadmin'] = '/Frameworks/moduleclasses/moduleadmin';
-$modversion['icons16'] = '../../Frameworks/moduleclasses/icons/16';
-$modversion['icons32'] = '../../Frameworks/moduleclasses/icons/32';
-
+$modversion['icons16']        = '../../Frameworks/moduleclasses/icons/16';
+$modversion['icons32']        = '../../Frameworks/moduleclasses/icons/32';
 //about
-$modversion['release_date']     = '2012/05/22';
-$modversion["module_website_url"] = "www.xoops.org/";
+$modversion["module_status"]       = "Beta 1";
+$modversion["release_date"]        = "2014/04/23";
+$modversion["module_website_url"]  = "www.xoops.org/";
 $modversion["module_website_name"] = "XOOPS";
-$modversion["module_status"] = "Final";
-$modversion['min_php']='5.2';
-$modversion['min_xoops']="2.5";
-$modversion['min_admin'] = '1.1';
-$modversion['min_db'] = array('mysql' => '5.0.7', 'mysqli' => '5.0.7');
-
+$modversion['min_php']             = '5.3.7';
+$modversion['min_xoops']           = "2.5.7";
+$modversion['min_admin']           = '1.1';
+$modversion['min_db']              = array('mysql' => '5.0.7', 'mysqli' => '5.0.7');
 
 /**
  * Images information
  */
-if (defined("ICMS_VERSION_NAME")) {
-    $modversion['image']     = "images/icon_big.png";
-    $modversion['iconsmall'] = "images/icon_small.png";
-    $modversion['iconbig']   = "images/icon_big.png";
-} else {
-    $modversion['image'] = "images/defacer_slogo.png";
-}
+
+$modversion['image'] = "assets/images/defacer_slogo.png";
 
 /**
  * Administrative information
@@ -80,17 +72,17 @@ $modversion['tables'][3] = $modversion['dirname']."_permission";
 /**
  * Templates information
  */
-$modversion['templates'][] = array('file' => "defacer_admin_page.html", 'description' => "");
-$modversion['templates'][] = array('file' => "defacer_admin_theme.html", 'description' => "");
-$modversion['templates'][] = array('file' => "defacer_admin_meta.html", 'description' => "");
-$modversion['templates'][] = array('file' => "defacer_admin_permission.html", 'description' => "");
-$modversion['templates'][] = array('file' => "defacer_admin_about.html", 'description' => "");
+$modversion['templates'][] = array('file' => "defacer_admin_page.tpl", 'description' => "");
+$modversion['templates'][] = array('file' => "defacer_admin_theme.tpl", 'description' => "");
+$modversion['templates'][] = array('file' => "defacer_admin_meta.tpl", 'description' => "");
+$modversion['templates'][] = array('file' => "defacer_admin_permission.tpl", 'description' => "");
+$modversion['templates'][] = array('file' => "defacer_admin_about.tpl", 'description' => "");
 
 /**
  * Config information
  */
 $i = 0;
-$i++;
+++$i;
 $modversion['config'][$i]['name'] = 'disable_defacer';
 $modversion['config'][$i]['title'] = '_MI_DEFACER_DISDEFACER';
 $modversion['config'][$i]['description'] = '_MI_PUB_DISDEFACER_DSC';
@@ -98,7 +90,7 @@ $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 0;
 
-$i++;
+++$i;
 $modversion['config'][$i]['name'] = 'disable_themes';
 $modversion['config'][$i]['title'] = '_MI_DEFACER_DISTHEMES';
 $modversion['config'][$i]['description'] = '_MI_PUB_DISTHEMES_DSC';
@@ -106,7 +98,7 @@ $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 0;
 
-$i++;
+++$i;
 $modversion['config'][$i]['name'] = 'disable_metas';
 $modversion['config'][$i]['title'] = '_MI_DEFACER_DISMETAS';
 $modversion['config'][$i]['description'] = '_MI_PUB_DISMETAS_DSC';
@@ -114,7 +106,7 @@ $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 0;
 
-$i++;
+++$i;
 $modversion['config'][$i]['name'] = 'disable_permissions';
 $modversion['config'][$i]['title'] = '_MI_DEFACER_DISPERMISSIONS';
 $modversion['config'][$i]['description'] = '_MI_PUB_DISPERMISSIONS_DSC';
@@ -122,7 +114,7 @@ $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 0;
 
-$i++;
+++$i;
 $modversion['config'][$i]['name'] = 'xoops_url';
 $modversion['config'][$i]['title'] = '_MI_DEFACER_XOOPS_URL';
 $modversion['config'][$i]['description'] = '_MI_PUB_XOOPS_URL_DSC';
@@ -130,14 +122,13 @@ $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = XOOPS_URL;
 
-$i++;
+++$i;
 $modversion['config'][$i]['name'] = 'enable_redirect';
 $modversion['config'][$i]['title'] = '_MI_DEFACER_ENABLE_REDIRECT';
 $modversion['config'][$i]['description'] = '_MI_PUB_ENABLE_REDIRECT_DSC';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 1;
-
 
 /**
  * Search information
@@ -184,4 +175,3 @@ $modversion['submit_feature'] = "http://www.xuups.com/modules/newbb/viewforum.ph
 
 $modversion['author_word'] = "";
 $modversion['warning'] = "";
-?>

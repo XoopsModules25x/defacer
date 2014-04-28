@@ -24,6 +24,9 @@ if (!class_exists('XoopsPersistableObjectHandler')) {
     include dirname(__FILE__) . '/object.php';
 }
 
+/**
+ * Class DefacerPermission
+ */
 class DefacerPermission extends XoopsObject
 {
     /**
@@ -37,13 +40,24 @@ class DefacerPermission extends XoopsObject
     }
 }
 
+/**
+ * Class DefacerPermissionHandler
+ */
 class DefacerPermissionHandler extends XoopsPersistableObjectHandler
 {
+    /**
+     * @param $db
+     */
     function DefacerPermissionHandler(&$db)
     {
         $this->XoopsPersistableObjectHandler($db, 'defacer_permission', 'DefacerPermission', 'permission_id', 'permission_groups');
     }
 
+    /**
+     * @param mixed|null $id
+     *
+     * @return DefacerPermission|object
+     */
     function &get($id)
     {
         $id = intval($id);
@@ -54,20 +68,29 @@ class DefacerPermissionHandler extends XoopsPersistableObjectHandler
                 if ($numrows == 1) {
                     $obj = new DefacerPermission();
                     $obj->assignVars($this->db->fetchArray($result));
+
                     return $obj;
                 }
             }
         }
 
         $obj = $this->create();
+
         return $obj;
     }
 
+    /**
+     * @param $obj
+     * @param $field_name
+     * @param $field_value
+     *
+     * @return bool
+     */
     function updateByField(&$obj, $field_name, $field_value)
     {
         $obj->unsetNew();
         $obj->setVar($field_name, $field_value);
+
         return $this->insert($obj);
     }
 }
-?>

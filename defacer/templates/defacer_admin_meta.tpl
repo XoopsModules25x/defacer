@@ -12,7 +12,7 @@ function defacer_showDiv(type, id){
 }
 </script>
 <!--
-<div style="background-image: url(<{$xoops_url}>/modules/defacer/images/pages_big.png);
+<div style="background-image: url(<{$xoops_url}>/modules/defacer/assets/images/pages_big.png);
             background-repeat: no-repeat;
             background-position: left top;
             font-size: 20px;
@@ -54,7 +54,7 @@ function defacer_showDiv(type, id){
           <{if $item.meta_vurl != '0'}>
             <a href="<{$item.meta_vurl}>" rel="external"><img src="<{xoModuleIcons16 search.png}>" title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>" /></a>
           <{else}>
-            <img src="<{$xoops_url}>/modules/defacer/images/view_big_off.png" title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>" />
+            <img src="<{$xoops_url}>/modules/defacer/assets/images/view_big_off.png" title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>" />
           <{/if}>
       	  <a href="admin_meta.php?op=edit&itemid=<{$item.meta_id}>"><img src="<{xoModuleIcons16 edit.png}>" title="<{$smarty.const._EDIT}>" alt="<{$smarty.const._EDIT}>" /></a>
       	  <a href="admin_meta.php?op=del&itemid=<{$item.meta_id}>"><img src="<{xoModuleIcons16 delete.png}>" title="<{$smarty.const._DELETE}>" alt="<{$smarty.const._DELETE}>" /></a>

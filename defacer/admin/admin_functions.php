@@ -23,6 +23,10 @@ defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
+/**
+ * @param int    $currentoption
+ * @param string $breadcrumb
+ */
 function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
 {
     $defacer =& DefacerDefacer::getInstance();
@@ -30,11 +34,11 @@ function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
     echo "
     <style type='text/css'>
     #buttontop { float:left; width:100%; background: #e7e7e7; font-size:93%; line-height:normal; border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; margin: 0; }
-    #buttonbar { float:left; width:100%; background: #e7e7e7 url('" . XOOPS_URL . "/modules/" . $defacer->getModule()->dirname() . "/images/bg.png') repeat-x left bottom; font-size:93%; line-height:normal; border-left: 1px solid black; border-right: 1px solid black; margin-bottom: 12px; }
+    #buttonbar { float:left; width:100%; background: #e7e7e7 url('" . XOOPS_URL . "/modules/" . $defacer->getModule()->dirname() . "/assets/images/bg.png') repeat-x left bottom; font-size:93%; line-height:normal; border-left: 1px solid black; border-right: 1px solid black; margin-bottom: 12px; }
     #buttonbar ul { margin:0; margin-top: 15px; padding:10px 10px 0; list-style:none; }
     #buttonbar li { display:inline; margin:0; padding:0; }
-    #buttonbar a { float:left; background:url('" . XOOPS_URL . "/modules/" . $defacer->getModule()->dirname() . "/images/left_both.png') no-repeat left top; margin:0; padding:0 0 0 9px; border-bottom:1px solid #000; text-decoration:none; }
-    #buttonbar a span { float:left; display:block; background:url('" . XOOPS_URL . "/modules/" . $defacer->getModule()->dirname() . "/images/right_both.png') no-repeat right top; padding:5px 15px 4px 6px; font-weight:bold; color:#765; }
+    #buttonbar a { float:left; background:url('" . XOOPS_URL . "/modules/" . $defacer->getModule()->dirname() . "/assets/images/left_both.png') no-repeat left top; margin:0; padding:0 0 0 9px; border-bottom:1px solid #000; text-decoration:none; }
+    #buttonbar a span { float:left; display:block; background:url('" . XOOPS_URL . "/modules/" . $defacer->getModule()->dirname() . "/assets/images/right_both.png') no-repeat right top; padding:5px 15px 4px 6px; font-weight:bold; color:#765; }
     /* Commented Backslash Hack hides rule from IE5-Mac \*/
     #buttonbar a span {float:none;}
     /* End IE5-Mac hack */
@@ -47,7 +51,7 @@ function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
     ";
 
     $tblColors = array('', '', '', '', '');
-    if($currentoption >= 0) {
+    if ($currentoption >= 0) {
         $tblColors[$currentoption] = 'current';
     }
 
@@ -73,4 +77,3 @@ function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
     echo "<li id='" . $tblColors[4] . "'><a href=\"admin_about.php\"\"><span>" . _MI_DEFACER_ABOUT . "</span></a></li>\n";
     echo "</ul></div><div>&nbsp;</div>";
 }
-?>

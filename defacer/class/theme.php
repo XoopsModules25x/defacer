@@ -24,6 +24,9 @@ if (!class_exists('XoopsPersistableObjectHandler')) {
     include dirname(__FILE__) . '/object.php';
 }
 
+/**
+ * Class DefacerTheme
+ */
 class DefacerTheme extends XoopsObject
 {
     /**
@@ -37,13 +40,24 @@ class DefacerTheme extends XoopsObject
     }
 }
 
+/**
+ * Class DefacerThemeHandler
+ */
 class DefacerThemeHandler extends XoopsPersistableObjectHandler
 {
+    /**
+     * @param $db
+     */
     function DefacerThemeHandler(&$db)
     {
         $this->XoopsPersistableObjectHandler($db, 'defacer_theme', 'DefacerTheme', 'theme_id', 'theme_name');
     }
 
+    /**
+     * @param mixed|null $id
+     *
+     * @return DefacerTheme|object
+     */
     function &get($id)
     {
         $id = intval($id);
@@ -54,20 +68,29 @@ class DefacerThemeHandler extends XoopsPersistableObjectHandler
                 if ($numrows == 1) {
                     $obj = new DefacerTheme();
                     $obj->assignVars($this->db->fetchArray($result));
+
                     return $obj;
                 }
             }
         }
 
         $obj = $this->create();
+
         return $obj;
     }
 
+    /**
+     * @param $obj
+     * @param $field_name
+     * @param $field_value
+     *
+     * @return bool
+     */
     function updateByField(&$obj, $field_name, $field_value)
     {
         $obj->unsetNew();
         $obj->setVar($field_name, $field_value);
+
         return $this->insert($obj);
     }
 }
-?>

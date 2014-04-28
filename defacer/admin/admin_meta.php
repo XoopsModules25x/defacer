@@ -59,6 +59,12 @@ switch ($op) {
         break;
 }
 
+/**
+ * @param int $start
+ * @param int $limit
+ *
+ * @return mixed|string
+ */
 function defacer_index($start = 0, $limit = 0)
 {
     global $xoopsTpl;
@@ -91,7 +97,7 @@ function defacer_index($start = 0, $limit = 0)
         if (substr($page->getVar('page_url'), -1) == '*') {
             $item['meta_vurl'] = 0;
         } else {
-            if ($page->getVar('page_moduleid') == 1){
+            if ($page->getVar('page_moduleid') == 1) {
                 $item['meta_vurl'] = XOOPS_URL . '/' . $page->getVar('page_url');
             } else {
                 $item['meta_vurl'] = XOOPS_URL . '/modules/' . $page->getVar('dirname') . '/' . $page->getVar('page_url');
@@ -103,7 +109,7 @@ function defacer_index($start = 0, $limit = 0)
 
     $xoopsTpl->assign('form', defacer_form());
 
-    return $xoopsTpl->fetch('db:defacer_admin_meta.html');
+    return $xoopsTpl->fetch('db:defacer_admin_meta.tpl');
 }
 
 function defacer_add()
@@ -126,6 +132,9 @@ function defacer_add()
     redirect_header(basename(__FILE__) , 2, $msg);
 }
 
+/**
+ * @param $itemid
+ */
 function defacer_edit($itemid)
 {
     $defacer =& DefacerDefacer::getInstance();
@@ -146,6 +155,9 @@ function defacer_edit($itemid)
     redirect_header(basename(__FILE__), 2, $msg);
 }
 
+/**
+ * @param $itemid
+ */
 function defacer_del($itemid)
 {
     $defacer =& DefacerDefacer::getInstance();
@@ -173,6 +185,9 @@ function defacer_del($itemid)
     redirect_header(basename(__FILE__), 2, _AM_DEFACER_DBUPDATED);
 }
 
+/**
+ * @param $itemid
+ */
 function defacer_confirmdel($itemid)
 {
     xoops_cp_header();
@@ -180,6 +195,11 @@ function defacer_confirmdel($itemid)
     include_once 'admin_footer.php';
 }
 
+/**
+ * @param int $itemid
+ *
+ * @return string
+ */
 function defacer_form($itemid = 0)
 {
     $defacer =& DefacerDefacer::getInstance();
@@ -194,7 +214,7 @@ function defacer_form($itemid = 0)
     $form = new XoopsThemeForm($ftitle, 'meta_form', basename(__FILE__), 'post', true);
 
     $page_select = new XoopsFormSelect(_AM_DEFACER_PAGE, 'meta_id', $obj->getVar('meta_id', 'e'));
-    $page_select->customValidationCode[] = 'var value = document.getElementById(\'meta_id\').value; if (value == 0){alert("' . _AM_DEFACER_SELECTPAGE_ERR . '"); return false;}';
+    $page_select->customValidationCode[] = 'var value = document.getElementById(\'meta_id\').value; if (value == 0) {alert("' . _AM_DEFACER_SELECTPAGE_ERR . '"); return false;}';
 
     $criteria = new CriteriaCompo(new Criteria('page_status', 1));
     $criteria->setSort('name');
@@ -232,5 +252,3 @@ function defacer_form($itemid = 0)
 
     return $form->render();
 }
-
-?>

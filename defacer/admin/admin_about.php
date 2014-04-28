@@ -24,4 +24,3 @@ include_once dirname(dirname(__FILE__)) . '/class/about.php';
 $aboutObj = new DefacerAbout();
 $aboutObj->render();
 include_once 'admin_footer.php';
-?>

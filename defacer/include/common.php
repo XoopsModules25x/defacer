@@ -25,4 +25,3 @@ include_once dirname(dirname(__FILE__)) . '/class/defacer.php';
 
 $debug = true;
 $defacer  =& DefacerDefacer::getInstance($debug);
-?>

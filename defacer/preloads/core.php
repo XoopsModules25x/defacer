@@ -17,7 +17,7 @@
  * @version         $Id: core.php 3333 2009-08-27 10:46:15Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Profile core preloads
@@ -28,6 +28,9 @@ defined('XOOPS_ROOT_PATH') or die('Restricted access');
  */
 class DefacerCorePreload extends XoopsPreloadItem
 {
+    /**
+     * @param $args
+     */
     function eventCoreHeaderStart($args)
     {
         if (DefacerCorePreload::isActive()) {
@@ -37,6 +40,9 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @param $args
+     */
     function eventCoreFooterStart($args)
     {
         if (DefacerCorePreload::isActive()) {
@@ -46,14 +52,17 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @param $args
+     */
     function eventCoreHeaderAddmeta($args)
     {
         if (DefacerCorePreload::isActive() && DefacerCorePreload::isRedirectActive()) {
-            if(!empty($_SESSION['redirect_message'])){
+            if (!empty($_SESSION['redirect_message'])) {
                 global $xoTheme;
                 $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
-                $xoTheme->addScript('modules/defacer/js/jgrowl.js');
-                $xoTheme->addStylesheet('modules/defacer/js/jgrowl.css', array('media' => 'screen'));
+                $xoTheme->addScript('modules/defacer/assets/js/jgrowl.js');
+                $xoTheme->addStylesheet('modules/defacer/assets/js/jgrowl.css', array('media' => 'screen'));
 
                 $xoTheme->addScript('', null, '
                     (function($){
@@ -68,17 +77,24 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @param $args
+     */
     function eventSystemClassGuiHeader($args)
     {
         DefacerCorePreload:: eventCoreHeaderAddmeta($args);
     }
 
+    /**
+     * @param $args
+     */
     function eventCoreIncludeFunctionsRedirectheader($args)
     {
         if (DefacerCorePreload::isActive() && DefacerCorePreload::isRedirectActive() && !headers_sent()) {
             global $xoopsConfig;
             if (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], 'user.php?op=logout')) {
                 unset($_SESSION['redirect_message']);
+
                 return;
             }
             list($url, $time, $message, $addredirect, $allowExternalLink) = $args;
@@ -120,6 +136,9 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @param $args
+     */
     function eventCoreClassTheme_blocksRetrieveBlocks($args)
     {
         if (DefacerCorePreload::isActive()) {
@@ -169,18 +188,25 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @return bool
+     */
     function isActive()
     {
         $module_handler =& xoops_getHandler('module');
         $module = $module_handler->getByDirname('defacer');
+
         return ($module && $module->getVar('isactive')) ? true : false;
     }
 
+    /**
+     * @return null
+     */
     function isRedirectActive()
     {
         require_once dirname(dirname(__FILE__)) . '/include/common.php';
         $defacer =& DefacerDefacer::getInstance();
+
         return $defacer->getConfig('enable_redirect');
     }
 }
-?>

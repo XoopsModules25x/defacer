@@ -28,36 +28,36 @@ $pathIcon32 = $module->getInfo('icons32');
 $adminmenu = array();
 
 $i = -1;
-$i++;
+++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_HOME;
 $adminmenu[$i]['link'] = "admin/index.php";
 $adminmenu[$i]['icon']  = $pathIcon32.'/home.png' ;
 
-$i++;
+++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_PAGEMANAGER;
 $adminmenu[$i]['link'] = "admin/admin_page.php";
 $adminmenu[$i]['icon']  = $pathIcon32.'/index.png' ;
 
-$i++;
+++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_THEMEMANAGER;
 $adminmenu[$i]['link'] = "admin/admin_theme.php";
 $adminmenu[$i]['icon']  = $pathIcon32.'/watermark.png' ;
-$i++;
+++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_METAMANAGER;
 $adminmenu[$i]['link'] = "admin/admin_meta.php";
 $adminmenu[$i]['icon']  = $pathIcon32.'/administration.png' ;
 
-$i++;
+++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_PERMISSIONMANAGER;
 $adminmenu[$i]['link'] = "admin/admin_permission.php";
 $adminmenu[$i]['icon']  = $pathIcon32.'/permissions.png' ;
 
-$i++;
+++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_ABOUT;
 $adminmenu[$i]['link']  = 'admin/about.php';
 $adminmenu[$i]['icon']  = $pathIcon32.'/about.png';
 
-//$i++;
+//++$i;
 //$adminmenu[$i]['title'] = _MI_DEFACER_ABOUT;
 //$adminmenu[$i]['link'] = "admin/admin_about.php";
 //$adminmenu[$i]['icon']  = $pathIcon32.'/about.png';

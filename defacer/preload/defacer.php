@@ -24,6 +24,9 @@
 
 defined('ICMS_ROOT_PATH') or die("ICMS root path not defined");
 
+/**
+ * Class IcmsPreloadDefacer
+ */
 class IcmsPreloadDefacer extends IcmsPreloadItem
 {
     function eventbeforeFooter()
@@ -41,4 +44,3 @@ class IcmsPreloadDefacer extends IcmsPreloadItem
     }
 
 }
-?>
