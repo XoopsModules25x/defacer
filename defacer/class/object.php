@@ -326,7 +326,7 @@ class XoopsPersistableObjectHandler extends XoopsObjectHandler
     {
         if ($checkObject != false) {
             if (!is_object($obj)) {
-                var_dump($obj);
+//                var_dump($obj);
 
                 return false;
             }
