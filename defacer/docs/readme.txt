@@ -18,22 +18,22 @@ Requirements
 How to install Defacer
 ====================
 
-Copy defacer folder into the /modules directory of your website. 
+Copy defacer folder into the /modules directory of your website.
 Then log in to your site as administrator, go to System Admin > Modules, look for the defacer
-icon in the list of uninstalled modules and click in the install icon. 
+icon in the list of uninstalled modules and click in the install icon.
 Follow the directions in the screen.
 
 
-ATENTION, if you are NOT using xoops 2.4 or impressCms 1.1 
+ATENTION, if you are NOT using xoops 2.4 or impressCms 1.1
 you have to add a line in header.php and footer.php at the root of your instalation
 
-In yoursite/header.php paste the line 
+In yoursite/header.php paste the line
 
 @include_once XOOPS_ROOT_PATH . '/modules/defacer/include/beforeheader.php';
 
 right after
 
-defined("XOOPS_ROOT_PATH") or die( 'XOOPS root path not defined' );
+defined("XOOPS_ROOT_PATH") || die("XOOPS root path not defined");
 
 In yoursite/footer.php paste the line
 
@@ -41,10 +41,7 @@ In yoursite/footer.php paste the line
 
 right after
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
-
+defined("XOOPS_ROOT_PATH") || die("XOOPS root path not defined");
 
 
 Tips
@@ -52,7 +49,7 @@ Tips
 When creating pages you can use '*' symbol in the url field to match any url.
 
 You should use relative paths
-If you select news module your path will be related to yoursite/module/news/ 
+If you select news module your path will be related to yoursite/module/news/
 You should add for example
 index.php and not modules/news/index.php
 
@@ -62,7 +59,7 @@ userinfo.php*
 
 Tips for blocks anywhere (xoops 2.4 only)
 =========
-Just prefix your block title with an underscore and you will be able to use it 
+Just prefix your block title with an underscore and you will be able to use it
 has a smarty variable inside your theme or template
 Example:
 -Edit User menu block and rename it to _User Menu

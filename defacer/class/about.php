@@ -19,7 +19,7 @@
  * @version         $Id: about.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
 
 /**
  * Class About is a simple class that lets you build an about page
@@ -50,6 +50,9 @@ class DefacerAbout
     var $_lang_by;
     var $_tpl;
 
+    /**
+     * @param string $aboutTitle
+     */
     function DefacerAbout($aboutTitle = 'About')
     {
         global $xoopsModule, $xoopsConfig;
@@ -81,9 +84,15 @@ class DefacerAbout
 
     }
 
+    /**
+     * @param $value
+     *
+     * @return mixed
+     */
     function sanitize($value)
     {
         $myts =& MyTextSanitizer::getInstance();
+
         return $myts->displayTarea($value, 1);
     }
 
@@ -170,10 +179,8 @@ class DefacerAbout
             fclose($handle);
         }
 
-        $this->_tpl->display('db:defacer_admin_about.html');
+        $this->_tpl->display('db:defacer_admin_about.tpl');
 
         xoops_cp_footer();
     }
 }
-
-?>

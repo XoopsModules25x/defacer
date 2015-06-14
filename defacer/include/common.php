@@ -18,11 +18,10 @@
  * @version         $Id: common.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
 
 include_once dirname(__FILE__) . '/functions.php';
 include_once dirname(dirname(__FILE__)) . '/class/defacer.php';
 
 $debug = true;
 $defacer  =& DefacerDefacer::getInstance($debug);
-?>

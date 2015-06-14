@@ -18,12 +18,15 @@
  * @version         $Id: meta.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
 
-if (!class_exists('XoopsPersistableObjectHandler')) {
-    include dirname(__FILE__) . '/object.php';
-}
+//if (!class_exists('XoopsPersistableObjectHandler')) {
+//    include dirname(__FILE__) . '/object.php';
+//}
 
+/**
+ * Class DefacerMeta
+ */
 class DefacerMeta extends XoopsObject
 {
     /**
@@ -41,13 +44,24 @@ class DefacerMeta extends XoopsObject
     }
 }
 
+/**
+ * Class DefacerMetaHandler
+ */
 class DefacerMetaHandler extends XoopsPersistableObjectHandler
 {
+    /**
+     * @param $db
+     */
     function DefacerMetaHandler(&$db)
     {
         $this->XoopsPersistableObjectHandler($db, 'defacer_meta', 'DefacerMeta', 'meta_id', 'meta_sitename');
     }
 
+    /**
+     * @param mixed|null $id
+     *
+     * @return DefacerMeta|object
+     */
     function &get($id)
     {
         $id = intval($id);
@@ -58,20 +72,29 @@ class DefacerMetaHandler extends XoopsPersistableObjectHandler
                 if ($numrows == 1) {
                     $obj = new DefacerMeta();
                     $obj->assignVars($this->db->fetchArray($result));
+
                     return $obj;
                 }
             }
         }
 
         $obj = $this->create();
+
         return $obj;
     }
 
+    /**
+     * @param $obj
+     * @param $field_name
+     * @param $field_value
+     *
+     * @return bool
+     */
     function updateByField(&$obj, $field_name, $field_value)
     {
         $obj->unsetNew();
         $obj->setVar($field_name, $field_value);
+
         return $this->insert($obj);
     }
 }
-?>

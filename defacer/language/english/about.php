@@ -22,4 +22,3 @@ define('_AB_DEFACER_PEOPLE_DOCUMENTERS', 'Documenters');
 define('_AB_DEFACER_PEOPLE_TRANSLATERS', 'Translaters');
 define('_AB_DEFACER_PEOPLE_OTHER', 'Other contributors');
 define('_AB_DEFACER_VERSION_HISTORY', 'Version History');
-?>
