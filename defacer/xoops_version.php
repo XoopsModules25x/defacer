@@ -41,8 +41,8 @@ $modversion["module_status"]       = "Beta 1";
 $modversion["release_date"]        = "2014/04/23";
 $modversion["module_website_url"]  = "www.xoops.org/";
 $modversion["module_website_name"] = "XOOPS";
-$modversion['min_php']             = '5.3.7';
-$modversion['min_xoops']           = "2.5.7";
+$modversion['min_php']             = '5.5';
+$modversion['min_xoops']           = "2.5.7.2";
 $modversion['min_admin']           = '1.1';
 $modversion['min_db']              = array('mysql' => '5.0.7', 'mysqli' => '5.0.7');
 

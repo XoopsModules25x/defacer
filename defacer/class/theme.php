@@ -32,9 +32,9 @@ class DefacerTheme extends XoopsObject
     /**
      * constructor
      */
-    function DefacerTheme()
+    function __construct()
     {
-        $this->XoopsObject();
+        parent::__construct();
         $this->initVar("theme_id", XOBJ_DTYPE_INT, 0, true);
         $this->initVar("theme_name", XOBJ_DTYPE_TXTBOX, null, true, 255);
     }

@@ -32,9 +32,9 @@ class DefacerMeta extends XoopsObject
     /**
      * constructor
      */
-    function DefacerMeta()
+    function __construct()
     {
-        $this->XoopsObject();
+        parent::__construct();
         $this->initVar("meta_id", XOBJ_DTYPE_INT, 0, true);
         $this->initVar("meta_sitename", XOBJ_DTYPE_TXTBOX, null, false, 100);
         $this->initVar("meta_pagetitle", XOBJ_DTYPE_TXTBOX, null, false, 100);

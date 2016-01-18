@@ -30,9 +30,9 @@ defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
 class DefacerPage extends XoopsObject
 {
 
-    function DefacerPage()
+    function __construct()
     {
-        $this->XoopsObject();
+        parent::__construct();
         $this->initVar('page_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('page_moduleid', XOBJ_DTYPE_INT, 1, true);
         $this->initVar('page_title', XOBJ_DTYPE_TXTBOX, '', true, 255);
