@@ -15,52 +15,37 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: permission.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 //if (!class_exists('XoopsPersistableObjectHandler')) {
-//    include dirname(__FILE__) . '/object.php';
+//    include __DIR__ . '/object.php';
 //}
 
-/**
- * Class DefacerPermission
- */
 class DefacerPermission extends XoopsObject
 {
     /**
      * constructor
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
-        $this->initVar("permission_id", XOBJ_DTYPE_INT, 0, true);
+        $this->initVar('permission_id', XOBJ_DTYPE_INT, 0, true);
         $this->initVar('permission_groups', XOBJ_DTYPE_ARRAY, serialize(array(XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS)));
     }
 }
 
-/**
- * Class DefacerPermissionHandler
- */
 class DefacerPermissionHandler extends XoopsPersistableObjectHandler
 {
-    /**
-     * @param $db
-     */
-    function DefacerPermissionHandler(&$db)
+    public function __construct(XoopsDatabase $db = null)
     {
-        $this->XoopsPersistableObjectHandler($db, 'defacer_permission', 'DefacerPermission', 'permission_id', 'permission_groups');
+        parent::__construct($db, 'defacer_permission', 'DefacerPermission', 'permission_id', 'permission_groups');
     }
 
-    /**
-     * @param mixed|null $id
-     *
-     * @return DefacerPermission|object
-     */
-    function &get($id)
+    public function get($id = null, $fields = null)
     {
-        $id = intval($id);
+        $id = (int)$id;
         if ($id > 0) {
             $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_permission') . ' WHERE permission_id=' . $id;
             if ($result = $this->db->query($sql)) {
@@ -79,14 +64,7 @@ class DefacerPermissionHandler extends XoopsPersistableObjectHandler
         return $obj;
     }
 
-    /**
-     * @param $obj
-     * @param $field_name
-     * @param $field_value
-     *
-     * @return bool
-     */
-    function updateByField(&$obj, $field_name, $field_value)
+    public function updateByField($obj, $field_name, $field_value)
     {
         $obj->unsetNew();
         $obj->setVar($field_name, $field_value);

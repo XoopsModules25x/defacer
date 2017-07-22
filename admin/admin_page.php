@@ -15,38 +15,37 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: admin_page.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-require dirname(__FILE__) . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 $actions = array('list', 'add', 'edit', 'editok', 'del', 'delok', 'changestatus');
-$op = isset($_REQUEST['op']) && in_array($_REQUEST['op'], $actions) ?  $_REQUEST['op'] : 'list';
+$op      = isset($_REQUEST['op']) && in_array($_REQUEST['op'], $actions) ? $_REQUEST['op'] : 'list';
 
-$itemid = isset($_REQUEST['itemid']) ? intval($_REQUEST['itemid']) : 0;
-$limit  = isset($_REQUEST['limit'])  ? intval($_REQUEST['limit'])  : 15;
-$start  = isset($_REQUEST['start'])  ? intval($_REQUEST['start'])  : 0;
-$query  = isset($_REQUEST['query'])  ? trim($_REQUEST['query'])    : '';
+$itemid = isset($_REQUEST['itemid']) ? (int)$_REQUEST['itemid'] : 0;
+$limit  = isset($_REQUEST['limit']) ? (int)$_REQUEST['limit'] : 15;
+$start  = isset($_REQUEST['start']) ? (int)$_REQUEST['start'] : 0;
+$query  = isset($_REQUEST['query']) ? trim($_REQUEST['query']) : '';
 
-$indexAdmin = new ModuleAdmin();
+$adminObject = \Xmf\Module\Admin::getInstance();
 
 switch ($op) {
     case 'list':
         xoops_cp_header();
-        echo $indexAdmin->addNavigation('admin_page.php');
+        $adminObject->displayNavigation(basename(__FILE__));
         //defacer_adminMenu(0);
         echo defacer_index($start, $limit, $query);
-        include_once 'admin_footer.php';
+        xoops_cp_footer();
         break;
     case 'add':
         defacer_add();
         break;
     case 'edit':
         xoops_cp_header();
-        echo $indexAdmin->addNavigation('admin_page.php');
+        $adminObject->displayNavigation(basename(__FILE__));
         //defacer_adminMenu(0);
         echo defacer_form($itemid);
-        include_once 'admin_footer.php';
+        xoops_cp_footer();
         break;
     case 'editok':
         defacer_edit($itemid);
@@ -73,13 +72,13 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 {
     global $xoopsTpl;
 
-    $defacer =& DefacerDefacer::getInstance();
+    $defacer = DefacerDefacer::getInstance();
 
     $xoopsTpl->assign('query', $query);
 
     $criteria = new CriteriaCompo();
     if (!empty($query)) {
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
         $criteria->add(new Criteria('page_title', $myts->addSlashes($query) . '%', 'LIKE'));
     }
 
@@ -93,7 +92,7 @@ function defacer_index($start = 0, $limit = 0, $query = '')
     $objs = $defacer->getHandler('page')->getObjects($criteria);
 
     if ($count > $limit) {
-        include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+        require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
         $nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
         $xoopsTpl->assign('pagenav', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
     }
@@ -101,7 +100,7 @@ function defacer_index($start = 0, $limit = 0, $query = '')
     foreach ($objs as $obj) {
         $item = $obj->getValues();
 
-        if (substr($obj->getVar('page_url'), -1) == '*') {
+        if (substr($obj->getVar('page_url'), -1) === '*') {
             $item['page_vurl'] = 0;
         } else {
             if ($obj->getVar('page_moduleid') == 1) {
@@ -121,10 +120,10 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 
 function defacer_add()
 {
-    $defacer =& DefacerDefacer::getInstance();
+    $defacer = DefacerDefacer::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header(basename(__FILE__), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+        redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
     if (!isset($_POST['page_moduleid']) || $_POST['page_moduleid'] == 0) {
@@ -140,7 +139,7 @@ function defacer_add()
         $msg = _AM_DEFACER_DBUPDATED;
     }
 
-    redirect_header(basename(__FILE__) , 2, $msg);
+    redirect_header(basename(__FILE__), 2, $msg);
 }
 
 /**
@@ -148,10 +147,10 @@ function defacer_add()
  */
 function defacer_edit($itemid)
 {
-    $defacer =& DefacerDefacer::getInstance();
+    $defacer = DefacerDefacer::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header(basename(__FILE__), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+        redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
     if (!isset($_POST['page_moduleid']) || $_POST['page_moduleid'] == 0) {
@@ -175,10 +174,10 @@ function defacer_edit($itemid)
  */
 function defacer_del($itemid)
 {
-    $defacer =& DefacerDefacer::getInstance();
+    $defacer = DefacerDefacer::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header(basename(__FILE__),1 , implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+        redirect_header(basename(__FILE__), 1, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
     if ($itemid <= 0) {
@@ -193,7 +192,7 @@ function defacer_del($itemid)
     if (!$defacer->getHandler('page')->delete($obj)) {
         xoops_cp_header();
         xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('page_id')));
-        include_once 'admin_footer.php';
+        xoops_cp_footer();
         exit();
     }
 
@@ -201,7 +200,7 @@ function defacer_del($itemid)
     if (is_object($obj) && !$defacer->getHandler('theme')->delete($obj)) {
         xoops_cp_header();
         xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('theme_id')));
-        include_once 'admin_footer.php';
+        xoops_cp_footer();
         exit();
     }
 
@@ -209,7 +208,7 @@ function defacer_del($itemid)
     if (is_object($obj) && !$defacer->getHandler('meta')->delete($obj)) {
         xoops_cp_header();
         xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('meta_id')));
-        include_once 'admin_footer.php';
+        xoops_cp_footer();
         exit();
     }
 
@@ -217,7 +216,7 @@ function defacer_del($itemid)
     if (is_object($obj) && !$defacer->getHandler('permission')->delete($obj)) {
         xoops_cp_header();
         xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('permission_id')));
-        include_once 'admin_footer.php';
+        xoops_cp_footer();
         exit();
     }
 
@@ -229,11 +228,9 @@ function defacer_del($itemid)
  */
 function defacer_confirmdel($itemid)
 {
-
-    global $pathIcon32;
     xoops_cp_header();
     xoops_confirm(array('op' => 'delok', 'itemid' => $itemid), basename(__FILE__), _AM_DEFACER_RUDEL);
-    include_once 'admin_footer.php';
+    xoops_cp_footer();
 }
 
 /**
@@ -241,7 +238,7 @@ function defacer_confirmdel($itemid)
  */
 function defacer_changestatus($itemid)
 {
-    $defacer =& DefacerDefacer::getInstance();
+    $defacer = DefacerDefacer::getInstance();
 
     $obj = $defacer->getHandler('page')->get($itemid);
     $obj->setVar('page_status', !$obj->getVar('page_status'));
@@ -262,8 +259,8 @@ function defacer_changestatus($itemid)
  */
 function defacer_form($itemid = 0)
 {
-    $defacer =& DefacerDefacer::getInstance();
-    $obj = $defacer->getHandler('page')->get($itemid);
+    $defacer = DefacerDefacer::getInstance();
+    $obj     = $defacer->getHandler('page')->get($itemid);
 
     if ($obj->isNew()) {
         $ftitle = _EDIT;
@@ -273,17 +270,18 @@ function defacer_form($itemid = 0)
 
     $form = new XoopsThemeForm($ftitle, 'page_form', basename(__FILE__), 'post', true);
 
-    $mid = new XoopsFormSelect(_AM_DEFACER_PAGE_MODULE, 'page_moduleid', $obj->getVar('page_moduleid', 'e'));
-    $mid->customValidationCode[] = 'var value = document.getElementById(\'page_moduleid\').value; if (value == 0) {alert("' . _AM_DEFACER_SELECTMODULE_ERR . '"); return false;}';
+    $mid                         = new XoopsFormSelect(_AM_DEFACER_PAGE_MODULE, 'page_moduleid', $obj->getVar('page_moduleid', 'e'));
+    $mid->customValidationCode[] = 'var value = document.getElementById(\'page_moduleid\').value; if (value == 0){alert("' . _AM_DEFACER_SELECTMODULE_ERR . '"); return false;}';
 
-    $module_handler =& xoops_gethandler('module');
-    $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
+    /** @var XoopsModuleHandler $moduleHandler */
+    $moduleHandler = xoops_getHandler('module');
+    $criteria      = new CriteriaCompo(new Criteria('hasmain', 1));
     $criteria->add(new Criteria('isactive', 1));
     //$criteria->setSort('name');
     //$criteria->setOrder('ASC'); xoopsModule does not accpet this :(
-    $moduleslist = $module_handler->getList($criteria);
-    $module = $module_handler->get(1);
-    $list = array($module->getVar('mid') => $module->getVar('name'));
+    $moduleslist = $moduleHandler->getList($criteria);
+    $module      = $moduleHandler->get(1);
+    $list        = array($module->getVar('mid') => $module->getVar('name'));
     $moduleslist = $list + $moduleslist;
     $mid->addOptionArray($moduleslist);
     $form->addElement($mid, true);
@@ -294,7 +292,7 @@ function defacer_form($itemid = 0)
     $form->addElement($furl, true);
     $form->addElement(new XoopsFormRadioYN(_AM_DEFACER_PAGE_DISPLAY, 'page_status', $obj->getVar('page_status', 'e'), _YES, _NO));
 
-    $tray = new XoopsFormElementTray('' ,'');
+    $tray = new XoopsFormElementTray('', '');
     $tray->addElement(new XoopsFormButton('', 'defacer_button', _SUBMIT, 'submit'));
 
     $btn = new XoopsFormButton('', 'reset', _CANCEL, 'button');

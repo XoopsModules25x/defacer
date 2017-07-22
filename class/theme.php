@@ -15,52 +15,37 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: theme.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 //if (!class_exists('XoopsPersistableObjectHandler')) {
-//    include dirname(__FILE__) . '/object.php';
+//    include __DIR__ . '/object.php';
 //}
 
-/**
- * Class DefacerTheme
- */
 class DefacerTheme extends XoopsObject
 {
     /**
      * constructor
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
-        $this->initVar("theme_id", XOBJ_DTYPE_INT, 0, true);
-        $this->initVar("theme_name", XOBJ_DTYPE_TXTBOX, null, true, 255);
+        $this->initVar('theme_id', XOBJ_DTYPE_INT, 0, true);
+        $this->initVar('theme_name', XOBJ_DTYPE_TXTBOX, null, true, 255);
     }
 }
 
-/**
- * Class DefacerThemeHandler
- */
 class DefacerThemeHandler extends XoopsPersistableObjectHandler
 {
-    /**
-     * @param $db
-     */
-    function DefacerThemeHandler(&$db)
+    public function __construct(XoopsDatabase $db = null)
     {
-        $this->XoopsPersistableObjectHandler($db, 'defacer_theme', 'DefacerTheme', 'theme_id', 'theme_name');
+        parent::__construct($db, 'defacer_theme', 'DefacerTheme', 'theme_id', 'theme_name');
     }
 
-    /**
-     * @param mixed|null $id
-     *
-     * @return DefacerTheme|object
-     */
-    function &get($id)
+    public function get($id = null, $fields = null)
     {
-        $id = intval($id);
+        $id = (int)$id;
         if ($id > 0) {
             $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_theme') . ' WHERE theme_id=' . $id;
             if ($result = $this->db->query($sql)) {
@@ -79,14 +64,7 @@ class DefacerThemeHandler extends XoopsPersistableObjectHandler
         return $obj;
     }
 
-    /**
-     * @param $obj
-     * @param $field_name
-     * @param $field_value
-     *
-     * @return bool
-     */
-    function updateByField(&$obj, $field_name, $field_value)
+    public function updateByField($obj, $field_name, $field_value)
     {
         $obj->unsetNew();
         $obj->setVar($field_name, $field_value);

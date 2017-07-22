@@ -1,18 +1,23 @@
-What is Defacer Module (v1.0 Final)
+What is Defacer Module (v1.0 Final) ?
 ======================
 
-With this Xoops module, you can:
+With this Xoops module, your can:
 - change themes, metadata and permissions for any given page.
-- enable jgrowl redirection system
-- use blocks anywhere
+- enable jgrowl redirection system (xoops 2.4 only)
+- use blocks anywhere (xoops 2.4 only)
+
 
 
 Requirements
 ====================
 
-- XOOPS >= 2.5.0
-- PHP version >= 5.2.0
-- ModuleClasses in /Frameworks (download it from here: http://goo.gl/Bmknt)
+Works in 2.4.x, xoops 2.3.x, xoops 2.2.x, xoops 2.0.18 & up, impresscms 1.x
+
+Others cms versions were not tested.
+
+Php5 only
+
+
 
 
 How to install Defacer
@@ -33,7 +38,7 @@ In yoursite/header.php paste the line
 
 right after
 
-defined("XOOPS_ROOT_PATH") || die("XOOPS root path not defined");
+defined("XOOPS_ROOT_PATH") || exit( 'XOOPS root path not defined' );
 
 In yoursite/footer.php paste the line
 
@@ -41,7 +46,11 @@ In yoursite/footer.php paste the line
 
 right after
 
-defined("XOOPS_ROOT_PATH") || die("XOOPS root path not defined");
+if (!defined("XOOPS_ROOT_PATH")) {
+    die("XOOPS root path not defined");
+}
+
+
 
 
 Tips

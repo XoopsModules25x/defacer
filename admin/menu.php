@@ -15,47 +15,52 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: menu.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+$moduleDirName = basename(dirname(__DIR__));
 
-$dirname = basename(dirname(dirname(__FILE__)));
-$module_handler = xoops_gethandler('module');
-$module = $module_handler->getByDirname($dirname);
-$pathIcon32 = $module->getInfo('icons32');
+if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
+} else {
+    $moduleHelper = Xmf\Module\Helper::getHelper('system');
+}
+$adminObject = \Xmf\Module\Admin::getInstance();
+
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+//$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
+
+$moduleHelper->loadLanguage('modinfo');
 
 $adminmenu = array();
 
 $i = -1;
 ++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_HOME;
-$adminmenu[$i]['link'] = "admin/index.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/home.png' ;
+$adminmenu[$i]['link']  = 'admin/index.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/home.png';
 
 ++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_PAGEMANAGER;
-$adminmenu[$i]['link'] = "admin/admin_page.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/index.png' ;
+$adminmenu[$i]['link']  = 'admin/admin_page.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/index.png';
 
 ++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_THEMEMANAGER;
-$adminmenu[$i]['link'] = "admin/admin_theme.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/watermark.png' ;
+$adminmenu[$i]['link']  = 'admin/admin_theme.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/watermark.png';
 ++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_METAMANAGER;
-$adminmenu[$i]['link'] = "admin/admin_meta.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/administration.png' ;
+$adminmenu[$i]['link']  = 'admin/admin_meta.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/administration.png';
 
 ++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_PERMISSIONMANAGER;
-$adminmenu[$i]['link'] = "admin/admin_permission.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/permissions.png' ;
+$adminmenu[$i]['link']  = 'admin/admin_permission.php';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/permissions.png';
 
 ++$i;
 $adminmenu[$i]['title'] = _MI_DEFACER_ABOUT;
 $adminmenu[$i]['link']  = 'admin/about.php';
-$adminmenu[$i]['icon']  = $pathIcon32.'/about.png';
+$adminmenu[$i]['icon']  = $pathIcon32 . '/about.png';
 
 //++$i;
 //$adminmenu[$i]['title'] = _MI_DEFACER_ABOUT;

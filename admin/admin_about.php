@@ -15,12 +15,11 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: admin_about.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-include_once dirname(__FILE__) . '/admin_header.php';
-include_once dirname(dirname(__FILE__)) . '/class/about.php';
+require_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/../class/about.php';
 
 $aboutObj = new DefacerAbout();
 $aboutObj->render();
-include_once 'admin_footer.php';
+require_once 'admin_footer.php';

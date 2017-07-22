@@ -15,17 +15,16 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: index.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/include/cp_header.php';
-include_once dirname(__FILE__) . '/admin_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();
 
-    $indexAdmin = new ModuleAdmin();
+$adminObject  = \Xmf\Module\Admin::getInstance();
 
-    echo $indexAdmin->addNavigation('index.php');
-    echo $indexAdmin->renderIndex();
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject->displayIndex();
 
-include 'admin_footer.php';
+include __DIR__ . '/admin_footer.php';

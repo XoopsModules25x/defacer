@@ -15,25 +15,19 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: functions.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-include_once dirname(__FILE__) . '/common.php';
+require_once __DIR__ . '/common.php';
 
-/**
- * @param array $ids
- *
- * @return int
- */
 function defacer_getPageInfo($ids = array())
 {
-    $defacer =& DefacerDefacer::getInstance();
+    $defacer = DefacerDefacer::getInstance();
 
-    $proto    = (@$_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
-    $fullurl  = $proto . "://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-    $url = ltrim(str_replace($defacer->getConfig('xoops_url'), '', $fullurl), '/');
+    $proto   = (@$_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+    $fullurl = $proto . '://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+    $url     = ltrim(str_replace($defacer->getConfig('xoops_url'), '', $fullurl), '/');
 
     $criteria = new CriteriaCompo(new Criteria('page_status', 1));
     if (count($ids) > 0) {
@@ -41,7 +35,7 @@ function defacer_getPageInfo($ids = array())
     }
     $pages = $defacer->getHandler('page')->getObjects($criteria);
 
-    $pid = -1;
+    $pid           = -1;
     $bigone['url'] = '';
     $bigone['pid'] = -1;
     foreach ($pages as $page) {
@@ -49,7 +43,7 @@ function defacer_getPageInfo($ids = array())
         if ($page->getVar('page_moduleid') > 1) {
             $purl = 'modules/' . $page->getVar('dirname') . '/' . $purl;
         }
-        if (substr($purl,-1) == '*') {
+        if (substr($purl, -1) === '*') {
             $purl = substr($purl, 0, -1);
             if (substr($url, 0, strlen($purl)) == $purl || substr($fullurl, 0, strlen($purl)) == $purl) {
                 $pid = $page->getVar('page_id');

@@ -15,25 +15,26 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: beforefooter.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-require dirname(__FILE__) . '/common.php';
+require_once __DIR__ . '/common.php';
+$debug   = true;
+$defacer = DefacerDefacer::getInstance($debug);
 
-if (is_object($defacer->getModule()) && $defacer->getModule()->getVar('isactive')) {
+if ((null !== $defacer) && is_object($defacer->getModule()) && $defacer->getModule()->getVar('isactive')) {
     $GLOBALS['xoopsLogger']->startTime('Defacer Footer');
 
     if (!$defacer->getConfig('disable_defacer')) {
 
         //Do metas
         if (!$defacer->getConfig('disable_metas')) {
-            $objs = $defacer->getHandler('meta')->getObjects(null, true);
+            $objs   = $defacer->getHandler('meta')->getObjects(null, true);
             $pageid = defacer_getPageInfo(array_keys($objs));
 
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {
-                $obj =& $objs[$pageid];
+                $obj = $objs[$pageid];
 
                 if ($obj->getVar('meta_sitename')) {
                     $GLOBALS['xoopsTpl']->assign('xoops_sitename', $obj->getVar('meta_sitename'));
@@ -52,10 +53,10 @@ if (is_object($defacer->getModule()) && $defacer->getModule()->getVar('isactive'
                 }
                 if (isset($GLOBALS['xoTheme']) && is_object($GLOBALS['xoTheme'])) {
                     if ($obj->getVar('meta_keywords')) {
-                        $GLOBALS['xoTheme']->addMeta( 'meta', 'keywords', $obj->getVar('meta_keywords'));
+                        $GLOBALS['xoTheme']->addMeta('meta', 'keywords', $obj->getVar('meta_keywords'));
                     }
                     if ($obj->getVar('meta_description')) {
-                        $GLOBALS['xoTheme']->addMeta( 'meta', 'description', $obj->getVar('meta_description'));
+                        $GLOBALS['xoTheme']->addMeta('meta', 'description', $obj->getVar('meta_description'));
                     }
                 }
                 unset($obj);
