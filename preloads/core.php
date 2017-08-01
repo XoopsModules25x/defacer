@@ -29,20 +29,16 @@ class DefacerCorePreload extends XoopsPreloadItem
 {
     public static function eventCoreHeaderStart($args)
     {
-        if (DefacerCorePreload::isActive()) {
             if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforeheader.php')) {
                 include $filename;
             }
-        }
     }
 
     public static function eventCoreFooterStart($args)
     {
-        if (DefacerCorePreload::isActive()) {
             if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforefooter.php')) {
                 include $filename;
             }
-        }
     }
 
     public static function eventCoreHeaderAddmeta($args)
@@ -126,7 +122,6 @@ class DefacerCorePreload extends XoopsPreloadItem
 
     public static function eventCoreClassTheme_blocksRetrieveBlocks($args)
     {
-        if (DefacerCorePreload::isActive()) {
             //$args[2] = array();
             $class     =& $args[0];
             $template  =& $args[1];
@@ -173,7 +168,6 @@ class DefacerCorePreload extends XoopsPreloadItem
                 $template->assign("xoops_block_{$block['id']}", $block);
                 unset($block_arr[$key]);
             }
-        }
     }
 
     public static function isActive()
