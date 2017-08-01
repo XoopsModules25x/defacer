@@ -43,7 +43,7 @@ class DefacerCorePreload extends XoopsPreloadItem
 
     public static function eventCoreHeaderAddmeta($args)
     {
-        if (DefacerCorePreload::isActive() && DefacerCorePreload::isRedirectActive()) {
+        if (DefacerCorePreload::isRedirectActive()) {
             if (!empty($_SESSION['redirect_message'])) {
                 global $xoTheme;
                 $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
@@ -70,7 +70,7 @@ class DefacerCorePreload extends XoopsPreloadItem
 
     public function eventCoreIncludeFunctionsRedirectheader($args)
     {
-        if (DefacerCorePreload::isActive() && DefacerCorePreload::isRedirectActive() && !headers_sent()) {
+        if (DefacerCorePreload::isRedirectActive() && !headers_sent()) {
             global $xoopsConfig;
             if (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], 'user.php?op=logout')) {
                 unset($_SESSION['redirect_message']);
@@ -168,15 +168,6 @@ class DefacerCorePreload extends XoopsPreloadItem
                 $template->assign("xoops_block_{$block['id']}", $block);
                 unset($block_arr[$key]);
             }
-    }
-
-    public static function isActive()
-    {
-        /** @var XoopsModuleHandler $moduleHandler */
-        $moduleHandler = xoops_getHandler('module');
-        $module        = $moduleHandler->getByDirname('defacer');
-
-        return ($module && $module->getVar('isactive')) ? true : false;
     }
 
     public static function isRedirectActive()
