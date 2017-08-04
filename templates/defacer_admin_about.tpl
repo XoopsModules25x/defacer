@@ -1,4 +1,4 @@
-<img src='<{$module_url}><{$module_image}>' alt='<{$module_name}>' style='float: left; margin-right: 10px;'/></a>
+<img src='<{$module_url}><{$module_image}>' alt='<{$module_name}>' style='float: left; margin-right: 10px;'></a>
 <div style='margin-top: 1px; color: #33538e; margin-bottom: 4px; font-size: 18px; line-height: 18px; font-weight: bold;'>
     <{$module_name}> version <{$module_version}> (<{$module_status_version}>)
 </div>

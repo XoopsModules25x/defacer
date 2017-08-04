@@ -26,7 +26,7 @@
 </div>
 <br>
 -->
-<br style="clear: right; line-height:1px;"/>
+<br style="clear: right; line-height:1px;">
 <table width="100%" cellspacing="1" cellpadding="0" class="outer">
     <tr align="center">
         <th width="5%"><{$smarty.const._AM_DEFACER_ID}></th>
@@ -47,18 +47,18 @@
                         <a href="<{$item.theme_vurl}>" rel="external"><img
                                     src="<{$xoops_url}>/modules/defacer/images/view_big.png"
                                     title="<{$smarty.const._PREVIEW}>"
-                                    alt="<{$smarty.const._PREVIEW}>"/></a>
+                                    alt="<{$smarty.const._PREVIEW}>"></a>
                     <{else}>
                         <img src="<{$xoops_url}>/modules/defacer/images/view_big_off.png"
-                             title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>"/>
+                             title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>">
                     <{/if}>
                     <a href="admin_theme.php?op=edit&itemid=<{$item.theme_id}>"><img
                                 src="<{$xoops_url}>/modules/defacer/images/edit_big.png" title="<{$smarty.const._EDIT}>"
-                                alt="<{$smarty.const._EDIT}>"/></a>
+                                alt="<{$smarty.const._EDIT}>"></a>
                     <a href="admin_theme.php?op=del&itemid=<{$item.theme_id}>"><img
                                 src="<{$xoops_url}>/modules/defacer/images/delete_big.png"
                                 title="<{$smarty.const._DELETE}>"
-                                alt="<{$smarty.const._DELETE}>"/></a>
+                                alt="<{$smarty.const._DELETE}>"></a>
                 </td>
             </tr>
         <{/foreach}>
@@ -71,7 +71,7 @@
         <td class="head" colspan="5" align="right">
             <{$pagenav}>
             <input type="button" onclick="defacer_showDiv('form','','hiddendiv'); return false;"
-                   value="<{$smarty.const._ADD}>"/>
+                   value="<{$smarty.const._ADD}>">
         </td>
     </tr>
 </table>

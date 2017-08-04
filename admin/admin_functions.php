@@ -15,7 +15,7 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @author          InstantZero <http://xoops.instant-zero.com/>
+ * @author          InstantZero <http://xoops.instant-zero.com>
  */
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');

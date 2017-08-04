@@ -28,13 +28,13 @@
 -->
 <div style="margin-top:0; float: right; width:400px;" align="right">
     <form action="admin_page.php?op=list" method="POST">
-        <input type="text" name="query" id="query" size="30" value="<{$query}>"/>
-        <input type="submit" name="btn" value="<{$smarty.const._SEARCH}>"/>
+        <input type="text" name="query" id="query" size="30" value="<{$query}>">
+        <input type="submit" name="btn" value="<{$smarty.const._SEARCH}>">
         <input type="submit" name="btn1" value="<{$smarty.const._CANCEL}>"
-               onclick="document.getElementById('query').value='';"/>
+               onclick="document.getElementById('query').value='';">
     </form>
 </div>
-<br style="clear: right; line-height:1px;"/>
+<br style="clear: right; line-height:1px;">
 <table width="100%" cellspacing="1" cellpadding="0" class="outer">
     <tr align="center">
         <th width="5%"><{$smarty.const._AM_DEFACER_ID}></th>
@@ -55,38 +55,38 @@
                 <td><a href="admin_page.php?op=changestatus&itemid=<{$item.page_id}>"><img
                                 src="<{$xoops_url}>/modules/defacer/images/<{$item.page_status}>.png"
                                 title="<{$smarty.const._AM_DEFACER_CHANGESTATUS}>"
-                                alt="<{$smarty.const._AM_DEFACER_CHANGESTATUS}>"/></a>
+                                alt="<{$smarty.const._AM_DEFACER_CHANGESTATUS}>"></a>
                 </td>
                 <td>
                     <a href="admin_theme.php?op=edit&itemid=<{$item.page_id}>"><img
                                 src="<{$xoops_url}>/modules/defacer/images/themes_small.png"
                                 title="<{$smarty.const._AM_DEFACER_THEMEMAN}>"
-                                alt="<{$smarty.const._AM_DEFACER_THEMEMAN}>"/></a>
+                                alt="<{$smarty.const._AM_DEFACER_THEMEMAN}>"></a>
                     <a href="admin_meta.php?op=edit&itemid=<{$item.page_id}>"><img
                                 src="<{$xoops_url}>/modules/defacer/images/metas_small.png"
                                 title="<{$smarty.const._AM_DEFACER_METAMAN}>"
-                                alt="<{$smarty.const._AM_DEFACER_METAMAN}>"/></a>
+                                alt="<{$smarty.const._AM_DEFACER_METAMAN}>"></a>
                     <a href="admin_permission.php?op=edit&itemid=<{$item.page_id}>"><img
                                 src="<{$xoops_url}>/modules/defacer/images/permissions_small.png"
                                 title="<{$smarty.const._AM_DEFACER_PERMISSIONMAN}>"
-                                alt="<{$smarty.const._AM_DEFACER_PERMISSIONMAN}>"/></a>
+                                alt="<{$smarty.const._AM_DEFACER_PERMISSIONMAN}>"></a>
                 </td>
                 <td>
                     <{if $item.page_vurl != '0'}>
                         <a href="<{$item.page_vurl}>" rel="external"><img
                                     src="<{$xoops_url}>/modules/defacer/images/view_big.png"
-                                    title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>"/></a>
+                                    title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>"></a>
                     <{else}>
                         <img src="<{$xoops_url}>/modules/defacer/images/view_big_off.png"
-                             title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>"/>
+                             title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>">
                     <{/if}>
                     <a href="admin_page.php?op=edit&itemid=<{$item.page_id}>"><img
                                 src="<{$xoops_url}>/modules/defacer/images/edit_big.png" title="<{$smarty.const._EDIT}>"
-                                alt="<{$smarty.const._EDIT}>"/></a>
+                                alt="<{$smarty.const._EDIT}>"></a>
                     <a href="admin_page.php?op=del&itemid=<{$item.page_id}>"><img
                                 src="<{$xoops_url}>/modules/defacer/images/delete_big.png"
                                 title="<{$smarty.const._DELETE}>"
-                                alt="<{$smarty.const._DELETE}>"/></a>
+                                alt="<{$smarty.const._DELETE}>"></a>
                 </td>
             </tr>
         <{/foreach}>
@@ -99,7 +99,7 @@
         <td class="head" colspan="7" align="right">
             <{$pagenav}>
             <input type="button" onclick="defacer_showDiv('form','','hiddendiv'); return false;"
-                   value="<{$smarty.const._ADD}>"/>
+                   value="<{$smarty.const._ADD}>">
         </td>
     </tr>
 </table>

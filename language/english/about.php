@@ -1,6 +1,6 @@
 <?php
 define('_AB_DEFACER_AUTHOR_INFO', 'Contributors information');
-define('_AB_DEFACER_AUTHOR_WORD',"The Author's Word");
+define('_AB_DEFACER_AUTHOR_WORD', "The Author's Word");
 define('_AB_DEFACER_BY', 'By');
 define('_AB_DEFACER_DEVELOPER_CONTRIBUTOR', 'Contributor(s)');
 define('_AB_DEFACER_DEVELOPER_CREDITS', 'Credits');
