@@ -3,7 +3,7 @@
         <a class="ui-corner-all tooltip" href="<{$xoops_url}>/modules/defacer/admin/index.php"
            title="Back to the administration of Defacer"> Defacer
             <img src="<{xoAdminIcons home.png}>"
-                 alt="Back to the Administration of Defacer"/>
+                 alt="Back to the Administration of Defacer">
         </a></h1>
 
     <h4 class="odd">DESCRIPTION</h4>
