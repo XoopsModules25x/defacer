@@ -22,22 +22,20 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 /**
  * General Information
  */
-$modversion['version']       = 1.20;
-$modversion['module_status'] = 'RC1';
-$modversion['release_date']  = '2017/03/08';
-$modversion['name']          = _MI_DEFACER_MD_NAME;
-$modversion['description']   = _MI_DEFACER_MD_DSC;
-$modversion['author']        = 'Trabis (www.xuups.com)';
-$modversion['credits']       = 'The ImpressCMS Project (http://www.impresscms.org/) & TheRplima (http://community.impresscms.org/userinfo.php?uid=106)';
-$modversion['help']          = 'page=help';
-$modversion['license']       = 'GNU GPL';
-$modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html/';
-$modversion['official']      = 0;
-$modversion['dirname']       = basename(__DIR__);
-$modversion['modicons16'] = 'assets/images/icons/16';
-$modversion['modicons32'] = 'assets/images/icons/32';
-
-//about
+$modversion['version']             = 1.20;
+$modversion['module_status']       = 'RC1';
+$modversion['release_date']        = '2017/07/08';
+$modversion['name']                = _MI_DEFACER_MD_NAME;
+$modversion['description']         = _MI_DEFACER_MD_DSC;
+$modversion['author']              = 'Trabis (www.xuups.com)';
+$modversion['credits']             = 'The ImpressCMS Project (http://www.impresscms.org/) & TheRplima (http://community.impresscms.org/userinfo.php?uid=106)';
+$modversion['help']                = 'page=help';
+$modversion['license']             = 'GNU GPL';
+$modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html/';
+$modversion['official']            = 0;
+$modversion['dirname']             = basename(__DIR__);
+$modversion['modicons16']          = 'assets/images/icons/16';
+$modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'https://xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
@@ -69,6 +67,13 @@ $modversion['tables'][1]        = $modversion['dirname'] . '_theme';
 $modversion['tables'][2]        = $modversion['dirname'] . '_meta';
 $modversion['tables'][3]        = $modversion['dirname'] . '_permission';
 
+// ------------------- Help files ------------------- //
+$modversion['helpsection'] = array(
+    ['name' => _MI_DEFACER_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_DEFACER_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_DEFACER_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_DEFACER_SUPPORT, 'link' => 'page=support'],
+);
 /**
  * Templates information
  */

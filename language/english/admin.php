@@ -47,3 +47,11 @@ define('_AM_DEFACER_PERMISSION_GROUPS', 'Permited Groups');
 
 // Text for Admin footer
 define('_AM_DEFACER_FOOTER', "<div class='center smallsmall italic pad5'>Defacer is maintained by the <a class='tooltip' rel='external' href='https://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
+//1.2
+define('_AM_DEFACER_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");
+define('_AM_DEFACER_UPGRADEFAILED1', "Update failed - couldn't add new fields");
+define('_AM_DEFACER_UPGRADEFAILED2', "Update failed - couldn't rename table '%s'");
+define('_AM_DEFACER_ERROR_COLUMN', 'Could not create column in database : %s');
+define('_AM_DEFACER_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
+define('_AM_DEFACER_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
+define('_AM_DEFACER_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');

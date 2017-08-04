@@ -28,3 +28,16 @@ define('_MI_DEFACER_ENABLE_REDIRECT_DSC', 'Enable this to replace default redire
 
 //1.1
 define('_MI_DEFACER_HOME', 'Home');
+//1.2
+//Help
+define('_MI_DEFACER_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_DEFACER_HELP_HEADER', __DIR__.'/help/helpheader.tpl');
+define('_MI_DEFACER_BACK_2_ADMIN', 'Back to Administration of ');
+define('_MI_DEFACER_OVERVIEW', 'Overview');
+
+//define('_MI_DEFACER_HELP_DIR', __DIR__);
+
+//help multi-page
+define('_MI_DEFACER_DISCLAIMER', 'Disclaimer');
+define('_MI_DEFACER_LICENSE', 'License');
+define('_MI_DEFACER_SUPPORT', 'Support');

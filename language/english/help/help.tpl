@@ -1,12 +1,7 @@
 <div id="help-template" class="outer">
-    <h1 class="head">Help:
-        <a class="ui-corner-all tooltip" href="<{$xoops_url}>/modules/defacer/admin/index.php"
-           title="Back to the administration of Defacer"> Defacer
-            <img src="<{xoAdminIcons home.png}>"
-                 alt="Back to the Administration of Defacer">
-        </a></h1>
+    <{include file=$smarty.const._MI_DEFACER_HELP_HEADER}>
 
-    <h4 class="odd">DESCRIPTION</h4>
+    <h4 class="odd">DESCRIPTION</h4> <br>
 
     <p>Defacer is a new revolutionary XOOPS module that allows you to change themes, metadata and
         permissions for any given page on the XOOPS-based Website, thus giving you a level of control and customization
