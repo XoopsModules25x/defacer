@@ -31,10 +31,9 @@ if (is_object($defacer->getModule()) && $defacer->getModule()->getVar('isactive'
             $objs   = $defacer->getHandler('permission')->getObjects(null, true);
             $pageid = defacer_getPageInfo(array_keys($objs));
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {
-                $groups = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+                $groups = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
                 if (!array_intersect($objs[$pageid]->getVar('permission_groups'), $groups)) {
                     redirect_header(XOOPS_URL, 3, _NOPERM);
-                    exit();
                 }
             }
             unset($objs);

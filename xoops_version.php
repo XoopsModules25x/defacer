@@ -41,7 +41,7 @@ $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.5');
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 /**
  * Images information
@@ -68,20 +68,20 @@ $modversion['tables'][2]        = $modversion['dirname'] . '_meta';
 $modversion['tables'][3]        = $modversion['dirname'] . '_permission';
 
 // ------------------- Help files ------------------- //
-$modversion['helpsection'] = array(
+$modversion['helpsection'] = [
     ['name' => _MI_DEFACER_OVERVIEW, 'link' => 'page=help'],
     ['name' => _MI_DEFACER_DISCLAIMER, 'link' => 'page=disclaimer'],
     ['name' => _MI_DEFACER_LICENSE, 'link' => 'page=license'],
     ['name' => _MI_DEFACER_SUPPORT, 'link' => 'page=support'],
-);
+];
 /**
  * Templates information
  */
-$modversion['templates'][] = array('file' => 'defacer_admin_page.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'defacer_admin_theme.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'defacer_admin_meta.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'defacer_admin_permission.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'defacer_admin_about.tpl', 'description' => '');
+$modversion['templates'][] = ['file' => 'defacer_admin_page.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'defacer_admin_theme.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'defacer_admin_meta.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'defacer_admin_permission.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'defacer_admin_about.tpl', 'description' => ''];
 
 /**
  * Config information

@@ -32,7 +32,7 @@ class DefacerPermission extends XoopsObject
     {
         parent::__construct();
         $this->initVar('permission_id', XOBJ_DTYPE_INT, 0, true);
-        $this->initVar('permission_groups', XOBJ_DTYPE_ARRAY, serialize(array(XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS)));
+        $this->initVar('permission_groups', XOBJ_DTYPE_ARRAY, serialize([XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS]));
     }
 }
 

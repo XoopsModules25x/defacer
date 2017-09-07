@@ -26,7 +26,7 @@ class DefacerDefacer
     public $handler;
     public $config;
     public $debug;
-    public $debugArray = array();
+    public $debugArray = [];
 
     public function __construct($debug)
     {

@@ -19,7 +19,7 @@
 
 require_once __DIR__ . '/admin_header.php';
 
-$actions = array('list', 'add', 'edit', 'editok', 'del', 'delok');
+$actions = ['list', 'add', 'edit', 'editok', 'del', 'delok'];
 $op      = isset($_REQUEST['op']) && in_array($_REQUEST['op'], $actions) ? $_REQUEST['op'] : 'list';
 
 $itemid = isset($_REQUEST['itemid']) ? (int)$_REQUEST['itemid'] : 0;
@@ -197,7 +197,7 @@ function defacer_del($itemid)
 function defacer_confirmdel($itemid)
 {
     xoops_cp_header();
-    xoops_confirm(array('op' => 'delok', 'itemid' => $itemid), basename(__FILE__), _AM_DEFACER_RUDEL);
+    xoops_confirm(['op' => 'delok', 'itemid' => $itemid], basename(__FILE__), _AM_DEFACER_RUDEL);
     xoops_cp_footer();
 }
 
@@ -226,7 +226,7 @@ function defacer_form($itemid = 0)
     $criteria->setSort('name');
     $criteria->setOrder('ASC');
     $pageslist = $defacer->getHandler('page')->getList($criteria);
-    $list      = array('0' => '--------------------------');
+    $list      = ['0' => '--------------------------'];
     $pageslist = $list + $pageslist;
     $page_select->addOptionArray($pageslist);
     $form->addElement($page_select, true);

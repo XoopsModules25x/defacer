@@ -70,7 +70,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
 
     public function &getObjects(CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
-        $ret   = array();
+        $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -130,7 +130,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0) //getList($criteria = null)
     {
         $pages = $this->getObjects($criteria, true);
-        $ret   = array();
+        $ret   = [];
         foreach (array_keys($pages) as $i) {
             $ret[$i] = $pages[$i]->getVar('name') . ' -> ' . $pages[$i]->getVar('page_title');
         }
@@ -149,7 +149,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
     public function getPageSelOptions($value = null)
     {
         if (!is_array($value)) {
-            $value = array($value);
+            $value = [$value];
         }
         /** @var XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');

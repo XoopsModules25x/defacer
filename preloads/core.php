@@ -29,16 +29,16 @@ class DefacerCorePreload extends XoopsPreloadItem
 {
     public static function eventCoreHeaderStart($args)
     {
-            if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforeheader.php')) {
-                include $filename;
-            }
+        if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforeheader.php')) {
+            include $filename;
+        }
     }
 
     public static function eventCoreFooterStart($args)
     {
-            if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforefooter.php')) {
-                include $filename;
-            }
+        if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforefooter.php')) {
+            include $filename;
+        }
     }
 
     public static function eventCoreHeaderAddmeta($args)
@@ -48,7 +48,7 @@ class DefacerCorePreload extends XoopsPreloadItem
                 global $xoTheme;
                 $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
                 $xoTheme->addScript('browse.php?Frameworks/jquery/plugins/jquery.jgrowl.js');
-                $xoTheme->addStylesheet('modules/defacer/assets/js/jquery.jgrowl.css', array('media' => 'screen'));
+                $xoTheme->addStylesheet('modules/defacer/assets/js/jquery.jgrowl.css', ['media' => 'screen']);
 
                 $xoTheme->addScript('', null, '
                     (function($){
@@ -122,52 +122,52 @@ class DefacerCorePreload extends XoopsPreloadItem
 
     public static function eventCoreClassTheme_blocksRetrieveBlocks($args)
     {
-            //$args[2] = array();
-            $class     =& $args[0];
-            $template  =& $args[1];
-            $block_arr =& $args[2];
+        //$args[2] = array();
+        $class     =& $args[0];
+        $template  =& $args[1];
+        $block_arr =& $args[2];
 
-            foreach ($block_arr as $key => $xobject) {
-                if (strpos($xobject->getVar('title'), '_') !== 0) {
-                    continue;
-                }
+        foreach ($block_arr as $key => $xobject) {
+            if (strpos($xobject->getVar('title'), '_') !== 0) {
+                continue;
+            }
 
-                $block = array(
+            $block = [
                     'id'      => $xobject->getVar('bid'),
                     'module'  => $xobject->getVar('dirname'),
                     'title'   => ltrim($xobject->getVar('title'), '_'),
                     'weight'  => $xobject->getVar('weight'),
                     'lastmod' => $xobject->getVar('last_modified')
-                );
+            ];
 
-                $bcachetime = (int)$xobject->getVar('bcachetime');
-                if (empty($bcachetime)) {
-                    $template->caching = 0;
-                } else {
-                    $template->caching        = 2;
-                    $template->cache_lifetime = $bcachetime;
-                }
-                $template->setCompileId($xobject->getVar('dirname', 'n'));
-                $tplName = ($tplName = $xobject->getVar('template')) ? "db:$tplName" : 'db:system_block_dummy.tpl';
-                $cacheid = $class->generateCacheId('blk_' . $xobject->getVar('bid'));
-
-                $xoopsLogger = XoopsLogger::getInstance();
-                if (!$bcachetime || !$template->is_cached($tplName, $cacheid)) {
-                    $xoopsLogger->addBlock($xobject->getVar('name'));
-                    if ($bresult = $xobject->buildBlock()) {
-                        $template->assign('block', $bresult);
-                        $block['content'] = $template->fetch($tplName, $cacheid);
-                    } else {
-                        $block = false;
-                    }
-                } else {
-                    $xoopsLogger->addBlock($xobject->getVar('name'), true, $bcachetime);
-                    $block['content'] = $template->fetch($tplName, $cacheid);
-                }
-                $template->setCompileId();
-                $template->assign("xoops_block_{$block['id']}", $block);
-                unset($block_arr[$key]);
+            $bcachetime = (int)$xobject->getVar('bcachetime');
+            if (empty($bcachetime)) {
+                $template->caching = 0;
+            } else {
+                $template->caching        = 2;
+                $template->cache_lifetime = $bcachetime;
             }
+            $template->setCompileId($xobject->getVar('dirname', 'n'));
+            $tplName = ($tplName = $xobject->getVar('template')) ? "db:$tplName" : 'db:system_block_dummy.tpl';
+            $cacheid = $class->generateCacheId('blk_' . $xobject->getVar('bid'));
+
+            $xoopsLogger = XoopsLogger::getInstance();
+            if (!$bcachetime || !$template->is_cached($tplName, $cacheid)) {
+                $xoopsLogger->addBlock($xobject->getVar('name'));
+                if ($bresult = $xobject->buildBlock()) {
+                    $template->assign('block', $bresult);
+                    $block['content'] = $template->fetch($tplName, $cacheid);
+                } else {
+                    $block = false;
+                }
+            } else {
+                $xoopsLogger->addBlock($xobject->getVar('name'), true, $bcachetime);
+                $block['content'] = $template->fetch($tplName, $cacheid);
+            }
+            $template->setCompileId();
+            $template->assign("xoops_block_{$block['id']}", $block);
+            unset($block_arr[$key]);
+        }
     }
 
     public static function isRedirectActive()

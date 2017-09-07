@@ -21,7 +21,7 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 
-function defacer_getPageInfo($ids = array())
+function defacer_getPageInfo($ids = [])
 {
     $defacer = DefacerDefacer::getInstance();
 

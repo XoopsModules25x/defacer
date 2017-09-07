@@ -19,7 +19,7 @@
 
 require_once __DIR__ . '/admin_header.php';
 
-$actions = array('list', 'add', 'edit', 'editok', 'del', 'delok', 'changestatus');
+$actions = ['list', 'add', 'edit', 'editok', 'del', 'delok', 'changestatus'];
 $op      = isset($_REQUEST['op']) && in_array($_REQUEST['op'], $actions) ? $_REQUEST['op'] : 'list';
 
 $itemid = isset($_REQUEST['itemid']) ? (int)$_REQUEST['itemid'] : 0;
@@ -229,7 +229,7 @@ function defacer_del($itemid)
 function defacer_confirmdel($itemid)
 {
     xoops_cp_header();
-    xoops_confirm(array('op' => 'delok', 'itemid' => $itemid), basename(__FILE__), _AM_DEFACER_RUDEL);
+    xoops_confirm(['op' => 'delok', 'itemid' => $itemid], basename(__FILE__), _AM_DEFACER_RUDEL);
     xoops_cp_footer();
 }
 
@@ -281,7 +281,7 @@ function defacer_form($itemid = 0)
     //$criteria->setOrder('ASC'); xoopsModule does not accpet this :(
     $moduleslist = $moduleHandler->getList($criteria);
     $module      = $moduleHandler->get(1);
-    $list        = array($module->getVar('mid') => $module->getVar('name'));
+    $list        = [$module->getVar('mid') => $module->getVar('name')];
     $moduleslist = $list + $moduleslist;
     $mid->addOptionArray($moduleslist);
     $form->addElement($mid, true);

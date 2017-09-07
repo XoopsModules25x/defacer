@@ -45,7 +45,7 @@ function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
     </style>
     ";
 
-    $tblColors = array('', '', '', '', '');
+    $tblColors = ['', '', '', '', ''];
     if ($currentoption >= 0) {
         $tblColors[$currentoption] = 'current';
     }
