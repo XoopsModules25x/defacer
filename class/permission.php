@@ -50,7 +50,7 @@ class DefacerPermissionHandler extends XoopsPersistableObjectHandler
             $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_permission') . ' WHERE permission_id=' . $id;
             if ($result = $this->db->query($sql)) {
                 $numrows = $this->db->getRowsNum($result);
-                if ($numrows == 1) {
+                if (1 == $numrows) {
                     $obj = new DefacerPermission();
                     $obj->assignVars($this->db->fetchArray($result));
 

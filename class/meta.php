@@ -55,7 +55,7 @@ class DefacerMetaHandler extends XoopsPersistableObjectHandler
             $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_meta') . ' WHERE meta_id=' . $id;
             if ($result = $this->db->query($sql)) {
                 $numrows = $this->db->getRowsNum($result);
-                if ($numrows == 1) {
+                if (1 == $numrows) {
                     $obj = new DefacerMeta();
                     $obj->assignVars($this->db->fetchArray($result));
 

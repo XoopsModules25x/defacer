@@ -25,7 +25,7 @@ function defacer_getPageInfo($ids = [])
 {
     $defacer = DefacerDefacer::getInstance();
 
-    $proto   = (@$_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+    $proto   = ('on' === @$_SERVER['HTTPS']) ? 'https' : 'http';
     $fullurl = $proto . '://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
     $url     = ltrim(str_replace($defacer->getConfig('xoops_url'), '', $fullurl), '/');
 
@@ -43,7 +43,7 @@ function defacer_getPageInfo($ids = [])
         if ($page->getVar('page_moduleid') > 1) {
             $purl = 'modules/' . $page->getVar('dirname') . '/' . $purl;
         }
-        if (substr($purl, -1) === '*') {
+        if ('*' === substr($purl, -1)) {
             $purl = substr($purl, 0, -1);
             if (substr($url, 0, strlen($purl)) == $purl || substr($fullurl, 0, strlen($purl)) == $purl) {
                 $pid = $page->getVar('page_id');

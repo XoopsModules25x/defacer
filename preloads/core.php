@@ -103,7 +103,7 @@ class DefacerCorePreload extends XoopsPreloadItem
             if (defined('SID') && SID
                 && (!isset($_COOKIE[session_name()])
                     || ($xoopsConfig['use_mysession']
-                        && $xoopsConfig['session_name'] != ''
+                        && '' != $xoopsConfig['session_name']
                         && !isset($_COOKIE[$xoopsConfig['session_name']])))) {
                 if (!strstr($url, '?')) {
                     $url .= '?' . SID;
@@ -113,7 +113,7 @@ class DefacerCorePreload extends XoopsPreloadItem
             }
 
             $url                          = preg_replace('/&amp;/i', '&', htmlspecialchars($url, ENT_QUOTES));
-            $message                      = trim($message) != '' ? $message : _TAKINGBACK;
+            $message                      = '' != trim($message) ? $message : _TAKINGBACK;
             $_SESSION['redirect_message'] = $message;
             header('Location: ' . $url);
             exit();
@@ -128,7 +128,7 @@ class DefacerCorePreload extends XoopsPreloadItem
         $block_arr =& $args[2];
 
         foreach ($block_arr as $key => $xobject) {
-            if (strpos($xobject->getVar('title'), '_') !== 0) {
+            if (0 !== strpos($xobject->getVar('title'), '_')) {
                 continue;
             }
 

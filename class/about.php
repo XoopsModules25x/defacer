@@ -121,7 +121,7 @@ class DefacerAbout
         $this->_tpl->assign('module_status_version', $versioninfo->getInfo('status_version'));
 
         // Left headings...
-        if ($versioninfo->getInfo('author_realname') != '') {
+        if ('' != $versioninfo->getInfo('author_realname')) {
             $author_name = $versioninfo->getInfo('author') . ' (' . $versioninfo->getInfo('author_realname') . ')';
         } else {
             $author_name = $versioninfo->getInfo('author');

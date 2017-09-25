@@ -100,10 +100,10 @@ function defacer_index($start = 0, $limit = 0)
         $item['permission_url']    = $page->getVar('page_url');
         $item['permission_status'] = $page->getVar('page_status');
 
-        if (substr($page->getVar('page_url'), -1) === '*') {
+        if ('*' === substr($page->getVar('page_url'), -1)) {
             $item['permission_vurl'] = 0;
         } else {
-            if ($page->getVar('page_moduleid') == 1) {
+            if (1 == $page->getVar('page_moduleid')) {
                 $item['permission_vurl'] = XOOPS_URL . '/' . $page->getVar('page_url');
             } else {
                 $item['permission_vurl'] = XOOPS_URL . '/modules/' . $page->getVar('dirname') . '/' . $page->getVar('page_url');

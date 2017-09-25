@@ -100,10 +100,10 @@ function defacer_index($start = 0, $limit = 0, $query = '')
     foreach ($objs as $obj) {
         $item = $obj->getValues();
 
-        if (substr($obj->getVar('page_url'), -1) === '*') {
+        if ('*' === substr($obj->getVar('page_url'), -1)) {
             $item['page_vurl'] = 0;
         } else {
-            if ($obj->getVar('page_moduleid') == 1) {
+            if (1 == $obj->getVar('page_moduleid')) {
                 $item['page_vurl'] = XOOPS_URL . '/' . $obj->getVar('page_url');
             } else {
                 $item['page_vurl'] = XOOPS_URL . '/modules/' . $obj->getVar('dirname') . '/' . $obj->getVar('page_url');
@@ -126,7 +126,7 @@ function defacer_add()
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
-    if (!isset($_POST['page_moduleid']) || $_POST['page_moduleid'] == 0) {
+    if (!isset($_POST['page_moduleid']) || 0 == $_POST['page_moduleid']) {
         $_POST['page_moduleid'] = 1;
     }
 
@@ -153,7 +153,7 @@ function defacer_edit($itemid)
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
-    if (!isset($_POST['page_moduleid']) || $_POST['page_moduleid'] == 0) {
+    if (!isset($_POST['page_moduleid']) || 0 == $_POST['page_moduleid']) {
         $_POST['page_moduleid'] = 1;
     }
 

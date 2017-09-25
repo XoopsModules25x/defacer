@@ -54,7 +54,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
             $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules') . ' WHERE page_id=' . $id . ' AND mid=page_moduleid';
             if ($result = $this->db->query($sql)) {
                 $numrows = $this->db->getRowsNum($result);
-                if ($numrows == 1) {
+                if (1 == $numrows) {
                     $obj = new DefacerPage();
                     $obj->assignVars($this->db->fetchArray($result));
 
@@ -75,13 +75,13 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         $sql   = 'SELECT * FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $where = $criteria->renderWhere();
-            if ($where != '') {
+            if ('' != $where) {
                 $where .= ' AND (mid=page_moduleid)';
             } else {
                 $where .= 'WHERE (mid=page_moduleid)';
             }
             $sql .= ' ' . $where;
-            if ($criteria->getSort() != '') {
+            if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
             $limit = $criteria->getLimit();
@@ -112,7 +112,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $where = $criteria->renderWhere();
-            if ($where != '') {
+            if ('' != $where) {
                 $where .= ' AND (mid=page_moduleid)';
             } else {
                 $where .= 'WHERE (mid=page_moduleid)';

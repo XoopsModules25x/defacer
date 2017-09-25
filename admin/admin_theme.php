@@ -94,10 +94,10 @@ function defacer_index($start = 0, $limit = 0)
         $item['theme_url']    = $page->getVar('page_url');
         $item['theme_status'] = $page->getVar('page_status');
 
-        if (substr($page->getVar('page_url'), -1) === '*') {
+        if ('*' === substr($page->getVar('page_url'), -1)) {
             $item['theme_vurl'] = 0;
         } else {
-            if ($page->getVar('page_moduleid') == 1) {
+            if (1 == $page->getVar('page_moduleid')) {
                 $item['theme_vurl'] = XOOPS_URL . '/' . $page->getVar('page_url');
             } else {
                 $item['theme_vurl'] = XOOPS_URL . '/modules/' . $page->getVar('dirname') . '/' . $page->getVar('page_url');
@@ -230,7 +230,7 @@ function defacer_form($itemid = 0)
     if (is_dir($dirname) && $handle = opendir($dirname)) {
         while (false !== ($file = readdir($handle))) {
             if (!preg_match("/^[\.]{1,2}$/", $file)) {
-                if (strtolower($file) !== 'cvs' && is_dir($dirname . $file) && $file !== 'z_changeable_theme') {
+                if ('cvs' !== strtolower($file) && is_dir($dirname . $file) && 'z_changeable_theme' !== $file) {
                     $dirlist[$file] = $file;
                 }
             }
