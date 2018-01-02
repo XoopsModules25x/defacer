@@ -78,7 +78,7 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 
     $criteria = new CriteriaCompo();
     if (!empty($query)) {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         $criteria->add(new Criteria('page_title', $myts->addSlashes($query) . '%', 'LIKE'));
     }
 

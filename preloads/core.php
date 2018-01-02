@@ -27,6 +27,15 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  */
 class DefacerCorePreload extends XoopsPreloadItem
 {
+    // to add PSR-4 autoloader
+    /**
+     * @param $args
+     */
+    public static function eventCoreIncludeCommonEnd($args)
+    {
+        include __DIR__ . '/autoloader.php';
+    }
+
     public static function eventCoreHeaderStart($args)
     {
         if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforeheader.php')) {

@@ -88,7 +88,7 @@ class DefacerAbout
      */
     public function sanitize($value)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
 
         return $myts->displayTarea($value, 1);
     }
@@ -99,7 +99,7 @@ class DefacerAbout
          * @todo move the output to a template
          * @todo make the output XHTML compliant
          */
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
 
         global $xoopsModule, $xoopsUser;
 

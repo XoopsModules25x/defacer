@@ -17,17 +17,14 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
-$moduleDirName = basename(dirname(__DIR__));
+use Xoopsmodules\defacer;
 
-if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
-} else {
-    $moduleHelper = Xmf\Module\Helper::getHelper('system');
-}
+require_once __DIR__ . '/../class/Helper.php';
+//require_once __DIR__ . '/../include/common.php';
+$helper = defacer\Helper::getInstance();
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
-//$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
-
-$moduleHelper->loadLanguage('modinfo');
+$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
 $adminmenu[] = [
     'title' => _MI_DEFACER_HOME,
@@ -70,4 +67,3 @@ $adminmenu[] = [
 //'link' =>  "admin/admin_about.php",
 //'icon' =>  $pathIcon32.'/about.png',
 //];
-

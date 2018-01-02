@@ -73,7 +73,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $where = $criteria->renderWhere();
             if ('' != $where) {
                 $where .= ' AND (mid=page_moduleid)';
@@ -110,7 +110,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
     public function getCount(CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $where = $criteria->renderWhere();
             if ('' != $where) {
                 $where .= ' AND (mid=page_moduleid)';

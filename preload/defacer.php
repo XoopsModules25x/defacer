@@ -22,7 +22,7 @@
  * @version         $Id: defacer.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('ICMS_ROOT_PATH') or die("ICMS root path not defined");
+defined('ICMS_ROOT_PATH') or die('ICMS root path not defined');
 
 /**
  * Class IcmsPreloadDefacer
