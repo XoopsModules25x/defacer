@@ -1,4 +1,4 @@
-<?php namespace Xoopsmodules\defater\common;
+<?php namespace XoopsModules\defater\Common;
 
 /*
  You may not change or alter any portion of this comment or credits

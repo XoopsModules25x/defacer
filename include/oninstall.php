@@ -31,7 +31,7 @@ function xoops_module_pre_install_defacer(XoopsModule $module)
 
     include __DIR__ . '/../preloads/autoloader.php';
     /** @var \Utility $utility */
-    $utility = new \Xoopsmodules\defacer\Utility();
+    $utility = new \XoopsModules\Defacer\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -59,9 +59,9 @@ function xoops_module_install_defacer(XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    $helper       = defacer\Helper::getInstance();
-    $utility      = new defacer\Utility();
-    $configurator = new defacer\Configurator();
+    $helper       = Defacer\Helper::getInstance();
+    $utility      = new Defacer\Utility();
+    $configurator = new Defacer\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');

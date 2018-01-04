@@ -17,11 +17,11 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
-use Xoopsmodules\defacer;
+use XoopsModules\Defacer;
 
 require_once __DIR__ . '/../class/Helper.php';
 //require_once __DIR__ . '/../include/common.php';
-$helper = defacer\Helper::getInstance();
+$helper = Defacer\Helper::getInstance();
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');

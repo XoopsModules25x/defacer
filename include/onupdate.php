@@ -45,10 +45,10 @@ function tableExists($tablename)
 function xoops_module_pre_update_defacer(XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var defacer\Helper $helper */
-    /** @var defacer\Utility $utility */
-    $helper       = defacer\Helper::getInstance();
-    $utility      = new defacer\Utility();
+    /** @var Defacer\Helper $helper */
+    /** @var Defacer\Utility $utility */
+    $helper       = Defacer\Helper::getInstance();
+    $utility      = new Defacer\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -69,12 +69,12 @@ function xoops_module_update_defacer(XoopsModule $module, $previousVersion = nul
     $moduleDirName = basename(dirname(__DIR__));
     $capsDirName   = strtoupper($moduleDirName);
 
-    /** @var defacer\Helper $helper */
-    /** @var defacer\Utility $utility */
-    /** @var defacer\Configurator $configurator */
-    $helper  = defacer\Helper::getInstance();
-    $utility = new defacer\Utility();
-    $configurator = new defacer\Configurator();
+    /** @var Defacer\Helper $helper */
+    /** @var Defacer\Utility $utility */
+    /** @var Defacer\Configurator $configurator */
+    $helper  = Defacer\Helper::getInstance();
+    $utility = new Defacer\Utility();
+    $configurator = new Defacer\Configurator();
 
     if ($previousVersion < 240) {
 

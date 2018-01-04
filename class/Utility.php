@@ -1,8 +1,8 @@
-<?php namespace Xoopsmodules\defacer;
+<?php namespace XoopsModules\Defacer;
 
 use Xmf\Request;
-use Xoopsmodules\defater;
-use Xoopsmodules\defater\common;
+use XoopsModules\defater;
+use XoopsModules\defater\Common;
 
 /**
  * Class Utility
