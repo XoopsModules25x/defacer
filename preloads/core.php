@@ -52,7 +52,7 @@ class DefacerCorePreload extends XoopsPreloadItem
 
     public static function eventCoreHeaderAddmeta($args)
     {
-        if (DefacerCorePreload::isRedirectActive()) {
+        if (self::isRedirectActive()) {
             if (!empty($_SESSION['redirect_message'])) {
                 global $xoTheme;
                 $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
@@ -74,12 +74,12 @@ class DefacerCorePreload extends XoopsPreloadItem
 
     public static function eventSystemClassGuiHeader($args)
     {
-        DefacerCorePreload:: eventCoreHeaderAddmeta($args);
+        self:: eventCoreHeaderAddmeta($args);
     }
 
     public function eventCoreIncludeFunctionsRedirectheader($args)
     {
-        if (DefacerCorePreload::isRedirectActive() && !headers_sent()) {
+        if (self::isRedirectActive() && !headers_sent()) {
             global $xoopsConfig;
             if (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], 'user.php?op=logout')) {
                 unset($_SESSION['redirect_message']);

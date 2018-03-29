@@ -18,7 +18,7 @@
  */
 
 require_once __DIR__ . '/admin_header.php';
-require_once __DIR__ . '/../class/about.php';
+// require_once __DIR__ . '/../class/about.php';
 
 $aboutObj = new DefacerAbout();
 $aboutObj->render();

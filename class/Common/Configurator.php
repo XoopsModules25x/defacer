@@ -1,4 +1,5 @@
-<?php namespace XoopsModules\defater;
+<?php namespace XoopsModules\Defacer\Common;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code

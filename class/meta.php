@@ -43,7 +43,7 @@ class DefacerMeta extends XoopsObject
 
 class DefacerMetaHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct(XoopsDatabase $db = null)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'defacer_meta', 'DefacerMeta', 'meta_id', 'meta_sitename');
     }

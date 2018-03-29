@@ -42,7 +42,7 @@ class DefacerPage extends XoopsObject
 
 class DefacerPageHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct(XoopsDatabase $db = null)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'defacer_page', 'DefacerPage', 'page_id', 'page_title');
     }
@@ -93,7 +93,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return $ret;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $page = new DefacerPage();
             $page->assignVars($myrow);
             if (!$id_as_key) {
@@ -129,7 +129,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
 
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0) //getList($criteria = null)
     {
-        $pages = $this->getObjects($criteria, true);
+        $pages =& $this->getObjects($criteria, true);
         $ret   = [];
         foreach (array_keys($pages) as $i) {
             $ret[$i] = $pages[$i]->getVar('name') . ' -> ' . $pages[$i]->getVar('page_title');
@@ -153,15 +153,15 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         }
         /** @var XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
-        $criteria      = new CriteriaCompo(new Criteria('hasmain', 1));
-        $criteria->add(new Criteria('isactive', 1));
+        $criteria      = new \CriteriaCompo(new \Criteria('hasmain', 1));
+        $criteria->add(new \Criteria('isactive', 1));
         $module_list = $moduleHandler->getObjects($criteria);
         $mods        = '';
         foreach ($module_list as $module) {
             $mods     .= '<optgroup label="' . $module->getVar('name') . '">';
-            $criteria = new CriteriaCompo(new Criteria('page_moduleid', $module->getVar('mid')));
-            $criteria->add(new Criteria('page_status', 1));
-            $pages = $this->getObjects($criteria);
+            $criteria = new \CriteriaCompo(new \Criteria('page_moduleid', $module->getVar('mid')));
+            $criteria->add(new \Criteria('page_status', 1));
+            $pages =& $this->getObjects($criteria);
             $sel   = '';
             if (in_array($module->getVar('mid') . '-0', $value)) {
                 $sel = ' selected=selected';
@@ -178,9 +178,9 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         }
 
         $module   = $moduleHandler->get(1);
-        $criteria = new CriteriaCompo(new Criteria('page_moduleid', 1));
-        $criteria->add(new Criteria('page_status', 1));
-        $pages = $this->getObjects($criteria);
+        $criteria = new \CriteriaCompo(new \Criteria('page_moduleid', 1));
+        $criteria->add(new \Criteria('page_status', 1));
+        $pages =& $this->getObjects($criteria);
         $cont  = '';
         if (count($pages) > 0) {
             $cont = '<optgroup label="' . $module->getVar('name') . '">';

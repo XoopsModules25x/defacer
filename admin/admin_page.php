@@ -76,10 +76,10 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 
     $xoopsTpl->assign('query', $query);
 
-    $criteria = new CriteriaCompo();
+    $criteria = new \CriteriaCompo();
     if (!empty($query)) {
         $myts = \MyTextSanitizer::getInstance();
-        $criteria->add(new Criteria('page_title', $myts->addSlashes($query) . '%', 'LIKE'));
+        $criteria->add(new \Criteria('page_title', $myts->addSlashes($query) . '%', 'LIKE'));
     }
 
     $count = $defacer->getHandler('page')->getCount($criteria);
@@ -93,7 +93,7 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 
     if ($count > $limit) {
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
+        $nav = new \XoopsPageNav($count, $limit, $start, 'start', 'op=list');
         $xoopsTpl->assign('pagenav', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
     }
 
@@ -268,15 +268,15 @@ function defacer_form($itemid = 0)
         $ftitle = _ADD;
     }
 
-    $form = new XoopsThemeForm($ftitle, 'page_form', basename(__FILE__), 'post', true);
+    $form = new \XoopsThemeForm($ftitle, 'page_form', basename(__FILE__), 'post', true);
 
-    $mid                         = new XoopsFormSelect(_AM_DEFACER_PAGE_MODULE, 'page_moduleid', $obj->getVar('page_moduleid', 'e'));
+    $mid                         = new \XoopsFormSelect(_AM_DEFACER_PAGE_MODULE, 'page_moduleid', $obj->getVar('page_moduleid', 'e'));
     $mid->customValidationCode[] = 'var value = document.getElementById(\'page_moduleid\').value; if (value == 0){alert("' . _AM_DEFACER_SELECTMODULE_ERR . '"); return false;}';
 
     /** @var XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
-    $criteria      = new CriteriaCompo(new Criteria('hasmain', 1));
-    $criteria->add(new Criteria('isactive', 1));
+    $criteria      = new \CriteriaCompo(new \Criteria('hasmain', 1));
+    $criteria->add(new \Criteria('isactive', 1));
     //$criteria->setSort('name');
     //$criteria->setOrder('ASC'); xoopsModule does not accpet this :(
     $moduleslist = $moduleHandler->getList($criteria);
@@ -286,16 +286,16 @@ function defacer_form($itemid = 0)
     $mid->addOptionArray($moduleslist);
     $form->addElement($mid, true);
 
-    $form->addElement(new XoopsFormText(_AM_DEFACER_PAGE_TITLE, 'page_title', 50, 255, $obj->getVar('page_title', 'e')), true);
-    $furl = new XoopsFormText(_AM_DEFACER_PAGE_URL, 'page_url', 50, 255, $obj->getVar('page_url', 'e'));
+    $form->addElement(new \XoopsFormText(_AM_DEFACER_PAGE_TITLE, 'page_title', 50, 255, $obj->getVar('page_title', 'e')), true);
+    $furl = new \XoopsFormText(_AM_DEFACER_PAGE_URL, 'page_url', 50, 255, $obj->getVar('page_url', 'e'));
     $furl->setDescription(_AM_DEFACER_PAGE_URL_DESC);
     $form->addElement($furl, true);
-    $form->addElement(new XoopsFormRadioYN(_AM_DEFACER_PAGE_DISPLAY, 'page_status', $obj->getVar('page_status', 'e'), _YES, _NO));
+    $form->addElement(new \XoopsFormRadioYN(_AM_DEFACER_PAGE_DISPLAY, 'page_status', $obj->getVar('page_status', 'e'), _YES, _NO));
 
-    $tray = new XoopsFormElementTray('', '');
-    $tray->addElement(new XoopsFormButton('', 'defacer_button', _SUBMIT, 'submit'));
+    $tray = new \XoopsFormElementTray('', '');
+    $tray->addElement(new \XoopsFormButton('', 'defacer_button', _SUBMIT, 'submit'));
 
-    $btn = new XoopsFormButton('', 'reset', _CANCEL, 'button');
+    $btn = new \XoopsFormButton('', 'reset', _CANCEL, 'button');
     if (!$obj->isNew()) {
         $btn->setExtra('onclick="document.location.href=\'' . basename(__FILE__) . '\'"');
     } else {
@@ -305,10 +305,10 @@ function defacer_form($itemid = 0)
     $form->addElement($tray);
 
     if (!$obj->isNew()) {
-        $form->addElement(new XoopsFormHidden('op', 'editok'));
-        $form->addElement(new XoopsFormHidden('itemid', $itemid));
+        $form->addElement(new \XoopsFormHidden('op', 'editok'));
+        $form->addElement(new \XoopsFormHidden('itemid', $itemid));
     } else {
-        $form->addElement(new XoopsFormHidden('op', 'add'));
+        $form->addElement(new \XoopsFormHidden('op', 'add'));
     }
 
     return $form->render();

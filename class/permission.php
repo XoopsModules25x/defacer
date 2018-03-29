@@ -38,7 +38,7 @@ class DefacerPermission extends XoopsObject
 
 class DefacerPermissionHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct(XoopsDatabase $db = null)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'defacer_permission', 'DefacerPermission', 'permission_id', 'permission_groups');
     }

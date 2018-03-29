@@ -112,7 +112,7 @@ class DefacerAbout
 
         require_once XOOPS_ROOT_PATH . '/class/template.php';
 
-        $this->_tpl = new XoopsTpl();
+        $this->_tpl = new \XoopsTpl();
 
         $this->_tpl->assign('module_url', XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/');
         $this->_tpl->assign('module_image', $versioninfo->getInfo('image'));

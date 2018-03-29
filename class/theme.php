@@ -38,7 +38,7 @@ class DefacerTheme extends XoopsObject
 
 class DefacerThemeHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct(XoopsDatabase $db = null)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'defacer_theme', 'DefacerTheme', 'theme_id', 'theme_name');
     }

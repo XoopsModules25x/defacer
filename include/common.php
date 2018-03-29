@@ -20,7 +20,7 @@
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once __DIR__ . '/functions.php';
-require_once __DIR__ . '/../class/defacer.php';
+// require_once __DIR__ . '/../class/defacer.php';
 
 $debug   = true;
 $defacer = DefacerDefacer::getInstance($debug);

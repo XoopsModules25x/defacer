@@ -29,9 +29,9 @@ function defacer_getPageInfo($ids = [])
     $fullurl = $proto . '://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
     $url     = ltrim(str_replace($defacer->getConfig('xoops_url'), '', $fullurl), '/');
 
-    $criteria = new CriteriaCompo(new Criteria('page_status', 1));
+    $criteria = new \CriteriaCompo(new \Criteria('page_status', 1));
     if (count($ids) > 0) {
-        $criteria->add(new Criteria('page_id', '(' . implode(',', $ids) . ')', 'IN'));
+        $criteria->add(new \Criteria('page_id', '(' . implode(',', $ids) . ')', 'IN'));
     }
     $pages = $defacer->getHandler('page')->getObjects($criteria);
 

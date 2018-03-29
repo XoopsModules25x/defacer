@@ -87,15 +87,15 @@ class DefacerPersistableObjectHandler extends XoopsObjectHandler
     public function &get($id, $as_object = true)
     {
         if (is_array($this->keyName)) {
-            $criteria = new CriteriaCompo();
+            $criteria = new \CriteriaCompo();
             for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
-                $criteria->add(new Criteria($this->keyName[$i], (int)$id[$i]));
+                $criteria->add(new \Criteria($this->keyName[$i], (int)$id[$i]));
             }
         } else {
-            $criteria = new Criteria($this->keyName, (int)$id);
+            $criteria = new \Criteria($this->keyName, (int)$id);
         }
         $criteria->setLimit(1);
-        $obj_array = $this->getObjects($criteria, false, $as_object);
+        $obj_array =& $this->getObjects($criteria, false, $as_object);
         if (1 != count($obj_array)) {
             $obj = $this->create();
 
@@ -147,7 +147,7 @@ class DefacerPersistableObjectHandler extends XoopsObjectHandler
     public function convertResultSet($result, $id_as_key = false, $as_object = true)
     {
         $ret = [];
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $obj = $this->create(false);
             $obj->assignVars($myrow);
             if (!$id_as_key) {
@@ -192,7 +192,7 @@ class DefacerPersistableObjectHandler extends XoopsObjectHandler
     {
         $ret = [];
         if (null == $criteria) {
-            $criteria = new CriteriaCompo();
+            $criteria = new \CriteriaCompo();
         }
 
         if ('' == $criteria->getSort()) {
@@ -218,7 +218,7 @@ class DefacerPersistableObjectHandler extends XoopsObjectHandler
         }
 
         $myts = \MyTextSanitizer::getInstance();
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             //identifiers should be textboxes, so sanitize them like that
             $ret[$myrow[$this->keyName]] = empty($this->identifierName) ? 1 : $myts->htmlSpecialChars($myrow[$this->identifierName]);
         }
@@ -259,7 +259,7 @@ class DefacerPersistableObjectHandler extends XoopsObjectHandler
             return $count;
         } else {
             $ret = [];
-            while (list($id, $count) = $this->db->fetchRow($result)) {
+            while (false !== (list($id, $count) = $this->db->fetchRow($result))) {
                 $ret[$id] = $count;
             }
 

@@ -80,14 +80,14 @@ function defacer_index($start = 0, $limit = 0)
     $count = $defacer->getHandler('permission')->getCount();
     $xoopsTpl->assign('count', $count);
 
-    $criteria = new CriteriaCompo();
+    $criteria = new \CriteriaCompo();
     $criteria->setStart($start);
     $criteria->setLimit($limit);
     $objs = $defacer->getHandler('permission')->getObjects($criteria);
 
     if ($count > $limit) {
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-        $nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
+        $nav = new \XoopsPageNav($count, $limit, $start, 'start', 'op=list');
         $xoopsTpl->assign('pagenav', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
     }
 
@@ -217,12 +217,12 @@ function defacer_form($itemid = 0)
         $ftitle = _ADD;
     }
 
-    $form = new XoopsThemeForm($ftitle, 'permission_form', basename(__FILE__), 'post', true);
+    $form = new \XoopsThemeForm($ftitle, 'permission_form', basename(__FILE__), 'post', true);
 
-    $page_select                         = new XoopsFormSelect(_AM_DEFACER_PAGE, 'permission_id', $obj->getVar('permission_id', 'e'));
+    $page_select                         = new \XoopsFormSelect(_AM_DEFACER_PAGE, 'permission_id', $obj->getVar('permission_id', 'e'));
     $page_select->customValidationCode[] = 'var value = document.getElementById(\'permission_id\').value; if (value == 0){alert("' . _AM_DEFACER_SELECTPAGE_ERR . '"); return false;}';
 
-    $criteria = new CriteriaCompo(new Criteria('page_status', 1));
+    $criteria = new \CriteriaCompo(new \Criteria('page_status', 1));
     $criteria->setSort('name');
     $criteria->setOrder('ASC');
     $pageslist = $defacer->getHandler('page')->getList($criteria);
@@ -231,12 +231,12 @@ function defacer_form($itemid = 0)
     $page_select->addOptionArray($pageslist);
     $form->addElement($page_select, true);
 
-    $form->addElement(new XoopsFormSelectGroup(_AM_DEFACER_PERMISSION_GROUPS, 'permission_groups', true, $obj->getVar('permission_groups', 'e'), 8, true));
+    $form->addElement(new \XoopsFormSelectGroup(_AM_DEFACER_PERMISSION_GROUPS, 'permission_groups', true, $obj->getVar('permission_groups', 'e'), 8, true));
 
-    $tray = new XoopsFormElementTray('', '');
-    $tray->addElement(new XoopsFormButton('', 'defacer_button', _SUBMIT, 'submit'));
+    $tray = new \XoopsFormElementTray('', '');
+    $tray->addElement(new \XoopsFormButton('', 'defacer_button', _SUBMIT, 'submit'));
 
-    $btn = new XoopsFormButton('', 'reset', _CANCEL, 'button');
+    $btn = new \XoopsFormButton('', 'reset', _CANCEL, 'button');
     if (!$obj->isNew()) {
         $btn->setExtra('onclick="document.location.href=\'' . basename(__FILE__) . '\'"');
     } else {
@@ -246,10 +246,10 @@ function defacer_form($itemid = 0)
     $form->addElement($tray);
 
     if (!$obj->isNew()) {
-        $form->addElement(new XoopsFormHidden('op', 'editok'));
-        $form->addElement(new XoopsFormHidden('itemid', $itemid));
+        $form->addElement(new \XoopsFormHidden('op', 'editok'));
+        $form->addElement(new \XoopsFormHidden('itemid', $itemid));
     } else {
-        $form->addElement(new XoopsFormHidden('op', 'add'));
+        $form->addElement(new \XoopsFormHidden('op', 'add'));
     }
 
     return $form->render();
