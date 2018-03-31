@@ -22,11 +22,11 @@ require_once __DIR__ . '/admin_header.php';
 $actions = ['list', 'add', 'edit', 'editok', 'del', 'delok'];
 $op      = isset($_REQUEST['op']) && in_array($_REQUEST['op'], $actions) ? $_REQUEST['op'] : 'list';
 
-$itemid = isset($_REQUEST['itemid']) ? (int)$_REQUEST['itemid'] : 0;
-$limit  = isset($_REQUEST['limit']) ? (int)$_REQUEST['limit'] : 15;
-$start  = isset($_REQUEST['start']) ? (int)$_REQUEST['start'] : 0;
+$itemid = \Xmf\Request::getInt('itemid', 0, 'REQUEST');
+$limit  = \Xmf\Request::getInt('limit', 15, 'REQUEST');
+$start  = \Xmf\Request::getInt('start', 0, 'REQUEST');
 
-$itemid = isset($_REQUEST['theme_id']) ? (int)$_REQUEST['theme_id'] : $itemid;
+$itemid = \Xmf\Request::getInt('theme_id', $itemid, 'REQUEST');
 
 $adminObject = \Xmf\Module\Admin::getInstance();
 
