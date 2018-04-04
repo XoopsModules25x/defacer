@@ -17,20 +17,22 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use XoopsModules\Defacer;
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 $debug   = true;
-$defacer = DefacerDefacer::getInstance($debug);
+$helper = Defacer\Helper::getInstance($debug);
 
-if ((null !== $defacer) && is_object($defacer->getModule()) && $defacer->getModule()->getVar('isactive')) {
+if ((null !== $helper) && is_object($helper->getModule()) && $helper->getModule()->getVar('isactive')) {
     $GLOBALS['xoopsLogger']->startTime('Defacer Footer');
 
-    if (!$defacer->getConfig('disable_defacer')) {
+    if (!$helper->getConfig('disable_defacer')) {
 
         //Do metas
-        if (!$defacer->getConfig('disable_metas')) {
-            $objs   = $defacer->getHandler('meta')->getObjects(null, true);
+        if (!$helper->getConfig('disable_metas')) {
+            $objs   = $helper->getHandler('Meta')->getObjects(null, true);
             $pageid = defacer_getPageInfo(array_keys($objs));
 
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {

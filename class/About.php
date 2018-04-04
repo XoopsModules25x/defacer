@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Defacer;
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,7 +24,7 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
  * Class About is a simple class that lets you build an about page
  * @author The SmartFactory <www.smartfactory.ca>
  */
-class DefacerAbout
+class About
 {
     public $_lang_aboutTitle;
     public $_lang_author_info;

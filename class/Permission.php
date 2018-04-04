@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Defacer;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,9 +18,21 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
-require_once __DIR__ . '/admin_header.php';
-// require_once __DIR__ . '/../class/about.php';
+defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-$aboutObj = new Defacer\About();
-$aboutObj->render();
-require_once 'admin_footer.php';
+//if (!class_exists('XoopsPersistableObjectHandler')) {
+//    include __DIR__ . '/object.php';
+//}
+
+class Permission extends \XoopsObject
+{
+    /**
+     * constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->initVar('permission_id', XOBJ_DTYPE_INT, 0, true);
+        $this->initVar('permission_groups', XOBJ_DTYPE_ARRAY, serialize([XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS]));
+    }
+}

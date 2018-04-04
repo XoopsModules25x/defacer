@@ -17,23 +17,25 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use XoopsModules\Defacer;
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 
 function defacer_getPageInfo($ids = [])
 {
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
     $proto   = ('on' === @$_SERVER['HTTPS']) ? 'https' : 'http';
     $fullurl = $proto . '://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-    $url     = ltrim(str_replace($defacer->getConfig('xoops_url'), '', $fullurl), '/');
+    $url     = ltrim(str_replace($helper->getConfig('xoops_url'), '', $fullurl), '/');
 
     $criteria = new \CriteriaCompo(new \Criteria('page_status', 1));
     if (count($ids) > 0) {
         $criteria->add(new \Criteria('page_id', '(' . implode(',', $ids) . ')', 'IN'));
     }
-    $pages = $defacer->getHandler('page')->getObjects($criteria);
+    $pages = $helper->getHandler('Page')->getObjects($criteria);
 
     $pid           = -1;
     $bigone['url'] = '';

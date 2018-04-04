@@ -17,6 +17,8 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use XoopsModules\Defacer;
+
 require_once __DIR__ . '/admin_header.php';
 
 $actions = ['list', 'add', 'edit', 'editok', 'del', 'delok'];
@@ -69,15 +71,15 @@ function defacer_index($start = 0, $limit = 0)
 {
     global $xoopsTpl;
 
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
-    $count = $defacer->getHandler('theme')->getCount();
+    $count = $helper->getHandler('Theme')->getCount();
     $xoopsTpl->assign('count', $count);
 
     $criteria = new \CriteriaCompo();
     $criteria->setStart($start);
     $criteria->setLimit($limit);
-    $objs = $defacer->getHandler('theme')->getObjects($criteria);
+    $objs = $helper->getHandler('Theme')->getObjects($criteria);
 
     if ($count > $limit) {
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
@@ -88,7 +90,7 @@ function defacer_index($start = 0, $limit = 0)
     foreach ($objs as $obj) {
         $item = $obj->getValues();
 
-        $page                 = $defacer->getHandler('page')->get($obj->getVar('theme_id'));
+        $page                 = $helper->getHandler('Page')->get($obj->getVar('theme_id'));
         $item['module']       = $page->getVar('name');
         $item['theme_title']  = $page->getVar('page_title');
         $item['theme_url']    = $page->getVar('page_url');
@@ -114,16 +116,16 @@ function defacer_index($start = 0, $limit = 0)
 
 function defacer_add()
 {
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
-    $obj = $defacer->getHandler('theme')->create();
+    $obj = $helper->getHandler('Theme')->create();
     $obj->setVars($_POST);
 
-    if (!$defacer->getHandler('theme')->insert($obj)) {
+    if (!$helper->getHandler('Theme')->insert($obj)) {
         $msg = _AM_DEFACER_ERROR;
     } else {
         $msg = _AM_DEFACER_DBUPDATED;
@@ -137,16 +139,16 @@ function defacer_add()
  */
 function defacer_edit($itemid)
 {
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
-    $obj = $defacer->getHandler('theme')->get($itemid);
+    $obj = $helper->getHandler('Theme')->get($itemid);
     $obj->setVars($_POST);
 
-    if (!$defacer->getHandler('theme')->insert($obj)) {
+    if (!$helper->getHandler('Theme')->insert($obj)) {
         $msg = _AM_DEFACER_ERROR;
     } else {
         $msg = _AM_DEFACER_DBUPDATED;
@@ -160,7 +162,7 @@ function defacer_edit($itemid)
  */
 function defacer_del($itemid)
 {
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 1, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -170,12 +172,12 @@ function defacer_del($itemid)
         redirect_header(basename(__FILE__), 1);
     }
 
-    $obj = $defacer->getHandler('theme')->get($itemid);
+    $obj = $helper->getHandler('Theme')->get($itemid);
     if (!is_object($obj)) {
         redirect_header(basename(__FILE__), 1);
     }
 
-    if (!$defacer->getHandler('theme')->delete($obj)) {
+    if (!$helper->getHandler('Theme')->delete($obj)) {
         xoops_cp_header();
         xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('theme_id')));
         xoops_cp_footer();
@@ -202,8 +204,8 @@ function defacer_confirmdel($itemid)
  */
 function defacer_form($itemid = 0)
 {
-    $defacer = DefacerDefacer::getInstance();
-    $obj     = $defacer->getHandler('theme')->get($itemid);
+    $helper = Defacer\Helper::getInstance();
+    $obj     = $helper->getHandler('Theme')->get($itemid);
 
     if ($obj->isNew()) {
         $ftitle = _EDIT;
@@ -219,7 +221,7 @@ function defacer_form($itemid = 0)
     $criteria = new \CriteriaCompo(new \Criteria('page_status', 1));
     $criteria->setSort('name');
     $criteria->setOrder('ASC');
-    $pageslist = $defacer->getHandler('page')->getList($criteria);
+    $pageslist = $helper->getHandler('Page')->getList($criteria);
     $list      = ['0' => '--------------------------'];
     $pageslist = $list + $pageslist;
     $page_select->addOptionArray($pageslist);

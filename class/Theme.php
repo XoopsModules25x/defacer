@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Defacer;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -23,7 +24,7 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 //    include __DIR__ . '/object.php';
 //}
 
-class DefacerTheme extends XoopsObject
+class Theme extends \XoopsObject
 {
     /**
      * constructor
@@ -33,42 +34,5 @@ class DefacerTheme extends XoopsObject
         parent::__construct();
         $this->initVar('theme_id', XOBJ_DTYPE_INT, 0, true);
         $this->initVar('theme_name', XOBJ_DTYPE_TXTBOX, null, true, 255);
-    }
-}
-
-class DefacerThemeHandler extends XoopsPersistableObjectHandler
-{
-    public function __construct(\XoopsDatabase $db = null)
-    {
-        parent::__construct($db, 'defacer_theme', 'DefacerTheme', 'theme_id', 'theme_name');
-    }
-
-    public function get($id = null, $fields = null)
-    {
-        $id = (int)$id;
-        if ($id > 0) {
-            $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_theme') . ' WHERE theme_id=' . $id;
-            if ($result = $this->db->query($sql)) {
-                $numrows = $this->db->getRowsNum($result);
-                if (1 == $numrows) {
-                    $obj = new DefacerTheme();
-                    $obj->assignVars($this->db->fetchArray($result));
-
-                    return $obj;
-                }
-            }
-        }
-
-        $obj = $this->create();
-
-        return $obj;
-    }
-
-    public function updateByField($obj, $field_name, $field_value)
-    {
-        $obj->unsetNew();
-        $obj->setVar($field_name, $field_value);
-
-        return $this->insert($obj);
     }
 }

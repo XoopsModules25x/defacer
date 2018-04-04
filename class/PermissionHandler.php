@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Defacer;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,46 +18,31 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use XoopsModules\Defacer;
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 //if (!class_exists('XoopsPersistableObjectHandler')) {
 //    include __DIR__ . '/object.php';
 //}
 
-class DefacerMeta extends XoopsObject
-{
-    /**
-     * constructor
-     */
-    public function __construct()
-    {
-        //        $this->XoopsObject();
-        parent::__construct();
-        $this->initVar('meta_id', XOBJ_DTYPE_INT, 0, true);
-        $this->initVar('meta_sitename', XOBJ_DTYPE_TXTBOX, null, false, 100);
-        $this->initVar('meta_pagetitle', XOBJ_DTYPE_TXTBOX, null, false, 100);
-        $this->initVar('meta_slogan', XOBJ_DTYPE_TXTBOX, null, false, 100);
-        $this->initVar('meta_keywords', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('meta_description', XOBJ_DTYPE_TXTAREA, null, false);
-    }
-}
 
-class DefacerMetaHandler extends XoopsPersistableObjectHandler
+class PermissionHandler extends \XoopsPersistableObjectHandler
 {
     public function __construct(\XoopsDatabase $db = null)
     {
-        parent::__construct($db, 'defacer_meta', 'DefacerMeta', 'meta_id', 'meta_sitename');
+        parent::__construct($db, 'defacer_permission', Permission::class, 'permission_id', 'permission_groups');
     }
 
     public function get($id = null, $fields = null)
     {
         $id = (int)$id;
         if ($id > 0) {
-            $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_meta') . ' WHERE meta_id=' . $id;
+            $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_permission') . ' WHERE permission_id=' . $id;
             if ($result = $this->db->query($sql)) {
                 $numrows = $this->db->getRowsNum($result);
                 if (1 == $numrows) {
-                    $obj = new DefacerMeta();
+                    $obj = new Defacer\Permission();
                     $obj->assignVars($this->db->fetchArray($result));
 
                     return $obj;

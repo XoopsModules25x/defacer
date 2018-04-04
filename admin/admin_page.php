@@ -17,6 +17,8 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use XoopsModules\Defacer;
+
 require_once __DIR__ . '/admin_header.php';
 
 $actions = ['list', 'add', 'edit', 'editok', 'del', 'delok', 'changestatus'];
@@ -72,7 +74,7 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 {
     global $xoopsTpl;
 
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
     $xoopsTpl->assign('query', $query);
 
@@ -82,14 +84,14 @@ function defacer_index($start = 0, $limit = 0, $query = '')
         $criteria->add(new \Criteria('page_title', $myts->addSlashes($query) . '%', 'LIKE'));
     }
 
-    $count = $defacer->getHandler('page')->getCount($criteria);
+    $count = $helper->getHandler('Page')->getCount($criteria);
     $xoopsTpl->assign('count', $count);
 
     $criteria->setStart($start);
     $criteria->setLimit($limit);
     $criteria->setSort('name');
     $criteria->setOrder('ASC');
-    $objs = $defacer->getHandler('page')->getObjects($criteria);
+    $objs = $helper->getHandler('Page')->getObjects($criteria);
 
     if ($count > $limit) {
         require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
@@ -120,7 +122,7 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 
 function defacer_add()
 {
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -130,10 +132,10 @@ function defacer_add()
         $_POST['page_moduleid'] = 1;
     }
 
-    $obj = $defacer->getHandler('page')->create();
+    $obj = $helper->getHandler('Page')->create();
     $obj->setVars($_POST);
 
-    if (!$defacer->getHandler('page')->insert($obj)) {
+    if (!$helper->getHandler('Page')->insert($obj)) {
         $msg = _AM_DEFACER_ERROR;
     } else {
         $msg = _AM_DEFACER_DBUPDATED;
@@ -147,7 +149,7 @@ function defacer_add()
  */
 function defacer_edit($itemid)
 {
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -157,10 +159,10 @@ function defacer_edit($itemid)
         $_POST['page_moduleid'] = 1;
     }
 
-    $obj = $defacer->getHandler('page')->get($itemid);
+    $obj = $helper->getHandler('Page')->get($itemid);
     $obj->setVars($_POST);
 
-    if (!$defacer->getHandler('page')->insert($obj)) {
+    if (!$helper->getHandler('Page')->insert($obj)) {
         $msg = _AM_DEFACER_ERROR;
     } else {
         $msg = _AM_DEFACER_DBUPDATED;
@@ -174,7 +176,7 @@ function defacer_edit($itemid)
  */
 function defacer_del($itemid)
 {
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 1, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -184,36 +186,36 @@ function defacer_del($itemid)
         redirect_header(basename(__FILE__), 1);
     }
 
-    $obj = $defacer->getHandler('page')->get($itemid);
+    $obj = $helper->getHandler('Page')->get($itemid);
     if (!is_object($obj)) {
         redirect_header(basename(__FILE__), 1);
     }
 
-    if (!$defacer->getHandler('page')->delete($obj)) {
+    if (!$helper->getHandler('Page')->delete($obj)) {
         xoops_cp_header();
         xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('page_id')));
         xoops_cp_footer();
         exit();
     }
 
-    $obj = $defacer->getHandler('theme')->get($itemid);
-    if (is_object($obj) && !$defacer->getHandler('theme')->delete($obj)) {
+    $obj = $helper->getHandler('Theme')->get($itemid);
+    if (is_object($obj) && !$helper->getHandler('Theme')->delete($obj)) {
         xoops_cp_header();
         xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('theme_id')));
         xoops_cp_footer();
         exit();
     }
 
-    $obj = $defacer->getHandler('meta')->get($itemid);
-    if (is_object($obj) && !$defacer->getHandler('meta')->delete($obj)) {
+    $obj = $helper->getHandler('Meta')->get($itemid);
+    if (is_object($obj) && !$helper->getHandler('Meta')->delete($obj)) {
         xoops_cp_header();
         xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('meta_id')));
         xoops_cp_footer();
         exit();
     }
 
-    $obj = $defacer->getHandler('permission')->get($itemid);
-    if (is_object($obj) && !$defacer->getHandler('permission')->delete($obj)) {
+    $obj = $helper->getHandler('Permission')->get($itemid);
+    if (is_object($obj) && !$helper->getHandler('Permission')->delete($obj)) {
         xoops_cp_header();
         xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('permission_id')));
         xoops_cp_footer();
@@ -238,12 +240,12 @@ function defacer_confirmdel($itemid)
  */
 function defacer_changestatus($itemid)
 {
-    $defacer = DefacerDefacer::getInstance();
+    $helper = Defacer\Helper::getInstance();
 
-    $obj = $defacer->getHandler('page')->get($itemid);
+    $obj = $helper->getHandler('Page')->get($itemid);
     $obj->setVar('page_status', !$obj->getVar('page_status'));
 
-    if (!$defacer->getHandler('page')->insert($obj)) {
+    if (!$helper->getHandler('Page')->insert($obj)) {
         $msg = _AM_DEFACER_ERROR;
     } else {
         $msg = _AM_DEFACER_DBUPDATED;
@@ -259,8 +261,8 @@ function defacer_changestatus($itemid)
  */
 function defacer_form($itemid = 0)
 {
-    $defacer = DefacerDefacer::getInstance();
-    $obj     = $defacer->getHandler('page')->get($itemid);
+    $helper = Defacer\Helper::getInstance();
+    $obj     = $helper->getHandler('Page')->get($itemid);
 
     if ($obj->isNew()) {
         $ftitle = _EDIT;

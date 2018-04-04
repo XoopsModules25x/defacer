@@ -21,14 +21,14 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 
-if (is_object($defacer->getModule()) && $defacer->getModule()->getVar('isactive')) {
+if (is_object($helper->getModule()) && $helper->getModule()->getVar('isactive')) {
     $GLOBALS['xoopsLogger']->startTime('Defacer Header');
 
-    if (!$defacer->getConfig('disable_defacer')) {
+    if (!$helper->getConfig('disable_defacer')) {
 
         //Do permissions
-        if (!$defacer->getConfig('disable_permissions')) {
-            $objs   = $defacer->getHandler('permission')->getObjects(null, true);
+        if (!$helper->getConfig('disable_permissions')) {
+            $objs   = $helper->getHandler('Permission')->getObjects(null, true);
             $pageid = defacer_getPageInfo(array_keys($objs));
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {
                 $groups = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
@@ -40,8 +40,8 @@ if (is_object($defacer->getModule()) && $defacer->getModule()->getVar('isactive'
         }
 
         //Do themes
-        if (!$defacer->getConfig('disable_themes')) {
-            $objs   = $defacer->getHandler('theme')->getObjects(null, true);
+        if (!$helper->getConfig('disable_themes')) {
+            $objs   = $helper->getHandler('Theme')->getObjects(null, true);
             $pageid = defacer_getPageInfo(array_keys($objs));
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {
                 $theme = $objs[$pageid]->getVar('theme_name');

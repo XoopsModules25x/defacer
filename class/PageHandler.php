@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Defacer;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,34 +18,19 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use XoopsModules\Defacer;
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 //if (!class_exists('XoopsPersistableObjectHandler')) {
 //    include __DIR__ . '/object.php';
 //}
 
-class DefacerPage extends XoopsObject
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->initVar('page_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('page_moduleid', XOBJ_DTYPE_INT, 1, true);
-        $this->initVar('page_title', XOBJ_DTYPE_TXTBOX, '', true, 255);
-        $this->initVar('page_url', XOBJ_DTYPE_TXTBOX, '*', true, 255);
-        $this->initVar('page_status', XOBJ_DTYPE_INT, 1, false);
-
-        //extra vars from modules table
-        $this->initVar('name', XOBJ_DTYPE_TXTBOX, null, true, 255);
-        $this->initVar('dirname', XOBJ_DTYPE_TXTBOX, null, true, 255);
-    }
-}
-
-class DefacerPageHandler extends XoopsPersistableObjectHandler
+class PageHandler extends \XoopsPersistableObjectHandler
 {
     public function __construct(\XoopsDatabase $db = null)
     {
-        parent::__construct($db, 'defacer_page', 'DefacerPage', 'page_id', 'page_title');
+        parent::__construct($db, 'defacer_page', Page::class, 'page_id', 'page_title');
     }
 
     public function get($id = null, $fields = null)
@@ -55,7 +41,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
             if ($result = $this->db->query($sql)) {
                 $numrows = $this->db->getRowsNum($result);
                 if (1 == $numrows) {
-                    $obj = new DefacerPage();
+                    $obj = new Defacer\Page();
                     $obj->assignVars($this->db->fetchArray($result));
 
                     return $obj;
@@ -68,7 +54,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         return $obj;
     }
 
-    public function &getObjects(CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
@@ -94,7 +80,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $page = new DefacerPage();
+            $page = new Defacer\Page();
             $page->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] =& $page;
@@ -107,7 +93,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         return $ret;
     }
 
-    public function getCount(CriteriaElement $criteria = null)
+    public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
@@ -127,7 +113,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         return $count;
     }
 
-    public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0) //getList($criteria = null)
+    public function getList(\CriteriaElement $criteria = null, $limit = 0, $start = 0) //getList($criteria = null)
     {
         $pages =& $this->getObjects($criteria, true);
         $ret   = [];
@@ -151,7 +137,7 @@ class DefacerPageHandler extends XoopsPersistableObjectHandler
         if (!is_array($value)) {
             $value = [$value];
         }
-        /** @var XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $criteria      = new \CriteriaCompo(new \Criteria('hasmain', 1));
         $criteria->add(new \Criteria('isactive', 1));

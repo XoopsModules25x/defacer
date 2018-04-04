@@ -12,7 +12,7 @@
     }
 </script>
 <!--
-<div style="background-image: url(<{$xoops_url}>/modules/defacer/images/pages_big.png);
+<div style="background-image: url(<{$xoops_url}>/modules/defacer/assets/images/pages_big.png);
             background-repeat: no-repeat;
             background-position: left top;
             font-size: 20px;
@@ -49,18 +49,18 @@
                 <td>
                     <{if $item.permission_vurl != '0'}>
                         <a href="<{$item.permission_vurl}>" rel="external"><img
-                                    src="<{$xoops_url}>/modules/defacer/images/view_big.png"
+                                    src="<{$xoops_url}>/modules/defacer/assets/images/view_big.png"
                                     title="<{$smarty.const._PREVIEW}>"
                                     alt="<{$smarty.const._PREVIEW}>"></a>
                     <{else}>
-                        <img src="<{$xoops_url}>/modules/defacer/images/view_big_off.png"
+                        <img src="<{$xoops_url}>/modules/defacer/assets/images/view_big_off.png"
                              title="<{$smarty.const._PREVIEW}>" alt="<{$smarty.const._PREVIEW}>">
                     <{/if}>
                     <a href="admin_permission.php?op=edit&itemid=<{$item.permission_id}>"><img
-                                src="<{$xoops_url}>/modules/defacer/images/edit_big.png" title="<{$smarty.const._EDIT}>"
+                                src="<{$xoops_url}>/modules/defacer/assets/images/edit_big.png" title="<{$smarty.const._EDIT}>"
                                 alt="<{$smarty.const._EDIT}>"></a>
                     <a href="admin_permission.php?op=del&itemid=<{$item.permission_id}>"><img
-                                src="<{$xoops_url}>/modules/defacer/images/delete_big.png"
+                                src="<{$xoops_url}>/modules/defacer/assets/images/delete_big.png"
                                 title="<{$smarty.const._DELETE}>"
                                 alt="<{$smarty.const._DELETE}>"></a>
                 </td>

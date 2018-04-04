@@ -16,6 +16,8 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use XoopsModules\Defacer;
+
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
@@ -81,7 +83,7 @@ class DefacerCorePreload extends XoopsPreloadItem
     {
         if (self::isRedirectActive() && !headers_sent()) {
             global $xoopsConfig;
-            if (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], 'user.php?op=logout')) {
+            if (!empty($_SERVER['REQUEST_URI']) && false !== strpos($_SERVER['REQUEST_URI'], 'user.php?op=logout')) {
                 unset($_SESSION['redirect_message']);
 
                 return;
@@ -101,8 +103,8 @@ class DefacerCorePreload extends XoopsPreloadItem
                 }
             }
 
-            if (!empty($_SERVER['REQUEST_URI']) && $addredirect && strstr($url, 'user.php')) {
-                if (!strstr($url, '?')) {
+            if (!empty($_SERVER['REQUEST_URI']) && $addredirect && false !== strpos($url, 'user.php')) {
+                if (false === strpos($url, '?')) {
                     $url .= '?xoops_redirect=' . urlencode($_SERVER['REQUEST_URI']);
                 } else {
                     $url .= '&amp;xoops_redirect=' . urlencode($_SERVER['REQUEST_URI']);
@@ -114,7 +116,7 @@ class DefacerCorePreload extends XoopsPreloadItem
                     || ($xoopsConfig['use_mysession']
                         && '' != $xoopsConfig['session_name']
                         && !isset($_COOKIE[$xoopsConfig['session_name']])))) {
-                if (!strstr($url, '?')) {
+                if (false === strpos($url, '?')) {
                     $url .= '?' . SID;
                 } else {
                     $url .= '&amp;' . SID;
@@ -182,8 +184,8 @@ class DefacerCorePreload extends XoopsPreloadItem
     public static function isRedirectActive()
     {
         require_once __DIR__ . '/../include/common.php';
-        $defacer = DefacerDefacer::getInstance();
+        $helper = Defacer\Helper::getInstance();
 
-        return $defacer->getConfig('enable_redirect');
+        return $helper->getConfig('enable_redirect');
     }
 }

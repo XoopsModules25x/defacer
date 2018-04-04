@@ -23,9 +23,9 @@ include __DIR__ . '/preloads/autoloader.php';
 /**
  * General Information
  */
-$modversion['version']             = 1.20;
-$modversion['module_status']       = 'RC1';
-$modversion['release_date']        = '2017/07/08';
+$modversion['version']             = 1.30;
+$modversion['module_status']       = 'Beta 1';
+$modversion['release_date']        = '2018/04/03';
 $modversion['name']                = _MI_DEFACER_MD_NAME;
 $modversion['description']         = _MI_DEFACER_MD_DSC;
 $modversion['author']              = 'Trabis (www.xuups.com)';
