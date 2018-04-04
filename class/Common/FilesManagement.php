@@ -23,19 +23,20 @@ trait FilesManagement
      * @param string $folder The full path of the directory to check
      *
      * @return void
+     * @throws \RuntimeException
      */
     public static function createFolder($folder)
     {
         try {
             if (!file_exists($folder)) {
-                if (!is_dir($folder) && !mkdir($folder) && !is_dir($folder)) {
-                    throw new \RuntimeException(sprintf('Unable to create the %s directory', $folder));
+                if (!mkdir($folder) && !is_dir($folder)) {
+                    throw new \UnexpectedValueException(sprintf('Unable to create the %s directory', $folder));
                 }
 
                 file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
             }
         } catch (\Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
+            echo 'Caught exception: ', $e->getMessage(), '<br>';
         }
     }
 
@@ -50,21 +51,22 @@ trait FilesManagement
     }
 
     /**
-     * @param $src
-     * @param $dst
+     * @param null|resource        $src
+     * @param null|resource|string $dest
+     * @throws \UnexpectedValueException
      */
-    public static function recurseCopy($src, $dst)
+    public static function recurseCopy($src = null, $dest = null)
     {
         $dir = opendir($src);
-        //        @mkdir($dst);
-        if (!mkdir($dst) && !is_dir($dst)) {
+        if (!mkdir($dest) && !is_dir($dest)) {
+            throw new \UnexpectedValueException(sprintf('Directory "%s" was not created', $dest));
+        }
             while (false !== ($file = readdir($dir))) {
                 if (('.' !== $file) && ('..' !== $file)) {
                     if (is_dir($src . '/' . $file)) {
-                        self::recurseCopy($src . '/' . $file, $dst . '/' . $file);
+                    self::recurseCopy($src . '/' . $file, $dest . '/' . $file);
                     } else {
-                        copy($src . '/' . $file, $dst . '/' . $file);
-                    }
+                    copy($src . '/' . $file, $dest . '/' . $file);
                 }
             }
         }
@@ -94,8 +96,7 @@ trait FilesManagement
         $dirInfo = new \SplFileInfo($src);
         // validate is a directory
         if ($dirInfo->isDir()) {
-            $fileList = array_diff(scandir($src, SCANDIR_SORT_NONE), ['..', '.']);
-            foreach ($fileList as $k => $v) {
+            foreach (array_diff(scandir($src, SCANDIR_SORT_NONE), ['..', '.']) as $k => $v) {
                 $fileInfo = new \SplFileInfo("{$src}/{$v}");
                 if ($fileInfo->isDir()) {
                     // recursively handle subdirectories
@@ -126,11 +127,11 @@ trait FilesManagement
      *
      * @todo currently won't remove directories with hidden files, should it?
      *
-     * @param string $src directory to remove (delete)
+     * @param null|resource|string $src directory to remove (delete)
      *
      * @return bool true on success
      */
-    public static function rrmdir($src)
+    public static function rrmdir($src = null)
     {
         // Only continue if user is a 'global' Admin
         if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -138,7 +139,7 @@ trait FilesManagement
         }
 
         // If source is not a directory stop processing
-        if (!is_dir($src)) {
+        if (is_string($src) && !is_dir($src)) {
             return false;
         }
 
@@ -165,8 +166,8 @@ trait FilesManagement
     /**
      * Recursively move files from one directory to another
      *
-     * @param string $src  - Source of files being moved
-     * @param string $dest - Destination of files being moved
+     * @param null|string $src  - Source of files being moved
+     * @param null|string $dest - Destination of files being moved
      *
      * @return bool true on success
      */
@@ -178,12 +179,12 @@ trait FilesManagement
         }
 
         // If source is not a directory stop processing
-        if (!is_dir($src)) {
+        if (is_string($src) && !is_dir($src)) {
             return false;
         }
 
         // If the destination directory does not exist and could not be created stop processing
-        if (!is_dir($dest) && !mkdir($dest) && !is_dir($dest)) {
+        if (!is_dir($dest) && !mkdir($dest, 0755) && !is_dir($dest)) {
             return false;
         }
 
@@ -205,15 +206,15 @@ trait FilesManagement
     /**
      * Recursively copy directories and files from one directory to another
      *
-     * @param string $src  - Source of files being moved
-     * @param string $dest - Destination of files being moved
+     * @param null|string $src  - Source of files being moved
+     * @param null|string $dest - Destination of files being moved
      *
      * @uses \Xmf\Module\Helper::getHelper()
      * @uses \Xmf\Module\Helper::isUserAdmin()
      *
      * @return bool true on success
      */
-    public static function rcopy($src, $dest)
+    public static function rcopy($src = null, $dest = null)
     {
         // Only continue if user is a 'global' Admin
         if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -221,12 +222,12 @@ trait FilesManagement
         }
 
         // If source is not a directory stop processing
-        if (!is_dir($src)) {
+        if (is_string($src) && !is_dir($src)) {
             return false;
         }
 
         // If the destination directory does not exist and could not be created stop processing
-        if (!is_dir($dest) && !mkdir($dest) && !is_dir($dest)) {
+        if (!is_dir($dest) && !mkdir($dest, 0755) && !is_dir($dest)) {
             return false;
         }
 
