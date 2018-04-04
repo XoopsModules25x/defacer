@@ -24,6 +24,10 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 //    include __DIR__ . '/object.php';
 //}
 
+/**
+ * Class Theme
+ * @package XoopsModules\Defacer
+ */
 class Theme extends \XoopsObject
 {
     /**

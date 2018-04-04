@@ -232,7 +232,7 @@ function defacer_form($itemid = 0)
     if (is_dir($dirname) && $handle = opendir($dirname)) {
         while (false !== ($file = readdir($handle))) {
             if (!preg_match("/^[\.]{1,2}$/", $file)) {
-                if ('cvs' !== strtolower($file) && is_dir($dirname . $file) && 'z_changeable_theme' !== $file) {
+                if ('z_changeable_theme' !== $file && 'cvs' !== strtolower($file) && is_dir($dirname . $file)) {
                     $dirlist[$file] = $file;
                 }
             }

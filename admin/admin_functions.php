@@ -23,6 +23,10 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once __DIR__ . '/../include/common.php';
 
+/**
+ * @param int    $currentoption
+ * @param string $breadcrumb
+ */
 function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
 {
     $helper = Defacer\Helper::getInstance();

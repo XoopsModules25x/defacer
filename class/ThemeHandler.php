@@ -26,13 +26,26 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 //    include __DIR__ . '/object.php';
 //}
 
+/**
+ * Class ThemeHandler
+ * @package XoopsModules\Defacer
+ */
 class ThemeHandler extends \XoopsPersistableObjectHandler
 {
+    /**
+     * ThemeHandler constructor.
+     * @param \XoopsDatabase|null $db
+     */
     public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'defacer_theme', Theme::class, 'theme_id', 'theme_name');
     }
 
+    /**
+     * @param null $id
+     * @param null $fields
+     * @return \XoopsModules\Defacer\Theme|\XoopsObject
+     */
     public function get($id = null, $fields = null)
     {
         $id = (int)$id;
@@ -54,6 +67,12 @@ class ThemeHandler extends \XoopsPersistableObjectHandler
         return $obj;
     }
 
+    /**
+     * @param $obj
+     * @param $field_name
+     * @param $field_value
+     * @return mixed
+     */
     public function updateByField($obj, $field_name, $field_value)
     {
         $obj->unsetNew();

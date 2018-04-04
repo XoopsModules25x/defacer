@@ -26,14 +26,26 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 //    include __DIR__ . '/object.php';
 //}
 
-
+/**
+ * Class PermissionHandler
+ * @package XoopsModules\Defacer
+ */
 class PermissionHandler extends \XoopsPersistableObjectHandler
 {
+    /**
+     * PermissionHandler constructor.
+     * @param \XoopsDatabase|null $db
+     */
     public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'defacer_permission', Permission::class, 'permission_id', 'permission_groups');
     }
 
+    /**
+     * @param null $id
+     * @param null $fields
+     * @return \XoopsModules\Defacer\Permission|\XoopsObject
+     */
     public function get($id = null, $fields = null)
     {
         $id = (int)$id;
@@ -55,6 +67,12 @@ class PermissionHandler extends \XoopsPersistableObjectHandler
         return $obj;
     }
 
+    /**
+     * @param $obj
+     * @param $field_name
+     * @param $field_value
+     * @return mixed
+     */
     public function updateByField($obj, $field_name, $field_value)
     {
         $obj->unsetNew();

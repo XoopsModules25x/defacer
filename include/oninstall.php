@@ -31,8 +31,8 @@ use XoopsModules\Defacer;
 function xoops_module_pre_install_defacer(\XoopsModule $module)
 {
     include __DIR__ . '/../preloads/autoloader.php';
-    /** @var \Utility $utility */
-    $utility = new \XoopsModules\Defacer\Utility();
+    /** @var Defacer\Utility $utility */
+    $utility = new Defacer\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -62,7 +62,7 @@ function xoops_module_install_defacer(\XoopsModule $module)
 
     $helper       = Defacer\Helper::getInstance();
     $utility      = new Defacer\Utility();
-    $configurator = new Defacer\Configurator();
+    $configurator = new Defacer\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
@@ -102,24 +102,3 @@ function xoops_module_install_defacer(\XoopsModule $module)
 
     return true;
 }
-
-//======================================================
-
-$indexFile = 'index.html';
-$blankFile = $GLOBALS['xoops']->path('modules/randomquote/assets/images/icons/blank.gif');
-
-//Creation du dossier "uploads" pour le module à la racine du site
-$module_uploads = $GLOBALS['xoops']->path('uploads/randomquote');
-if (!is_dir($module_uploads)) {
-    mkdir($module_uploads, 0777);
-}
-chmod($module_uploads, 0777);
-copy($indexFile, $GLOBALS['xoops']->path('uploads/randomquote/index.html'));
-
-//Creation du fichier citas dans uploads
-$module_uploads = $GLOBALS['xoops']->path('uploads/randomquote/citas');
-if (!is_dir($module_uploads)) {
-    mkdir($module_uploads, 0777);
-}
-chmod($module_uploads, 0777);
-copy($indexFile, $GLOBALS['xoops']->path('uploads/randomquote/citas/index.html'));

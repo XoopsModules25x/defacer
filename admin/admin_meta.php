@@ -58,6 +58,11 @@ switch ($op) {
         break;
 }
 
+/**
+ * @param int $start
+ * @param int $limit
+ * @return mixed|string|void
+ */
 function defacer_index($start = 0, $limit = 0)
 {
     global $xoopsTpl;
@@ -125,6 +130,9 @@ function defacer_add()
     redirect_header(basename(__FILE__), 2, $msg);
 }
 
+/**
+ * @param $itemid
+ */
 function defacer_edit($itemid)
 {
     $helper = Defacer\Helper::getInstance();
@@ -145,6 +153,9 @@ function defacer_edit($itemid)
     redirect_header(basename(__FILE__), 2, $msg);
 }
 
+/**
+ * @param $itemid
+ */
 function defacer_del($itemid)
 {
     $helper = Defacer\Helper::getInstance();
@@ -172,6 +183,9 @@ function defacer_del($itemid)
     redirect_header(basename(__FILE__), 2, _AM_DEFACER_DBUPDATED);
 }
 
+/**
+ * @param $itemid
+ */
 function defacer_confirmdel($itemid)
 {
     xoops_cp_header();
@@ -179,6 +193,10 @@ function defacer_confirmdel($itemid)
     xoops_cp_footer();
 }
 
+/**
+ * @param int $itemid
+ * @return string
+ */
 function defacer_form($itemid = 0)
 {
     $helper = Defacer\Helper::getInstance();

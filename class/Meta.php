@@ -26,6 +26,10 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 //    include __DIR__ . '/object.php';
 //}
 
+/**
+ * Class Meta
+ * @package XoopsModules\Defacer
+ */
 class Meta extends \XoopsObject
 {
     /**

@@ -34,7 +34,7 @@ function tableExists($tablename)
 {
     $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
 
-    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0) ? true : false;
+    return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
 }
 
 /**
@@ -73,25 +73,12 @@ function xoops_module_update_defacer(\XoopsModule $module, $previousVersion = nu
 
     /** @var Defacer\Helper $helper */
     /** @var Defacer\Utility $utility */
-    /** @var Defacer\Configurator $configurator */
+    /** @var Defacer\Common\Configurator $configurator */
     $helper  = Defacer\Helper::getInstance();
     $utility = new Defacer\Utility();
-    $configurator = new Defacer\Configurator();
+    $configurator = new Defacer\Common\Configurator();
 
     if ($previousVersion < 240) {
-
-        //rename column EXAMPLE
-        $tables     = new Tables();
-        $table      = 'defacerx_categories';
-        $column     = 'ordre';
-        $newName    = 'order';
-        $attributes = "INT(5) NOT NULL DEFAULT '0'";
-        if ($tables->useTable($table)) {
-            $tables->alterColumn($table, $column, $attributes, $newName);
-            if (!$tables->executeQueue()) {
-                echo '<br>' . _AM_XXXXX_UPGRADEFAILED0 . ' ' . $migrate->getLastError();
-            }
-        }
 
         //delete old HTML templates
         if (count($configurator->templateFolders) > 0) {

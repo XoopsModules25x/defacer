@@ -38,6 +38,9 @@ class DefacerCorePreload extends XoopsPreloadItem
         include __DIR__ . '/autoloader.php';
     }
 
+    /**
+     * @param $args
+     */
     public static function eventCoreHeaderStart($args)
     {
         if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforeheader.php')) {
@@ -45,6 +48,9 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @param $args
+     */
     public static function eventCoreFooterStart($args)
     {
         if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforefooter.php')) {
@@ -52,6 +58,9 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @param $args
+     */
     public static function eventCoreHeaderAddmeta($args)
     {
         if (self::isRedirectActive()) {
@@ -74,11 +83,17 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @param $args
+     */
     public static function eventSystemClassGuiHeader($args)
     {
         self:: eventCoreHeaderAddmeta($args);
     }
 
+    /**
+     * @param $args
+     */
     public function eventCoreIncludeFunctionsRedirectheader($args)
     {
         if (self::isRedirectActive() && !headers_sent()) {
@@ -131,6 +146,9 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @param $args
+     */
     public static function eventCoreClassTheme_blocksRetrieveBlocks($args)
     {
         //$args[2] = array();
@@ -181,6 +199,9 @@ class DefacerCorePreload extends XoopsPreloadItem
         }
     }
 
+    /**
+     * @return mixed
+     */
     public static function isRedirectActive()
     {
         require_once __DIR__ . '/../include/common.php';

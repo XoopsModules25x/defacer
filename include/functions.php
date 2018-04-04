@@ -23,6 +23,10 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 
+/**
+ * @param array $ids
+ * @return int
+ */
 function defacer_getPageInfo($ids = [])
 {
     $helper = Defacer\Helper::getInstance();
@@ -47,7 +51,7 @@ function defacer_getPageInfo($ids = [])
         }
         if ('*' === substr($purl, -1)) {
             $purl = substr($purl, 0, -1);
-            if (substr($url, 0, strlen($purl)) == $purl || substr($fullurl, 0, strlen($purl)) == $purl) {
+            if (0 === strpos($url, $purl) || 0 === strpos($fullurl, $purl)) {
                 $pid = $page->getVar('page_id');
                 if (strlen($purl) >= strlen($bigone['url'])) {
                     $bigone['url'] = $purl;

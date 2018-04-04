@@ -1,7 +1,7 @@
 <?php namespace XoopsModules\Defacer;
 
 use Xmf\Request;
-use XoopsModules\defater;
+use XoopsModules\Defacer;
 use XoopsModules\Defacer\Common;
 
 /**

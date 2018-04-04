@@ -26,13 +26,26 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 //    include __DIR__ . '/object.php';
 //}
 
+/**
+ * Class PageHandler
+ * @package XoopsModules\Defacer
+ */
 class PageHandler extends \XoopsPersistableObjectHandler
 {
+    /**
+     * PageHandler constructor.
+     * @param \XoopsDatabase|null $db
+     */
     public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'defacer_page', Page::class, 'page_id', 'page_title');
     }
 
+    /**
+     * @param null $id
+     * @param null $fields
+     * @return \XoopsModules\Defacer\Page|\XoopsObject
+     */
     public function get($id = null, $fields = null)
     {
         $id = (int)$id;
@@ -54,12 +67,18 @@ class PageHandler extends \XoopsPersistableObjectHandler
         return $obj;
     }
 
+    /**
+     * @param \CriteriaElement|null $criteria
+     * @param bool                  $id_as_key
+     * @param bool                  $as_object
+     * @return array
+     */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'CriteriaElement')) {
             $where = $criteria->renderWhere();
             if ('' != $where) {
                 $where .= ' AND (mid=page_moduleid)';
@@ -93,10 +112,14 @@ class PageHandler extends \XoopsPersistableObjectHandler
         return $ret;
     }
 
+    /**
+     * @param \CriteriaElement|null $criteria
+     * @return int
+     */
     public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (null !== $criteria && is_subclass_of($criteria, 'CriteriaElement')) {
             $where = $criteria->renderWhere();
             if ('' != $where) {
                 $where .= ' AND (mid=page_moduleid)';
@@ -113,6 +136,12 @@ class PageHandler extends \XoopsPersistableObjectHandler
         return $count;
     }
 
+    /**
+     * @param \CriteriaElement|null $criteria
+     * @param int                   $limit
+     * @param int                   $start
+     * @return array
+     */
     public function getList(\CriteriaElement $criteria = null, $limit = 0, $start = 0) //getList($criteria = null)
     {
         $pages =& $this->getObjects($criteria, true);
@@ -124,6 +153,12 @@ class PageHandler extends \XoopsPersistableObjectHandler
         return $ret;
     }
 
+    /**
+     * @param $page
+     * @param $field_name
+     * @param $field_value
+     * @return mixed
+     */
     public function updateByField($page, $field_name, $field_value)
     {
         $page->unsetNew();
@@ -132,6 +167,10 @@ class PageHandler extends \XoopsPersistableObjectHandler
         return $this->insert($page);
     }
 
+    /**
+     * @param null $value
+     * @return string
+     */
     public function getPageSelOptions($value = null)
     {
         if (!is_array($value)) {

@@ -26,14 +26,26 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 //    include __DIR__ . '/object.php';
 //}
 
-
+/**
+ * Class MetaHandler
+ * @package XoopsModules\Defacer
+ */
 class MetaHandler extends \XoopsPersistableObjectHandler
 {
+    /**
+     * MetaHandler constructor.
+     * @param \XoopsDatabase|null $db
+     */
     public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'defacer_meta', Meta::class, 'meta_id', 'meta_sitename');
     }
 
+    /**
+     * @param null $id
+     * @param null $fields
+     * @return \XoopsModules\Defacer\Meta|\XoopsObject
+     */
     public function get($id = null, $fields = null)
     {
         $id = (int)$id;
@@ -55,6 +67,12 @@ class MetaHandler extends \XoopsPersistableObjectHandler
         return $obj;
     }
 
+    /**
+     * @param $obj
+     * @param $field_name
+     * @param $field_value
+     * @return mixed
+     */
     public function updateByField($obj, $field_name, $field_value)
     {
         $obj->unsetNew();
