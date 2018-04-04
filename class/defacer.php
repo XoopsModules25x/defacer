@@ -46,7 +46,7 @@ class DefacerDefacer
 
     public function getModule()
     {
-        if (null == $this->module) {
+        if (null === $this->module) {
             $this->initModule();
         }
 
@@ -55,7 +55,7 @@ class DefacerDefacer
 
     public function getConfig($name = null)
     {
-        if (null == $this->config) {
+        if (null === $this->config) {
             $this->initConfig();
         }
         if (!$name) {
@@ -77,7 +77,7 @@ class DefacerDefacer
 
     public function setConfig($name = null, $value = null)
     {
-        if (null == $this->config) {
+        if (null === $this->config) {
             $this->initConfig();
         }
 

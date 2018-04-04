@@ -22,4 +22,4 @@ require_once __DIR__ . '/admin_header.php';
 
 $aboutObj = new Defacer\About();
 $aboutObj->render();
-require_once 'admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';
