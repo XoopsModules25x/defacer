@@ -41,8 +41,7 @@
 .jGrowl-notification {
     background-color: #000000;
     opacity: 0.9;
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=(0.9 *100));
-    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=(0.9 *100));
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
     zoom: 1;
     width: 250px;
     padding: 10px;
@@ -80,8 +79,7 @@
 .jGrowl-closer {
     background-color: #000000;
     opacity: 0.9;
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=(0.9 *100));
-    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=(0.9 *100));
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
     zoom: 1;
     width: 250px;
     padding: 10px;
