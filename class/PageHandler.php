@@ -68,12 +68,12 @@ class PageHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param \CriteriaElement|null $criteria
+     * @param \CriteriaCompo|null $criteria
      * @param bool                  $id_as_key
      * @param bool                  $as_object
      * @return array
      */
-    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
+    public function &getObjects(\CriteriaCompo $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
