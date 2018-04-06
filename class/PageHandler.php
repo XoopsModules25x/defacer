@@ -68,12 +68,13 @@ class PageHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param \CriteriaCompo|null $criteria
+     * @param \CriteriaCompo|\CriteriaElement|null $criteria
      * @param bool                  $id_as_key
      * @param bool                  $as_object
      * @return array
      */
-    public function &getObjects(\CriteriaCompo $criteria = null, $id_as_key = false, $as_object = true)
+
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
@@ -144,7 +145,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
      */
     public function getList(\CriteriaElement $criteria = null, $limit = 0, $start = 0) //getList($criteria = null)
     {
-        $pages =& $this->getObjects($criteria, true);
+        $pages = $this->getObjects($criteria, true);
         $ret   = [];
         foreach (array_keys($pages) as $i) {
             $ret[$i] = $pages[$i]->getVar('name') . ' -> ' . $pages[$i]->getVar('page_title');
@@ -186,7 +187,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
             $mods     .= '<optgroup label="' . $module->getVar('name') . '">';
             $criteria = new \CriteriaCompo(new \Criteria('page_moduleid', $module->getVar('mid')));
             $criteria->add(new \Criteria('page_status', 1));
-            $pages =& $this->getObjects($criteria);
+            $pages = $this->getObjects($criteria);
             $sel   = '';
             if (in_array($module->getVar('mid') . '-0', $value)) {
                 $sel = ' selected=selected';
@@ -205,7 +206,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
         $module   = $moduleHandler->get(1);
         $criteria = new \CriteriaCompo(new \Criteria('page_moduleid', 1));
         $criteria->add(new \Criteria('page_status', 1));
-        $pages =& $this->getObjects($criteria);
+        $pages = $this->getObjects($criteria);
         $cont  = '';
         if (count($pages) > 0) {
             $cont = '<optgroup label="' . $module->getVar('name') . '">';
