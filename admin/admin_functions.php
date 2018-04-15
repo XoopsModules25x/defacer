@@ -21,7 +21,7 @@ use XoopsModules\Defacer;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-require_once __DIR__ . '/../include/common.php';
+require_once  dirname(__DIR__) . '/include/common.php';
 
 /**
  * @param int    $currentoption

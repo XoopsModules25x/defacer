@@ -27,7 +27,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author          trabis <lusopoemas@gmail.com>
  */
-class DefacerCorePreload extends XoopsPreloadItem
+class DefacerCorePreload extends \XoopsPreloadItem
 {
     // to add PSR-4 autoloader
     /**
@@ -204,7 +204,7 @@ class DefacerCorePreload extends XoopsPreloadItem
      */
     public static function isRedirectActive()
     {
-        require_once __DIR__ . '/../include/common.php';
+        require_once  dirname(__DIR__) . '/include/common.php';
         $helper = Defacer\Helper::getInstance();
 
         return $helper->getConfig('enable_redirect');

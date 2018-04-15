@@ -21,7 +21,7 @@ use XoopsModules\Defacer;
 
 //defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-include __DIR__ . '/../preloads/autoloader.php';
+include  dirname(__DIR__) . '/preloads/autoloader.php';
 
 require __DIR__ . '/functions.php';
 
