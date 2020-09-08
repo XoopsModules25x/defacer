@@ -26,7 +26,10 @@ namespace XoopsModules\Defacer\Common;
 use MyTextSanitizer;
 use XoopsFormDhtmlTextArea;
 use XoopsFormTextArea;
-use XoopsModules\Defacer;
+use XoopsModules\Defacer\{
+    Helper
+};
+/** @var Helper $helper */
 
 /**
  * Class SysUtility
@@ -150,13 +153,13 @@ class SysUtility
     }
 
     /**
-     * @param null       $helper
-     * @param array|null $options
+     * @param null|Helper $helper
+     * @param array|null  $options
      * @return \XoopsFormDhtmlTextArea|\XoopsFormEditor
      */
     public static function getEditor($helper = null, $options = null)
     {
-        /** @var Helper $helper */
+
         if (null === $options) {
             $options           = [];
             $options['name']   = 'Editor';
