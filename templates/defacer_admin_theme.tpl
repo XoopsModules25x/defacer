@@ -69,7 +69,7 @@
     <{/if}>
     <tr>
         <td class="head" colspan="5" align="right">
-            <{$pagenav}>
+            <{$pagenav|default:false}>
             <input type="button" onclick="defacer_showDiv('form','','hiddendiv'); return false;"
                    value="<{$smarty.const._ADD}>">
         </td>
