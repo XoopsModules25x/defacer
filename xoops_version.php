@@ -23,7 +23,7 @@ require_once __DIR__ . '/preloads/autoloader.php';
  * General Information
  */
 $modversion['version']             = 1.30;
-$modversion['module_status']       = 'Beta 1';
+$modversion['module_status']       = 'RC 1';
 $modversion['release_date']        = '2020/09/08';
 $modversion['name']                = _MI_DEFACER_MD_NAME;
 $modversion['description']         = _MI_DEFACER_MD_DSC;
