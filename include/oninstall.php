@@ -31,7 +31,6 @@ use XoopsModules\Defacer\Helper;
 function xoops_module_pre_install_defacer(\XoopsModule $module)
 {
     require dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var Defacer\Utility $utility */
     $utility      = new Defacer\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);

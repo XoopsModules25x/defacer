@@ -38,7 +38,6 @@ function xoops_module_uninstall_defacer(\XoopsModule $module)
     /** @var \XoopsModules\Defacer\Helper $helper */
     $helper = Helper::getInstance();
 
-    /** @var Defacer\Utility $utility */
     $utility = new Defacer\Utility();
 
     $success = true;
