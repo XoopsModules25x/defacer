@@ -1,30 +1,29 @@
 <?php
-/*
- You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code
- which is considered copyrighted (c) material of the original comment or credit authors.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
 
 /**
- * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
- * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Defacer
- * @since           1.0
- * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: admin_about.php 0 2009-06-11 18:47:04Z trabis $
+ * Defacer module
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright    The XOOPS Project (https://xoops.org)
+ * @license      GNU GPL (https://www.gnu.org/licenses/gpl-2.0.html/)
+ * @package      Defacer
+ * @since        2.5.0
+ * @author       trabis <lusopoemas@gmail.com>
  */
+use Xmf\Module\Admin;
+/** @var Admin $adminObject */
 
-include_once dirname(__FILE__) . '/admin_header.php';
-
+require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-$aboutAdmin = new ModuleAdmin();
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject::setPaypal('xoopsfoundation@gmail.com');
+$adminObject->displayAbout(false);
 
-echo $aboutAdmin->addNavigation('about.php');
-echo $aboutAdmin->renderAbout('6KJ7RW5DR3VTJ', false);
-
-include 'admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

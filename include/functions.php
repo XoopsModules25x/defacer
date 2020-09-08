@@ -15,33 +15,38 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: functions.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+use XoopsModules\Defacer\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
-include_once dirname(__FILE__) . '/common.php';
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+
+require_once __DIR__ . '/common.php';
 
 /**
  * @param array $ids
- *
  * @return int
  */
-function defacer_getPageInfo($ids = array())
+function defacer_getPageInfo($ids = [])
 {
-    $defacer =& DefacerDefacer::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = Helper::getInstance();
 
-    $proto    = (@$_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
-    $fullurl  = $proto . "://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-    $url = ltrim(str_replace($defacer->getConfig('xoops_url'), '', $fullurl), '/');
+    $proto   = ('on' === @$_SERVER['HTTPS']) ? 'https' : 'http';
+    $fullurl = $proto . '://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+    $url     = ltrim(str_replace($helper->getConfig('xoops_url'), '', $fullurl), '/');
 
-    $criteria = new CriteriaCompo(new Criteria('page_status', 1));
+    $criteria = new \CriteriaCompo(new \Criteria('page_status', 1));
     if (count($ids) > 0) {
-        $criteria->add(new Criteria('page_id', '(' . implode(',', $ids) . ')', 'IN'));
+        $criteria->add(new \Criteria('page_id', '(' . implode(',', $ids) . ')', 'IN'));
     }
-    $pages = $defacer->getHandler('page')->getObjects($criteria);
+    $pages = $helper->getHandler('Page')->getObjects($criteria);
 
-    $pid = -1;
+    $pid           = -1;
     $bigone['url'] = '';
     $bigone['pid'] = -1;
     foreach ($pages as $page) {
@@ -49,18 +54,18 @@ function defacer_getPageInfo($ids = array())
         if ($page->getVar('page_moduleid') > 1) {
             $purl = 'modules/' . $page->getVar('dirname') . '/' . $purl;
         }
-        if (substr($purl,-1) == '*') {
-            $purl = substr($purl, 0, -1);
-            if (substr($url, 0, strlen($purl)) == $purl || substr($fullurl, 0, strlen($purl)) == $purl) {
+        if ('*' === mb_substr($purl, -1)) {
+            $purl = mb_substr($purl, 0, -1);
+            if (0 === mb_strpos($url, $purl) || 0 === mb_strpos($fullurl, $purl)) {
                 $pid = $page->getVar('page_id');
-                if (strlen($purl) >= strlen($bigone['url'])) {
+                if (mb_strlen($purl) >= mb_strlen($bigone['url'])) {
                     $bigone['url'] = $purl;
                     $bigone['pid'] = $pid;
                 }
             }
         } elseif ($purl == $url || $purl == $fullurl) {
             $pid = $page->getVar('page_id');
-            if (strlen($purl) >= strlen($bigone['url'])) {
+            if (mb_strlen($purl) >= mb_strlen($bigone['url'])) {
                 $bigone['url'] = $purl;
                 $bigone['pid'] = $pid;
             }

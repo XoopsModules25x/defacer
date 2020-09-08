@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Defacer;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,58 +18,46 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: theme.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+use XoopsModules\Defacer;
+
+
 
 //if (!class_exists('XoopsPersistableObjectHandler')) {
-//    include dirname(__FILE__) . '/object.php';
+//    require __DIR__   . '/object.php';
 //}
 
 /**
- * Class DefacerTheme
+ * Class ThemeHandler
+ * @package XoopsModules\Defacer
  */
-class DefacerTheme extends XoopsObject
+class ThemeHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * constructor
+     * ThemeHandler constructor.
+     * @param \XoopsDatabase|null $db
      */
-    function __construct()
+    public function __construct(\XoopsDatabase $db = null)
     {
-        parent::__construct();
-        $this->initVar("theme_id", XOBJ_DTYPE_INT, 0, true);
-        $this->initVar("theme_name", XOBJ_DTYPE_TXTBOX, null, true, 255);
-    }
-}
-
-/**
- * Class DefacerThemeHandler
- */
-class DefacerThemeHandler extends XoopsPersistableObjectHandler
-{
-    /**
-     * @param $db
-     */
-    function DefacerThemeHandler(&$db)
-    {
-        $this->XoopsPersistableObjectHandler($db, 'defacer_theme', 'DefacerTheme', 'theme_id', 'theme_name');
+        parent::__construct($db, 'defacer_theme', Theme::class, 'theme_id', 'theme_name');
     }
 
     /**
-     * @param mixed|null $id
-     *
-     * @return DefacerTheme|object
+     * @param null $id
+     * @param null $fields
+     * @return \XoopsModules\Defacer\Theme|\XoopsObject
      */
-    function &get($id)
+    public function get($id = null, $fields = null)
     {
-        $id = intval($id);
+        $id = (int)$id;
         if ($id > 0) {
-            $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_theme') . ' WHERE theme_id=' . $id;
-            if ($result = $this->db->query($sql)) {
+            $sql    = 'SELECT * FROM ' . $this->db->prefix('defacer_theme') . ' WHERE theme_id=' . $id;
+            $result = $this->db->query($sql);
+            if ($result) {
                 $numrows = $this->db->getRowsNum($result);
-                if ($numrows == 1) {
-                    $obj = new DefacerTheme();
+                if (1 == $numrows) {
+                    $obj = new Theme();
                     $obj->assignVars($this->db->fetchArray($result));
 
                     return $obj;
@@ -83,10 +74,9 @@ class DefacerThemeHandler extends XoopsPersistableObjectHandler
      * @param $obj
      * @param $field_name
      * @param $field_value
-     *
-     * @return bool
+     * @return mixed
      */
-    function updateByField(&$obj, $field_name, $field_value)
+    public function updateByField($obj, $field_name, $field_value)
     {
         $obj->unsetNew();
         $obj->setVar($field_name, $field_value);

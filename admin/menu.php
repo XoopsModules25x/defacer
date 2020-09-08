@@ -15,49 +15,63 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: menu.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+use Xmf\Module\Admin;
+use XoopsModules\Defacer\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
-$dirname = basename(dirname(dirname(__FILE__)));
-$module_handler = xoops_gethandler('module');
-$module = $module_handler->getByDirname($dirname);
-$pathIcon32 = $module->getInfo('icons32');
+//require_once  dirname(__DIR__) . '/include/common.php';
+$helper = Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
 
-$adminmenu = array();
+$pathIcon32 = Admin::menuIconPath('');
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+}
 
-$i = -1;
-++$i;
-$adminmenu[$i]['title'] = _MI_DEFACER_HOME;
-$adminmenu[$i]['link'] = "admin/index.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/home.png' ;
+$adminmenu[] = [
+    'title' => _MI_DEFACER_HOME,
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png',
+];
 
-++$i;
-$adminmenu[$i]['title'] = _MI_DEFACER_PAGEMANAGER;
-$adminmenu[$i]['link'] = "admin/admin_page.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/index.png' ;
+$adminmenu[] = [
+    'title' => _MI_DEFACER_PAGEMANAGER,
+    'link'  => 'admin/admin_page.php',
+    'icon'  => $pathIcon32 . '/index.png',
+];
 
-++$i;
-$adminmenu[$i]['title'] = _MI_DEFACER_THEMEMANAGER;
-$adminmenu[$i]['link'] = "admin/admin_theme.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/watermark.png' ;
-++$i;
-$adminmenu[$i]['title'] = _MI_DEFACER_METAMANAGER;
-$adminmenu[$i]['link'] = "admin/admin_meta.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/administration.png' ;
+$adminmenu[] = [
+    'title' => _MI_DEFACER_THEMEMANAGER,
+    'link'  => 'admin/admin_theme.php',
+    'icon'  => $pathIcon32 . '/watermark.png',
+];
 
-++$i;
-$adminmenu[$i]['title'] = _MI_DEFACER_PERMISSIONMANAGER;
-$adminmenu[$i]['link'] = "admin/admin_permission.php";
-$adminmenu[$i]['icon']  = $pathIcon32.'/permissions.png' ;
+$adminmenu[] = [
+    'title' => _MI_DEFACER_METAMANAGER,
+    'link'  => 'admin/admin_meta.php',
+    'icon'  => $pathIcon32 . '/administration.png',
+];
 
-++$i;
-$adminmenu[$i]['title'] = _MI_DEFACER_ABOUT;
-$adminmenu[$i]['link']  = 'admin/about.php';
-$adminmenu[$i]['icon']  = $pathIcon32.'/about.png';
+$adminmenu[] = [
+    'title' => _MI_DEFACER_PERMISSIONMANAGER,
+    'link'  => 'admin/admin_permission.php',
+    'icon'  => $pathIcon32 . '/permissions.png',
+];
 
-//++$i;
-//$adminmenu[$i]['title'] = _MI_DEFACER_ABOUT;
-//$adminmenu[$i]['link'] = "admin/admin_about.php";
-//$adminmenu[$i]['icon']  = $pathIcon32.'/about.png';
+$adminmenu[] = [
+    'title' => _MI_DEFACER_ABOUT,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png',
+];
+
+//$adminmenu[] = [
+//'title' =>  _MI_DEFACER_ABOUT,
+//'link' =>  "admin/admin_about.php",
+//'icon' =>  $pathIcon32.'/about.png',
+//];

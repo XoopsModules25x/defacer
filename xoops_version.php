@@ -15,120 +15,125 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: xoops_version.php 0 2009-06-11 18:47:04Z trabis $
  */
-
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+require_once __DIR__ . '/preloads/autoloader.php';
 
 /**
  * General Information
  */
-$modversion['name']           = _MI_DEFACER_MD_NAME;
-$modversion['version']        = 1.12;
-$modversion['description']    = _MI_DEFACER_MD_DSC;
-$modversion['author']         = "Trabis (www.xuups.com)";
-$modversion['credits']        = "Trabis (http://www.xuups.com), The ImpressCMS Project (http://www.impresscms.org/) & TheRplima (http://community.impresscms.org/userinfo.php?uid=106)";
-$modversion['help']           = 'page=help';
-$modversion['license']        = 'GNU GPL';
-$modversion['license_url']    = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']       = 0;
-$modversion['dirname']        = basename(dirname(__FILE__));
-$modversion['dirmoduleadmin'] = '/Frameworks/moduleclasses/moduleadmin';
-$modversion['icons16']        = '../../Frameworks/moduleclasses/icons/16';
-$modversion['icons32']        = '../../Frameworks/moduleclasses/icons/32';
-//about
-$modversion["module_status"]       = "Beta 1";
-$modversion["release_date"]        = "2014/04/23";
-$modversion["module_website_url"]  = "www.xoops.org/";
-$modversion["module_website_name"] = "XOOPS";
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = "2.5.7.2";
-$modversion['min_admin']           = '1.1';
-$modversion['min_db']              = array('mysql' => '5.0.7', 'mysqli' => '5.0.7');
+$modversion['version']             = 1.30;
+$modversion['module_status']       = 'Beta 1';
+$modversion['release_date']        = '2020/09/08';
+$modversion['name']                = _MI_DEFACER_MD_NAME;
+$modversion['description']         = _MI_DEFACER_MD_DSC;
+$modversion['author']              = 'Trabis (www.xuups.com)';
+$modversion['credits']             = 'The ImpressCMS Project (http://www.impresscms.org/) & TheRplima (http://community.impresscms.org/userinfo.php?uid=106)';
+$modversion['help']                = 'page=help';
+$modversion['license']             = 'GNU GPL';
+$modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html/';
+$modversion['official']            = 0;
+$modversion['dirname']             = basename(__DIR__);
+$modversion['modicons16']          = 'assets/images/icons/16';
+$modversion['modicons32']          = 'assets/images/icons/32';
+$modversion['module_website_url']  = 'https://xoops.org/';
+$modversion['module_website_name'] = 'XOOPS';
+$modversion['min_php']             = '7.2';
+$modversion['min_xoops']           = '2.5.10';
+$modversion['min_admin']           = '1.2';
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 /**
  * Images information
  */
-
-$modversion['image'] = "assets/images/defacer_slogo.png";
+$modversion['image']     = 'assets/images/logoModule.png';
+$modversion['iconsmall'] = 'assets/images/logo_small.png';
+$modversion['iconbig']   = 'assets/images/logo_big.png';
 
 /**
  * Administrative information
  */
-$modversion['hasAdmin'] = 1;
+$modversion['hasAdmin']    = 1;
 $modversion['system_menu'] = 1;
-$modversion['adminindex'] = "admin/index.php";
-$modversion['adminmenu'] = "admin/menu.php";
+$modversion['adminindex']  = 'admin/index.php';
+$modversion['adminmenu']   = 'admin/menu.php';
 
 /**
  * Database information
  */
-$modversion['sqlfile']['mysql'] = "sql/mysql.sql";
-$modversion['tables'][0] = $modversion['dirname']."_page";
-$modversion['tables'][1] = $modversion['dirname']."_theme";
-$modversion['tables'][2] = $modversion['dirname']."_meta";
-$modversion['tables'][3] = $modversion['dirname']."_permission";
+$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
+$modversion['tables'][0]        = $modversion['dirname'] . '_page';
+$modversion['tables'][1]        = $modversion['dirname'] . '_theme';
+$modversion['tables'][2]        = $modversion['dirname'] . '_meta';
+$modversion['tables'][3]        = $modversion['dirname'] . '_permission';
 
+// ------------------- Help files ------------------- //
+$modversion['helpsection'] = [
+    ['name' => _MI_DEFACER_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_DEFACER_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_DEFACER_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_DEFACER_SUPPORT, 'link' => 'page=support'],
+];
 /**
  * Templates information
  */
-$modversion['templates'][] = array('file' => "defacer_admin_page.tpl", 'description' => "");
-$modversion['templates'][] = array('file' => "defacer_admin_theme.tpl", 'description' => "");
-$modversion['templates'][] = array('file' => "defacer_admin_meta.tpl", 'description' => "");
-$modversion['templates'][] = array('file' => "defacer_admin_permission.tpl", 'description' => "");
-$modversion['templates'][] = array('file' => "defacer_admin_about.tpl", 'description' => "");
+$modversion['templates'][] = ['file' => 'defacer_admin_page.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'defacer_admin_theme.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'defacer_admin_meta.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'defacer_admin_permission.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'defacer_admin_about.tpl', 'description' => ''];
 
 /**
  * Config information
  */
 $i = 0;
-++$i;
-$modversion['config'][$i]['name'] = 'disable_defacer';
-$modversion['config'][$i]['title'] = '_MI_DEFACER_DISDEFACER';
+$i++;
+$modversion['config'][$i]['name']        = 'disable_defacer';
+$modversion['config'][$i]['title']       = '_MI_DEFACER_DISDEFACER';
 $modversion['config'][$i]['description'] = '_MI_PUB_DISDEFACER_DSC';
-$modversion['config'][$i]['formtype'] = 'yesno';
-$modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['formtype']    = 'yesno';
+$modversion['config'][$i]['valuetype']   = 'int';
+$modversion['config'][$i]['default']     = 0;
 
-++$i;
-$modversion['config'][$i]['name'] = 'disable_themes';
-$modversion['config'][$i]['title'] = '_MI_DEFACER_DISTHEMES';
+$i++;
+$modversion['config'][$i]['name']        = 'disable_themes';
+$modversion['config'][$i]['title']       = '_MI_DEFACER_DISTHEMES';
 $modversion['config'][$i]['description'] = '_MI_PUB_DISTHEMES_DSC';
-$modversion['config'][$i]['formtype'] = 'yesno';
-$modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['formtype']    = 'yesno';
+$modversion['config'][$i]['valuetype']   = 'int';
+$modversion['config'][$i]['default']     = 0;
 
-++$i;
-$modversion['config'][$i]['name'] = 'disable_metas';
-$modversion['config'][$i]['title'] = '_MI_DEFACER_DISMETAS';
+$i++;
+$modversion['config'][$i]['name']        = 'disable_metas';
+$modversion['config'][$i]['title']       = '_MI_DEFACER_DISMETAS';
 $modversion['config'][$i]['description'] = '_MI_PUB_DISMETAS_DSC';
-$modversion['config'][$i]['formtype'] = 'yesno';
-$modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['formtype']    = 'yesno';
+$modversion['config'][$i]['valuetype']   = 'int';
+$modversion['config'][$i]['default']     = 0;
 
-++$i;
-$modversion['config'][$i]['name'] = 'disable_permissions';
-$modversion['config'][$i]['title'] = '_MI_DEFACER_DISPERMISSIONS';
+$i++;
+$modversion['config'][$i]['name']        = 'disable_permissions';
+$modversion['config'][$i]['title']       = '_MI_DEFACER_DISPERMISSIONS';
 $modversion['config'][$i]['description'] = '_MI_PUB_DISPERMISSIONS_DSC';
-$modversion['config'][$i]['formtype'] = 'yesno';
-$modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['formtype']    = 'yesno';
+$modversion['config'][$i]['valuetype']   = 'int';
+$modversion['config'][$i]['default']     = 0;
 
-++$i;
-$modversion['config'][$i]['name'] = 'xoops_url';
-$modversion['config'][$i]['title'] = '_MI_DEFACER_XOOPS_URL';
+$i++;
+$modversion['config'][$i]['name']        = 'xoops_url';
+$modversion['config'][$i]['title']       = '_MI_DEFACER_XOOPS_URL';
 $modversion['config'][$i]['description'] = '_MI_PUB_XOOPS_URL_DSC';
-$modversion['config'][$i]['formtype'] = 'textbox';
-$modversion['config'][$i]['valuetype'] = 'text';
-$modversion['config'][$i]['default'] = XOOPS_URL;
+$modversion['config'][$i]['formtype']    = 'textbox';
+$modversion['config'][$i]['valuetype']   = 'text';
+$modversion['config'][$i]['default']     = XOOPS_URL;
 
-++$i;
-$modversion['config'][$i]['name'] = 'enable_redirect';
-$modversion['config'][$i]['title'] = '_MI_DEFACER_ENABLE_REDIRECT';
+$i++;
+$modversion['config'][$i]['name']        = 'enable_redirect';
+$modversion['config'][$i]['title']       = '_MI_DEFACER_ENABLE_REDIRECT';
 $modversion['config'][$i]['description'] = '_MI_PUB_ENABLE_REDIRECT_DSC';
-$modversion['config'][$i]['formtype'] = 'yesno';
-$modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['default'] = 1;
+$modversion['config'][$i]['formtype']    = 'yesno';
+$modversion['config'][$i]['valuetype']   = 'int';
+$modversion['config'][$i]['default']     = 1;
 
 /**
  * Search information
@@ -153,25 +158,25 @@ $modversion['hasNotification'] = 0;
 /**
  * About stuff
  */
-$modversion['status_version'] = "RC";
-$modversion['developer_website_url'] = "http://www.xuups.com";
-$modversion['developer_website_name'] = "Xuups";
-$modversion['developer_email'] = "lusopoemas@gmail.com";
-$modversion['status'] = "Final";
-$modversion['date'] = "05/09/2009";
+$modversion['status_version']         = 'RC';
+$modversion['developer_website_url']  = 'http://www.xuups.com';
+$modversion['developer_website_name'] = 'Xuups';
+$modversion['developer_email']        = 'lusopoemas@gmail.com';
+$modversion['status']                 = 'Final';
+$modversion['date']                   = '05/09/2009';
 
-$modversion['people']['developers'][] = "Trabis";
+$modversion['people']['developers'][] = 'Trabis';
 //$modversion['people']['testers'][] = "";
 //$modversion['people']['translaters'][] = ")";
 //$modversion['people']['documenters'][] = "";
 //$modversion['people']['other'][] = "";
 
-$modversion['demo_site_url'] = "http://www.xuups.com";
-$modversion['demo_site_name'] = "Xuups.com";
-$modversion['support_site_url'] = "http://www.xuups.com/modules/newbb";
-$modversion['support_site_name'] = "Xuups Support Forums";
-$modversion['submit_bug'] = "http://www.xuups.com/modules/newbb/viewforum.php?forum=24";
-$modversion['submit_feature'] = "http://www.xuups.com/modules/newbb/viewforum.php?forum=24";
+$modversion['demo_site_url']     = 'http://www.xuups.com';
+$modversion['demo_site_name']    = 'Xuups.com';
+$modversion['support_site_url']  = 'http://www.xuups.com/modules/newbb';
+$modversion['support_site_name'] = 'Xuups Support Forums';
+$modversion['submit_bug']        = 'http://www.xuups.com/modules/newbb/viewforum.php?forum=24';
+$modversion['submit_feature']    = 'http://www.xuups.com/modules/newbb/viewforum.php?forum=24';
 
-$modversion['author_word'] = "";
-$modversion['warning'] = "";
+$modversion['author_word'] = '';
+$modversion['warning']     = '';

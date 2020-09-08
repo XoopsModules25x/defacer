@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Defacer;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,12 +18,26 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: admin_about.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-include_once dirname(__FILE__) . '/admin_header.php';
-include_once dirname(dirname(__FILE__)) . '/class/about.php';
 
-$aboutObj = new DefacerAbout();
-$aboutObj->render();
-include_once 'admin_footer.php';
+//if (!class_exists('XoopsPersistableObjectHandler')) {
+//    require __DIR__   . '/object.php';
+//}
+
+/**
+ * Class Theme
+ * @package XoopsModules\Defacer
+ */
+class Theme extends \XoopsObject
+{
+    /**
+     * constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->initVar('theme_id', \XOBJ_DTYPE_INT, 0, true);
+        $this->initVar('theme_name', \XOBJ_DTYPE_TXTBOX, null, true, 255);
+    }
+}

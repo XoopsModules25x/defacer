@@ -15,39 +15,44 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: beforeheader.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-defined('XOOPS_ROOT_PATH') || die("XOOPS root path not defined");
+use XoopsModules\Defacer\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
-require dirname(__FILE__) . '/common.php';
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-if (is_object($defacer->getModule()) && $defacer->getModule()->getVar('isactive')) {
+require_once __DIR__ . '/common.php';
+
+/** @var \XoopsModules\Defacer\Helper $helper */
+$helper = Helper::getInstance();
+if (is_object($helper->getModule()) && $helper->getModule()->getVar('isactive')) {
     $GLOBALS['xoopsLogger']->startTime('Defacer Header');
 
-    if (!$defacer->getConfig('disable_defacer')) {
-
+    if (!$helper->getConfig('disable_defacer')) {
         //Do permissions
-        if (!$defacer->getConfig('disable_permissions')) {
-            $objs = $defacer->getHandler('permission')->getObjects(null, true);
+        if (!$helper->getConfig('disable_permissions')) {
+            $objs   = $helper->getHandler('Permission')->getObjects(null, true);
             $pageid = defacer_getPageInfo(array_keys($objs));
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {
-                $groups = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+                $groups = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
                 if (!array_intersect($objs[$pageid]->getVar('permission_groups'), $groups)) {
-                    redirect_header(XOOPS_URL ,3,_NOPERM);
-                    exit();
+                    redirect_header(XOOPS_URL, 3, _NOPERM);
                 }
             }
             unset($objs);
         }
 
         //Do themes
-        if (!$defacer->getConfig('disable_themes')) {
-            $objs = $defacer->getHandler('theme')->getObjects(null, true);
+        if (!$helper->getConfig('disable_themes')) {
+            $objs   = $helper->getHandler('Theme')->getObjects(null, true);
             $pageid = defacer_getPageInfo(array_keys($objs));
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {
                 $theme = $objs[$pageid]->getVar('theme_name');
-                if (empty($theme) || !file_exists(XOOPS_ROOT_PATH . "/themes/{$theme}/theme.html")) {
+                if (empty($theme) || (!file_exists(XOOPS_ROOT_PATH . "/themes/{$theme}/theme.html") && !file_exists(XOOPS_ROOT_PATH . "/themes/{$theme}/theme.tpl"))) {
                     $theme = $GLOBALS['xoopsConfig']['theme_set'];
                 }
                 $GLOBALS['xoopsConfig']['theme_set'] = $theme;
