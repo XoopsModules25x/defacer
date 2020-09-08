@@ -78,6 +78,7 @@ function defacer_index($start = 0, $limit = 0)
 
     $helper = Helper::getInstance();
 
+    /** @var \XoopsGroupHandler $grouplistHandler */
     $grouplistHandler = xoops_getHandler('group');
     $grouplist        = $grouplistHandler->getObjects(null, true);
     foreach (array_keys($grouplist) as $i) {

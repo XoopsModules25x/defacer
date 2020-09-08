@@ -9,10 +9,12 @@
  */
 
 use XoopsModules\Defacer\{
-    Helper
+    Helper,
+    Utility
 };
-/** @var Admin $adminObject */
 /** @var Helper $helper */
+/** @var Utility $utility */
+
 
 /**
  * Prepares system prior to attempting to uninstall module
@@ -38,10 +40,9 @@ function xoops_module_uninstall_defacer(\XoopsModule $module)
 
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    /** @var \XoopsModules\Defacer\Helper $helper */
     $helper = Helper::getInstance();
 
-    $utility = new Defacer\Utility();
+    $utility = new Utility();
 
     $success = true;
     $helper->loadLanguage('admin');

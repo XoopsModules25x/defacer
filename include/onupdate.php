@@ -17,7 +17,13 @@
  * @author       XOOPS Development Team
  */
 
-use XoopsModules\Defacer;
+use XoopsModules\Defacer\{
+    Common\Configurator,
+    Utility
+};
+
+/** @var Utility $utility */
+/** @var Configurator $configurator */
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -44,12 +50,7 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_defacer(\XoopsModule $module)
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    /** @var Defacer\Helper $helper */
-    /** @var Defacer\Utility $utility */
-    $helper  = Defacer\Helper::getInstance();
-    $utility = new Defacer\Utility();
-
+    $utility       = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -65,14 +66,9 @@ function xoops_module_pre_update_defacer(\XoopsModule $module)
  */
 function xoops_module_update_defacer(\XoopsModule $module, $previousVersion = null)
 {
-    $moduleDirName      = basename(dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
-    /** @var Defacer\Helper $helper */ /** @var Defacer\Utility $utility */
-    /** @var Defacer\Common\Configurator $configurator */
-    $helper       = Defacer\Helper::getInstance();
-    $utility      = new Defacer\Utility();
-    $configurator = new Defacer\Common\Configurator();
+    $moduleDirName = basename(dirname(__DIR__));
+    $utility       = new Utility();
+    $configurator  = new Configurator();
 
     if ($previousVersion < 240) {
         //delete old HTML templates
@@ -137,8 +133,8 @@ function xoops_module_update_defacer(\XoopsModule $module, $previousVersion = nu
         $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . '\' AND `tpl_file` LIKE \'%.html%\'';
         $GLOBALS['xoopsDB']->queryF($sql);
 
-    /** @var \XoopsGroupPermHandler $grouppermHandler */
-$grouppermHandler = xoops_getHandler('groupperm');
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
 
         return $grouppermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }

@@ -56,3 +56,24 @@ define('_AM_DEFACER_ERROR_COLUMN', 'Could not create column in database : %s');
 define('_AM_DEFACER_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
 define('_AM_DEFACER_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
 define('_AM_DEFACER_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');
+
+// Blocks & Groups Admin
+define('_AM_TOPPAGE', 'Top Page');
+define('_AM_ALLPAGES', 'All Pages');
+define('_AM_TITLE', 'Title');
+define('_AM_SIDE', 'Side');
+define('_AM_WEIGHT', 'Weight');
+define('_AM_VISIBLE', 'Visible');
+define('_AM_VISIBLEIN', 'Visible In');
+define('_AM_ACTION', 'Action');
+define('_AM_LATESTNEWS_TITLE', 'Title');
+define('_AM_LATESTNEWS_WEIGHT', 'Weight');
+define('_AM_BCACHETIME', 'Cache time');
+define('_AM_LATESTNEWS_ACTION', 'Action');
+define('_AM_ACTIVERIGHTS', 'Module administration rights');
+define('_AM_ACCESSRIGHTS', 'Module access rights');
+define('_AM_BADMIN', 'Blocks administration');
+define('_AM_ADGS', 'Groups');
+define('_AM_ALLMODULEPAGES', 'Groups');
+define('_AM_SYSTEMLEVEL', '_AM_SYSTEMLEVEL');
+define('_AM_ADMINBLOCK', '_AM_ADMINBLOCK');

@@ -17,11 +17,13 @@
  * @author       XOOPS Development Team
  */
 
-use XoopsModules\Defacer\{
-    Helper
+use XoopsModules\Defacer\{Common\Configurator,
+    Helper,
+    Utility
 };
-/** @var Admin $adminObject */
 /** @var Helper $helper */
+/** @var Utility $utility */
+/** @var Configurator $configurator */
 
 //require_once __DIR__ . '/setup.php';
 
@@ -34,7 +36,7 @@ use XoopsModules\Defacer\{
 function xoops_module_pre_install_defacer(\XoopsModule $module)
 {
     require dirname(__DIR__) . '/preloads/autoloader.php';
-    $utility      = new Defacer\Utility();
+    $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -61,10 +63,9 @@ function xoops_module_install_defacer(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var \XoopsModules\Defacer\Helper $helper */
     $helper       = Helper::getInstance();
-    $utility      = new Defacer\Utility();
-    $configurator = new Defacer\Common\Configurator();
+    $utility      = new Utility();
+    $configurator = new Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
@@ -73,8 +74,8 @@ function xoops_module_install_defacer(\XoopsModule $module)
     global $xoopsModule;
     $moduleId = $xoopsModule->getVar('mid');
 
-/** @var \XoopsGroupPermHandler $grouppermHandler */
-$grouppermHandler = xoops_getHandler('groupperm');
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler = xoops_getHandler('groupperm');
     // access rights ------------------------------------------
     $grouppermHandler->addRight($moduleDirName . '_approve', 1, XOOPS_GROUP_ADMIN, $moduleId);
     $grouppermHandler->addRight($moduleDirName . '_submit', 1, XOOPS_GROUP_ADMIN, $moduleId);
