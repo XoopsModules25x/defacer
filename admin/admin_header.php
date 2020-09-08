@@ -23,7 +23,7 @@ use XoopsModules\Defacer\Helper;
 
 //require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 //require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-$path = dirname(dirname(dirname(__DIR__)));
+$path = dirname(__DIR__, 3);
 require_once $path . '/mainfile.php';
 require_once $path . '/include/cp_functions.php';
 require_once $path . '/include/cp_header.php';

@@ -31,7 +31,7 @@ define('_MI_DEFACER_ENABLE_REDIRECT_DSC', 'Enable this to replace default redire
 define('_MI_DEFACER_HOME', 'Home');
 //1.2
 //Help
-define('_MI_DEFACER_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_DEFACER_DIRNAME', basename(dirname(__DIR__, 2)));
 define('_MI_DEFACER_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_DEFACER_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_DEFACER_OVERVIEW', 'Overview');

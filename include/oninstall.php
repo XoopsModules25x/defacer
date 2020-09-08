@@ -53,7 +53,7 @@ function xoops_module_pre_install_defacer(\XoopsModule $module)
  */
 function xoops_module_install_defacer(\XoopsModule $module)
 {
-    require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+    require_once dirname(__DIR__, 3) . '/mainfile.php';
     //    require_once   dirname(__DIR__) . '/config/config.php';
 
     $moduleDirName = basename(dirname(__DIR__));
