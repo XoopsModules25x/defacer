@@ -105,13 +105,11 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 
         if ('*' === mb_substr($obj->getVar('page_url'), -1)) {
             $item['page_vurl'] = 0;
-        } else {
-            if (1 == $obj->getVar('page_moduleid')) {
+        } elseif (1 == $obj->getVar('page_moduleid')) {
                 $item['page_vurl'] = XOOPS_URL . '/' . $obj->getVar('page_url');
             } else {
                 $item['page_vurl'] = XOOPS_URL . '/modules/' . $obj->getVar('dirname') . '/' . $obj->getVar('page_url');
             }
-        }
 
         $xoopsTpl->append('items', $item);
     }
