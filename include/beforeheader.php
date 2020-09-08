@@ -18,13 +18,14 @@
  */
 
 use XoopsModules\Defacer;
+use XoopsModules\Defacer\Helper;
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 
 /** @var \XoopsModules\Defacer\Helper $helper */
-$helper = \XoopsModules\Defacer\Helper::getInstance();
+$helper = Helper::getInstance();
 if (is_object($helper->getModule()) && $helper->getModule()->getVar('isactive')) {
     $GLOBALS['xoopsLogger']->startTime('Defacer Header');
 

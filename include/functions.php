@@ -18,6 +18,7 @@
  */
 
 use XoopsModules\Defacer;
+use XoopsModules\Defacer\Helper;
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
@@ -30,7 +31,7 @@ require_once __DIR__ . '/common.php';
 function defacer_getPageInfo($ids = [])
 {
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     $proto   = ('on' === @$_SERVER['HTTPS']) ? 'https' : 'http';
     $fullurl = $proto . '://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];

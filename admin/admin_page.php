@@ -17,19 +17,22 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use Xmf\Module\Admin;
+use Xmf\Request;
 use XoopsModules\Defacer;
+use XoopsModules\Defacer\Helper;
 
 require_once __DIR__ . '/admin_header.php';
 
 $actions = ['list', 'add', 'edit', 'editok', 'del', 'delok', 'changestatus'];
 $op      = isset($_REQUEST['op']) && in_array($_REQUEST['op'], $actions) ? $_REQUEST['op'] : 'list';
 
-$itemid = \Xmf\Request::getInt('itemid', 0, 'REQUEST');
-$limit  = \Xmf\Request::getInt('limit', 15, 'REQUEST');
-$start  = \Xmf\Request::getInt('start', 0, 'REQUEST');
+$itemid = Request::getInt('itemid', 0, 'REQUEST');
+$limit  = Request::getInt('limit', 15, 'REQUEST');
+$start  = Request::getInt('start', 0, 'REQUEST');
 $query  = isset($_REQUEST['query']) ? trim($_REQUEST['query']) : '';
 
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 switch ($op) {
     case 'list':
@@ -75,7 +78,7 @@ function defacer_index($start = 0, $limit = 0, $query = '')
     global $xoopsTpl;
 
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     $xoopsTpl->assign('query', $query);
 
@@ -122,7 +125,7 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 function defacer_add()
 {
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -150,7 +153,7 @@ function defacer_add()
 function defacer_edit($itemid)
 {
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -178,7 +181,7 @@ function defacer_edit($itemid)
 function defacer_del($itemid)
 {
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 1, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -243,7 +246,7 @@ function defacer_confirmdel($itemid)
 function defacer_changestatus($itemid)
 {
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     $obj = $helper->getHandler('Page')->get($itemid);
     $obj->setVar('page_status', !$obj->getVar('page_status'));
@@ -265,7 +268,7 @@ function defacer_changestatus($itemid)
 function defacer_form($itemid = 0)
 {
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $helper = Helper::getInstance();
     $obj    = $helper->getHandler('Page')->get($itemid);
 
     if ($obj->isNew()) {

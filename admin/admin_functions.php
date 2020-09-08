@@ -19,6 +19,7 @@
  */
 
 use XoopsModules\Defacer;
+use XoopsModules\Defacer\Helper;
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
@@ -31,7 +32,7 @@ require_once dirname(__DIR__) . '/include/common.php';
 function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
 {
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $helper = Helper::getInstance();
     /* Nice buttons styles */
     echo "
     <style type='text/css'>

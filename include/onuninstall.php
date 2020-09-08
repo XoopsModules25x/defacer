@@ -9,6 +9,7 @@
  */
 
 use XoopsModules\Defacer;
+use XoopsModules\Defacer\Helper;
 
 /**
  * Prepares system prior to attempting to uninstall module
@@ -35,7 +36,7 @@ function xoops_module_uninstall_defacer(\XoopsModule $module)
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     /** @var Defacer\Utility $utility */
     $utility = new Defacer\Utility();

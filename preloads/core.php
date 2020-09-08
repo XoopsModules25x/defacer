@@ -17,8 +17,7 @@
  */
 
 use XoopsModules\Defacer;
-
-
+use XoopsModules\Defacer\Helper;
 
 /**
  * Profile core preloads
@@ -212,7 +211,7 @@ class DefacerCorePreload extends \XoopsPreloadItem
     {
         require_once dirname(__DIR__) . '/include/common.php';
         /** @var \XoopsModules\Defacer\Helper $helper */
-        $helper = \XoopsModules\Defacer\Helper::getInstance();
+        $helper = Helper::getInstance();
 
         return $helper->getConfig('enable_redirect');
     }

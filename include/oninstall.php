@@ -18,6 +18,7 @@
  */
 
 use XoopsModules\Defacer;
+use XoopsModules\Defacer\Helper;
 
 //require_once __DIR__ . '/setup.php';
 
@@ -59,7 +60,7 @@ function xoops_module_install_defacer(\XoopsModule $module)
     $moduleDirName = basename(dirname(__DIR__));
 
     /** @var \XoopsModules\Defacer\Helper $helper */
-    $helper       = \XoopsModules\Defacer\Helper::getInstance();
+    $helper       = Helper::getInstance();
     $utility      = new Defacer\Utility();
     $configurator = new Defacer\Common\Configurator();
     // Load language files

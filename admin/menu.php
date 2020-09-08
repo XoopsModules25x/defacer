@@ -17,15 +17,17 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
+use Xmf\Module\Admin;
 use XoopsModules\Defacer;
+use XoopsModules\Defacer\Helper;
 
 //require_once  dirname(__DIR__) . '/include/common.php';
 /** @var \XoopsModules\Defacer\Helper $helper */
-$helper = \XoopsModules\Defacer\Helper::getInstance();
+$helper = Helper::getInstance();
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');
 
-$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+$pathIcon32 = Admin::menuIconPath('');
 if (is_object($helper->getModule())) {
     $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 }
