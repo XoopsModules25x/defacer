@@ -1,4 +1,5 @@
 <?php
+
 define('_AB_DEFACER_AUTHOR_INFO', 'Contributors information');
 define('_AB_DEFACER_AUTHOR_WORD', "The Author's Word");
 define('_AB_DEFACER_BY', 'By');

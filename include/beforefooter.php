@@ -19,17 +19,16 @@
 
 use XoopsModules\Defacer;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
-$debug   = true;
+$debug  = true;
 $helper = Defacer\Helper::getInstance($debug);
 
 if ((null !== $helper) && is_object($helper->getModule()) && $helper->getModule()->getVar('isactive')) {
     $GLOBALS['xoopsLogger']->startTime('Defacer Footer');
 
     if (!$helper->getConfig('disable_defacer')) {
-
         //Do metas
         if (!$helper->getConfig('disable_metas')) {
             $objs   = $helper->getHandler('Meta')->getObjects(null, true);

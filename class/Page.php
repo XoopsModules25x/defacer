@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Defacer;
+<?php
+
+namespace XoopsModules\Defacer;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -20,10 +22,10 @@
 
 use XoopsModules\Defacer;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+
 
 //if (!class_exists('XoopsPersistableObjectHandler')) {
-//    include __DIR__ . '/object.php';
+//    require __DIR__   . '/object.php';
 //}
 
 /**
@@ -35,14 +37,14 @@ class Page extends \XoopsObject
     public function __construct()
     {
         parent::__construct();
-        $this->initVar('page_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('page_moduleid', XOBJ_DTYPE_INT, 1, true);
-        $this->initVar('page_title', XOBJ_DTYPE_TXTBOX, '', true, 255);
-        $this->initVar('page_url', XOBJ_DTYPE_TXTBOX, '*', true, 255);
-        $this->initVar('page_status', XOBJ_DTYPE_INT, 1, false);
+        $this->initVar('page_id', \XOBJ_DTYPE_INT, null, false);
+        $this->initVar('page_moduleid', \XOBJ_DTYPE_INT, 1, true);
+        $this->initVar('page_title', \XOBJ_DTYPE_TXTBOX, '', true, 255);
+        $this->initVar('page_url', \XOBJ_DTYPE_TXTBOX, '*', true, 255);
+        $this->initVar('page_status', \XOBJ_DTYPE_INT, 1, false);
 
         //extra vars from modules table
-        $this->initVar('name', XOBJ_DTYPE_TXTBOX, null, true, 255);
-        $this->initVar('dirname', XOBJ_DTYPE_TXTBOX, null, true, 255);
+        $this->initVar('name', \XOBJ_DTYPE_TXTBOX, null, true, 255);
+        $this->initVar('dirname', \XOBJ_DTYPE_TXTBOX, null, true, 255);
     }
 }

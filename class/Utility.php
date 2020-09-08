@@ -1,19 +1,15 @@
-<?php namespace XoopsModules\Defacer;
+<?php
 
-use Xmf\Request;
+namespace XoopsModules\Defacer;
+
 use XoopsModules\Defacer;
 use XoopsModules\Defacer\Common;
+use XoopsModules\Defacer\Constants;
 
 /**
  * Class Utility
  */
-class Utility
+class Utility extends Common\SysUtility
 {
-    use Common\VersionChecks; //checkVerXoops, checkVerPhp Traits
-
-    use Common\ServerStats; // getServerStats Trait
-
-    use Common\FilesManagement; // Files Management Trait
-
     //--------------- Custom module methods -----------------------------
 }

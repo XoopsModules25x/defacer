@@ -17,11 +17,12 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @author          InstantZero <http://xoops.instant-zero.com>
  */
+
 use XoopsModules\Defacer;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-require_once  dirname(__DIR__) . '/include/common.php';
+require_once dirname(__DIR__) . '/include/common.php';
 
 /**
  * @param int    $currentoption
@@ -29,7 +30,8 @@ require_once  dirname(__DIR__) . '/include/common.php';
  */
 function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
     /* Nice buttons styles */
     echo "
     <style type='text/css'>
@@ -55,7 +57,7 @@ function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
         $tblColors[$currentoption] = 'current';
     }
 
-    if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/' . $helper->getModule()->dirname() . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php')) {
+    if (is_file($filename = XOOPS_ROOT_PATH . '/modules/' . $helper->getModule()->dirname() . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php')) {
         require_once $filename;
     } else {
         require_once XOOPS_ROOT_PATH . '/modules/' . $helper->getModule()->dirname() . '/language/english/modinfo.php';

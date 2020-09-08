@@ -19,16 +19,16 @@
 
 use XoopsModules\Defacer;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 
-$helper =  Defacer\Helper::getInstance();
+/** @var \XoopsModules\Defacer\Helper $helper */
+$helper = \XoopsModules\Defacer\Helper::getInstance();
 if (is_object($helper->getModule()) && $helper->getModule()->getVar('isactive')) {
     $GLOBALS['xoopsLogger']->startTime('Defacer Header');
 
     if (!$helper->getConfig('disable_defacer')) {
-
         //Do permissions
         if (!$helper->getConfig('disable_permissions')) {
             $objs   = $helper->getHandler('Permission')->getObjects(null, true);

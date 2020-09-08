@@ -1,4 +1,5 @@
 <?php
+
 define('_AM_DEFACER_MODULEADMIN', 'Module Administration');
 define('_AM_DEFACER_GENERALSET', 'General Settings');
 

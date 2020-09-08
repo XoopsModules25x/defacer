@@ -18,7 +18,7 @@
 
 use XoopsModules\Defacer;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
 
 /**
  * Profile core preloads
@@ -30,12 +30,13 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 class DefacerCorePreload extends \XoopsPreloadItem
 {
     // to add PSR-4 autoloader
+
     /**
      * @param $args
      */
     public static function eventCoreIncludeCommonEnd($args)
     {
-        include __DIR__ . '/autoloader.php';
+        require_once __DIR__ . '/autoloader.php';
     }
 
     /**
@@ -43,8 +44,8 @@ class DefacerCorePreload extends \XoopsPreloadItem
      */
     public static function eventCoreHeaderStart($args)
     {
-        if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforeheader.php')) {
-            include $filename;
+        if (is_file($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforeheader.php')) {
+            require_once $filename;
         }
     }
 
@@ -53,8 +54,8 @@ class DefacerCorePreload extends \XoopsPreloadItem
      */
     public static function eventCoreFooterStart($args)
     {
-        if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforefooter.php')) {
-            include $filename;
+        if (is_file($filename = XOOPS_ROOT_PATH . '/modules/defacer/include/beforefooter.php')) {
+            require_once $filename;
         }
     }
 
@@ -70,13 +71,17 @@ class DefacerCorePreload extends \XoopsPreloadItem
                 $xoTheme->addScript('browse.php?Frameworks/jquery/plugins/jquery.jgrowl.js');
                 $xoTheme->addStylesheet('modules/defacer/assets/js/jquery.jgrowl.css', ['media' => 'screen']);
 
-                $xoTheme->addScript('', null, '
+                $xoTheme->addScript(
+                    '',
+                    null,
+                    '
                     (function($){
                         $(document).ready(function(){
                             $.jGrowl("' . $_SESSION['redirect_message'] . '", {position:"center"});
                         });
                     })(jQuery);
-                ');
+                '
+                );
                 //{ life:5000 , position:\'bottom-left\', speed:\'slow\' }
                 unset($_SESSION['redirect_message']);
             }
@@ -98,28 +103,28 @@ class DefacerCorePreload extends \XoopsPreloadItem
     {
         if (self::isRedirectActive() && !headers_sent()) {
             global $xoopsConfig;
-            if (!empty($_SERVER['REQUEST_URI']) && false !== strpos($_SERVER['REQUEST_URI'], 'user.php?op=logout')) {
+            if (!empty($_SERVER['REQUEST_URI']) && false !== mb_strpos($_SERVER['REQUEST_URI'], 'user.php?op=logout')) {
                 unset($_SESSION['redirect_message']);
 
                 return;
             }
-            list($url, $time, $message, $addredirect, $allowExternalLink) = $args;
+            [$url, $time, $message, $addredirect, $allowExternalLink] = $args;
 
-            if (preg_match("/[\\0-\\31]|about:|script:/i", $url)) {
+            if (preg_match('/[\\0-\\31]|about:|script:/i', $url)) {
                 if (!preg_match('/^\b(java)?script:([\s]*)history\.go\(-[0-9]*\)([\s]*[;]*[\s]*)$/si', $url)) {
                     $url = XOOPS_URL;
                 }
             }
 
-            if (!$allowExternalLink && $pos = strpos($url, '://')) {
-                $xoopsLocation = substr(XOOPS_URL, strpos(XOOPS_URL, '://') + 3);
-                if (strcasecmp(substr($url, $pos + 3, strlen($xoopsLocation)), $xoopsLocation)) {
+            if (!$allowExternalLink && $pos = mb_strpos($url, '://')) {
+                $xoopsLocation = mb_substr(XOOPS_URL, mb_strpos(XOOPS_URL, '://') + 3);
+                if (strcasecmp(mb_substr($url, $pos + 3, mb_strlen($xoopsLocation)), $xoopsLocation)) {
                     $url = XOOPS_URL;
                 }
             }
 
-            if (!empty($_SERVER['REQUEST_URI']) && $addredirect && false !== strpos($url, 'user.php')) {
-                if (false === strpos($url, '?')) {
+            if (!empty($_SERVER['REQUEST_URI']) && $addredirect && false !== mb_strpos($url, 'user.php')) {
+                if (false === mb_strpos($url, '?')) {
                     $url .= '?xoops_redirect=' . urlencode($_SERVER['REQUEST_URI']);
                 } else {
                     $url .= '&amp;xoops_redirect=' . urlencode($_SERVER['REQUEST_URI']);
@@ -131,7 +136,7 @@ class DefacerCorePreload extends \XoopsPreloadItem
                     || ($xoopsConfig['use_mysession']
                         && '' != $xoopsConfig['session_name']
                         && !isset($_COOKIE[$xoopsConfig['session_name']])))) {
-                if (false === strpos($url, '?')) {
+                if (false === mb_strpos($url, '?')) {
                     $url .= '?' . SID;
                 } else {
                     $url .= '&amp;' . SID;
@@ -151,22 +156,22 @@ class DefacerCorePreload extends \XoopsPreloadItem
      */
     public static function eventCoreClassTheme_blocksRetrieveBlocks($args)
     {
-        //$args[2] = array();
-        $class     =& $args[0];
-        $template  =& $args[1];
-        $block_arr =& $args[2];
+        //$args[2] = [];
+        $class     = &$args[0];
+        $template  = &$args[1];
+        $block_arr = &$args[2];
 
         foreach ($block_arr as $key => $xobject) {
-            if (0 !== strpos($xobject->getVar('title'), '_')) {
+            if (0 !== mb_strpos($xobject->getVar('title'), '_')) {
                 continue;
             }
 
             $block = [
-                    'id'      => $xobject->getVar('bid'),
-                    'module'  => $xobject->getVar('dirname'),
-                    'title'   => ltrim($xobject->getVar('title'), '_'),
-                    'weight'  => $xobject->getVar('weight'),
-                    'lastmod' => $xobject->getVar('last_modified')
+                'id'      => $xobject->getVar('bid'),
+                'module'  => $xobject->getVar('dirname'),
+                'title'   => ltrim($xobject->getVar('title'), '_'),
+                'weight'  => $xobject->getVar('weight'),
+                'lastmod' => $xobject->getVar('last_modified'),
             ];
 
             $bcachetime = (int)$xobject->getVar('bcachetime');
@@ -183,7 +188,8 @@ class DefacerCorePreload extends \XoopsPreloadItem
             $xoopsLogger = XoopsLogger::getInstance();
             if (!$bcachetime || !$template->is_cached($tplName, $cacheid)) {
                 $xoopsLogger->addBlock($xobject->getVar('name'));
-                if ($bresult = $xobject->buildBlock()) {
+                $bresult = $xobject->buildBlock();
+                if ($bresult) {
                     $template->assign('block', $bresult);
                     $block['content'] = $template->fetch($tplName, $cacheid);
                 } else {
@@ -204,8 +210,9 @@ class DefacerCorePreload extends \XoopsPreloadItem
      */
     public static function isRedirectActive()
     {
-        require_once  dirname(__DIR__) . '/include/common.php';
-        $helper = Defacer\Helper::getInstance();
+        require_once dirname(__DIR__) . '/include/common.php';
+        /** @var \XoopsModules\Defacer\Helper $helper */
+        $helper = \XoopsModules\Defacer\Helper::getInstance();
 
         return $helper->getConfig('enable_redirect');
     }

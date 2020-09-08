@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Defacer;
+<?php
+
+namespace XoopsModules\Defacer;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -20,10 +22,10 @@
 
 use XoopsModules\Defacer;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+
 
 //if (!class_exists('XoopsPersistableObjectHandler')) {
-//    include __DIR__ . '/object.php';
+//    require __DIR__   . '/object.php';
 //}
 
 /**
@@ -50,8 +52,9 @@ class MetaHandler extends \XoopsPersistableObjectHandler
     {
         $id = (int)$id;
         if ($id > 0) {
-            $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_meta') . ' WHERE meta_id=' . $id;
-            if ($result = $this->db->query($sql)) {
+            $sql    = 'SELECT * FROM ' . $this->db->prefix('defacer_meta') . ' WHERE meta_id=' . $id;
+            $result = $this->db->query($sql);
+            if ($result) {
                 $numrows = $this->db->getRowsNum($result);
                 if (1 == $numrows) {
                     $obj = new Defacer\Meta();

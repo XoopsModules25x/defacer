@@ -27,12 +27,13 @@ require_once $path . '/include/cp_functions.php';
 require_once $path . '/include/cp_header.php';
 require_once $path . '/class/xoopsformloader.php';
 
-require_once  dirname(__DIR__) . '/include/common.php';
+require_once dirname(__DIR__) . '/include/common.php';
 require_once __DIR__ . '/admin_functions.php';
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-$helper = Defacer\Helper::getInstance();
+/** @var \XoopsModules\Defacer\Helper $helper */
+$helper      = \XoopsModules\Defacer\Helper::getInstance();
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 $pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
@@ -46,7 +47,7 @@ $helper->loadLanguage('main');
 
 $myts = \MyTextSanitizer::getInstance();
 
-if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');
     $xoopsTpl = new \XoopsTpl();
 }

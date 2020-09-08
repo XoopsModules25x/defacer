@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Defacer;
+<?php
+
+namespace XoopsModules\Defacer;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -20,10 +22,10 @@
 
 use XoopsModules\Defacer;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+
 
 //if (!class_exists('XoopsPersistableObjectHandler')) {
-//    include __DIR__ . '/object.php';
+//    require __DIR__   . '/object.php';
 //}
 
 /**
@@ -39,11 +41,11 @@ class Meta extends \XoopsObject
     {
         //        $this->XoopsObject();
         parent::__construct();
-        $this->initVar('meta_id', XOBJ_DTYPE_INT, 0, true);
-        $this->initVar('meta_sitename', XOBJ_DTYPE_TXTBOX, null, false, 100);
-        $this->initVar('meta_pagetitle', XOBJ_DTYPE_TXTBOX, null, false, 100);
-        $this->initVar('meta_slogan', XOBJ_DTYPE_TXTBOX, null, false, 100);
-        $this->initVar('meta_keywords', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('meta_description', XOBJ_DTYPE_TXTAREA, null, false);
+        $this->initVar('meta_id', \XOBJ_DTYPE_INT, 0, true);
+        $this->initVar('meta_sitename', \XOBJ_DTYPE_TXTBOX, null, false, 100);
+        $this->initVar('meta_pagetitle', \XOBJ_DTYPE_TXTBOX, null, false, 100);
+        $this->initVar('meta_slogan', \XOBJ_DTYPE_TXTBOX, null, false, 100);
+        $this->initVar('meta_keywords', \XOBJ_DTYPE_TXTAREA, null, false);
+        $this->initVar('meta_description', \XOBJ_DTYPE_TXTAREA, null, false);
     }
 }

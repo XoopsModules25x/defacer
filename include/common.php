@@ -19,15 +19,14 @@
 
 use XoopsModules\Defacer;
 
-//defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-include  dirname(__DIR__) . '/preloads/autoloader.php';
 
-require __DIR__ . '/functions.php';
+require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
-$moduleDirName = basename(dirname(__DIR__));
-$moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
+require_once __DIR__ . '/functions.php';
 
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
 /** @var \XoopsDatabase $db */
 /** @var Defacer\Helper $helper */
@@ -35,13 +34,13 @@ $moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
 $db      = \XoopsDatabaseFactory::getDatabaseConnection();
 $helper  = Defacer\Helper::getInstance();
 $utility = new Defacer\Utility();
-//$configurator = new xxxxx\Common\Configurator();
+//$configurator = new Defacer\Common\Configurator();
 
 $helper->loadLanguage('common');
 
 //handlers
-//$categoryHandler     = new xxxxx\CategoryHandler($db);
-//$downloadHandler     = new xxxxx\DownloadHandler($db);
+//$categoryHandler     = new Defacer\CategoryHandler($db);
+//$downloadHandler     = new Defacer\DownloadHandler($db);
 
 if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_DIRNAME', basename(dirname(__DIR__)));
@@ -59,8 +58,8 @@ if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_CONSTANTS_DEFINED', 1);
 }
 
-$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
+$pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
+$pathIcon32 = \Xmf\Module\Admin::iconUrl('', 32);
 //$pathModIcon16 = $helper->getModule()->getInfo('modicons16');
 //$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 

@@ -1,4 +1,5 @@
 <?php
+
 define('_MI_DEFACER_MD_NAME', 'Defacer');
 define('_MI_DEFACER_MD_DSC', 'This module enables your site to change themes, metadata and group acess permissions for each given page.');
 
@@ -31,7 +32,7 @@ define('_MI_DEFACER_HOME', 'Home');
 //1.2
 //Help
 define('_MI_DEFACER_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_DEFACER_HELP_HEADER', __DIR__.'/help/helpheader.tpl');
+define('_MI_DEFACER_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_DEFACER_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_DEFACER_OVERVIEW', 'Overview');
 

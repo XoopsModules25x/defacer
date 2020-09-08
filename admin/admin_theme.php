@@ -71,7 +71,8 @@ function defacer_index($start = 0, $limit = 0)
 {
     global $xoopsTpl;
 
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     $count = $helper->getHandler('Theme')->getCount();
     $xoopsTpl->assign('count', $count);
@@ -96,7 +97,7 @@ function defacer_index($start = 0, $limit = 0)
         $item['theme_url']    = $page->getVar('page_url');
         $item['theme_status'] = $page->getVar('page_status');
 
-        if ('*' === substr($page->getVar('page_url'), -1)) {
+        if ('*' === mb_substr($page->getVar('page_url'), -1)) {
             $item['theme_vurl'] = 0;
         } else {
             if (1 == $page->getVar('page_moduleid')) {
@@ -116,7 +117,8 @@ function defacer_index($start = 0, $limit = 0)
 
 function defacer_add()
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -139,7 +141,8 @@ function defacer_add()
  */
 function defacer_edit($itemid)
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -162,7 +165,8 @@ function defacer_edit($itemid)
  */
 function defacer_del($itemid)
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 1, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -204,8 +208,9 @@ function defacer_confirmdel($itemid)
  */
 function defacer_form($itemid = 0)
 {
-    $helper = Defacer\Helper::getInstance();
-    $obj     = $helper->getHandler('Theme')->get($itemid);
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $obj    = $helper->getHandler('Theme')->get($itemid);
 
     if ($obj->isNew()) {
         $ftitle = _EDIT;
@@ -232,7 +237,7 @@ function defacer_form($itemid = 0)
     if (is_dir($dirname) && $handle = opendir($dirname)) {
         while (false !== ($file = readdir($handle))) {
             if (!preg_match("/^[\.]{1,2}$/", $file)) {
-                if ('z_changeable_theme' !== $file && 'cvs' !== strtolower($file) && is_dir($dirname . $file)) {
+                if ('z_changeable_theme' !== $file && 'cvs' !== mb_strtolower($file) && is_dir($dirname . $file)) {
                     $dirlist[$file] = $file;
                 }
             }

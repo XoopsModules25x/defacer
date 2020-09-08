@@ -74,7 +74,8 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 {
     global $xoopsTpl;
 
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     $xoopsTpl->assign('query', $query);
 
@@ -102,7 +103,7 @@ function defacer_index($start = 0, $limit = 0, $query = '')
     foreach ($objs as $obj) {
         $item = $obj->getValues();
 
-        if ('*' === substr($obj->getVar('page_url'), -1)) {
+        if ('*' === mb_substr($obj->getVar('page_url'), -1)) {
             $item['page_vurl'] = 0;
         } else {
             if (1 == $obj->getVar('page_moduleid')) {
@@ -122,7 +123,8 @@ function defacer_index($start = 0, $limit = 0, $query = '')
 
 function defacer_add()
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -149,7 +151,8 @@ function defacer_add()
  */
 function defacer_edit($itemid)
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -176,7 +179,8 @@ function defacer_edit($itemid)
  */
 function defacer_del($itemid)
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 1, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -240,7 +244,8 @@ function defacer_confirmdel($itemid)
  */
 function defacer_changestatus($itemid)
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     $obj = $helper->getHandler('Page')->get($itemid);
     $obj->setVar('page_status', !$obj->getVar('page_status'));
@@ -261,8 +266,9 @@ function defacer_changestatus($itemid)
  */
 function defacer_form($itemid = 0)
 {
-    $helper = Defacer\Helper::getInstance();
-    $obj     = $helper->getHandler('Page')->get($itemid);
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $obj    = $helper->getHandler('Page')->get($itemid);
 
     if ($obj->isNew()) {
         $ftitle = _EDIT;
@@ -275,8 +281,8 @@ function defacer_form($itemid = 0)
     $mid                         = new \XoopsFormSelect(_AM_DEFACER_PAGE_MODULE, 'page_moduleid', $obj->getVar('page_moduleid', 'e'));
     $mid->customValidationCode[] = 'var value = document.getElementById(\'page_moduleid\').value; if (value == 0){alert("' . _AM_DEFACER_SELECTMODULE_ERR . '"); return false;}';
 
-    /** @var XoopsModuleHandler $moduleHandler */
-    $moduleHandler = xoops_getHandler('module');
+    /** @var \XoopsModuleHandler $moduleHandler */
+$moduleHandler = xoops_getHandler('module');
     $criteria      = new \CriteriaCompo(new \Criteria('hasmain', 1));
     $criteria->add(new \Criteria('isactive', 1));
     //$criteria->setSort('name');

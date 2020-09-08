@@ -16,7 +16,9 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  */
+
 use XoopsModules\Defacer;
+
 require_once __DIR__ . '/admin_header.php';
 
 $actions = ['list', 'add', 'edit', 'editok', 'del', 'delok'];
@@ -67,7 +69,8 @@ function defacer_index($start = 0, $limit = 0)
 {
     global $xoopsTpl;
 
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     $count = $helper->getHandler('Meta')->getCount();
     $xoopsTpl->assign('count', $count);
@@ -92,7 +95,7 @@ function defacer_index($start = 0, $limit = 0)
         $item['meta_url']    = $page->getVar('page_url');
         $item['meta_status'] = $page->getVar('page_status');
 
-        if ('*' === substr($page->getVar('page_url'), -1)) {
+        if ('*' === mb_substr($page->getVar('page_url'), -1)) {
             $item['meta_vurl'] = 0;
         } else {
             if (1 == $page->getVar('page_moduleid')) {
@@ -112,7 +115,8 @@ function defacer_index($start = 0, $limit = 0)
 
 function defacer_add()
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -135,7 +139,8 @@ function defacer_add()
  */
 function defacer_edit($itemid)
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -158,7 +163,8 @@ function defacer_edit($itemid)
  */
 function defacer_del($itemid)
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(basename(__FILE__), 1, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -199,8 +205,9 @@ function defacer_confirmdel($itemid)
  */
 function defacer_form($itemid = 0)
 {
-    $helper = Defacer\Helper::getInstance();
-    $obj     = $helper->getHandler('Meta')->get($itemid);
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
+    $obj    = $helper->getHandler('Meta')->get($itemid);
 
     if ($obj->isNew()) {
         $ftitle = _EDIT;

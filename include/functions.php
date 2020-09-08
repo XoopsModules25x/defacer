@@ -19,7 +19,7 @@
 
 use XoopsModules\Defacer;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 
@@ -29,7 +29,8 @@ require_once __DIR__ . '/common.php';
  */
 function defacer_getPageInfo($ids = [])
 {
-    $helper = Defacer\Helper::getInstance();
+    /** @var \XoopsModules\Defacer\Helper $helper */
+    $helper = \XoopsModules\Defacer\Helper::getInstance();
 
     $proto   = ('on' === @$_SERVER['HTTPS']) ? 'https' : 'http';
     $fullurl = $proto . '://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
@@ -49,18 +50,18 @@ function defacer_getPageInfo($ids = [])
         if ($page->getVar('page_moduleid') > 1) {
             $purl = 'modules/' . $page->getVar('dirname') . '/' . $purl;
         }
-        if ('*' === substr($purl, -1)) {
-            $purl = substr($purl, 0, -1);
-            if (0 === strpos($url, $purl) || 0 === strpos($fullurl, $purl)) {
+        if ('*' === mb_substr($purl, -1)) {
+            $purl = mb_substr($purl, 0, -1);
+            if (0 === mb_strpos($url, $purl) || 0 === mb_strpos($fullurl, $purl)) {
                 $pid = $page->getVar('page_id');
-                if (strlen($purl) >= strlen($bigone['url'])) {
+                if (mb_strlen($purl) >= mb_strlen($bigone['url'])) {
                     $bigone['url'] = $purl;
                     $bigone['pid'] = $pid;
                 }
             }
         } elseif ($purl == $url || $purl == $fullurl) {
             $pid = $page->getVar('page_id');
-            if (strlen($purl) >= strlen($bigone['url'])) {
+            if (mb_strlen($purl) >= mb_strlen($bigone['url'])) {
                 $bigone['url'] = $purl;
                 $bigone['pid'] = $pid;
             }

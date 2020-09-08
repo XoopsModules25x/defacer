@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Defacer;
+<?php
+
+namespace XoopsModules\Defacer;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -20,10 +22,10 @@
 
 use XoopsModules\Defacer;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+
 
 //if (!class_exists('XoopsPersistableObjectHandler')) {
-//    include __DIR__ . '/object.php';
+//    require __DIR__   . '/object.php';
 //}
 
 /**
@@ -50,8 +52,9 @@ class PageHandler extends \XoopsPersistableObjectHandler
     {
         $id = (int)$id;
         if ($id > 0) {
-            $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules') . ' WHERE page_id=' . $id . ' AND mid=page_moduleid';
-            if ($result = $this->db->query($sql)) {
+            $sql    = 'SELECT * FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules') . ' WHERE page_id=' . $id . ' AND mid=page_moduleid';
+            $result = $this->db->query($sql);
+            if ($result) {
                 $numrows = $this->db->getRowsNum($result);
                 if (1 == $numrows) {
                     $obj = new Defacer\Page();
@@ -69,17 +72,16 @@ class PageHandler extends \XoopsPersistableObjectHandler
 
     /**
      * @param \CriteriaCompo|\CriteriaElement|null $criteria
-     * @param bool                  $id_as_key
-     * @param bool                  $as_object
+     * @param bool                                 $id_as_key
+     * @param bool                                 $as_object
      * @return array
      */
-
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
-        if (null !== $criteria && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (null !== $criteria && $criteria instanceof \CriteriaElement) {
             $where = $criteria->renderWhere();
             if ('' != $where) {
                 $where .= ' AND (mid=page_moduleid)';
@@ -103,9 +105,9 @@ class PageHandler extends \XoopsPersistableObjectHandler
             $page = new Defacer\Page();
             $page->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $page;
+                $ret[] = &$page;
             } else {
-                $ret[$myrow['page_id']] =& $page;
+                $ret[$myrow['page_id']] = &$page;
             }
             unset($page);
         }
@@ -120,7 +122,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
     public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('defacer_page') . ', ' . $this->db->prefix('modules');
-        if (null !== $criteria && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (null !== $criteria && $criteria instanceof \CriteriaElement) {
             $where = $criteria->renderWhere();
             if ('' != $where) {
                 $where .= ' AND (mid=page_moduleid)';
@@ -132,7 +134,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return 0;
         }
-        list($count) = $this->db->fetchRow($result);
+        [$count] = $this->db->fetchRow($result);
 
         return $count;
     }
@@ -147,7 +149,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
     {
         $pages = $this->getObjects($criteria, true);
         $ret   = [];
-        foreach (array_keys($pages) as $i) {
+        foreach (\array_keys($pages) as $i) {
             $ret[$i] = $pages[$i]->getVar('name') . ' -> ' . $pages[$i]->getVar('page_title');
         }
 
@@ -174,11 +176,11 @@ class PageHandler extends \XoopsPersistableObjectHandler
      */
     public function getPageSelOptions($value = null)
     {
-        if (!is_array($value)) {
+        if (!\is_array($value)) {
             $value = [$value];
         }
         /** @var \XoopsModuleHandler $moduleHandler */
-        $moduleHandler = xoops_getHandler('module');
+        $moduleHandler = \xoops_getHandler('module');
         $criteria      = new \CriteriaCompo(new \Criteria('hasmain', 1));
         $criteria->add(new \Criteria('isactive', 1));
         $module_list = $moduleHandler->getObjects($criteria);
@@ -189,13 +191,13 @@ class PageHandler extends \XoopsPersistableObjectHandler
             $criteria->add(new \Criteria('page_status', 1));
             $pages = $this->getObjects($criteria);
             $sel   = '';
-            if (in_array($module->getVar('mid') . '-0', $value)) {
+            if (\in_array($module->getVar('mid') . '-0', $value)) {
                 $sel = ' selected=selected';
             }
             $mods .= '<option value="' . $module->getVar('mid') . '-0"' . $sel . '>' . _AM_ALLPAGES . '</option>';
             foreach ($pages as $page) {
                 $sel = '';
-                if (in_array($module->getVar('mid') . '-' . $page->getVar('page_id'), $value)) {
+                if (\in_array($module->getVar('mid') . '-' . $page->getVar('page_id'), $value)) {
                     $sel = ' selected=selected';
                 }
                 $mods .= '<option value="' . $module->getVar('mid') . '-' . $page->getVar('page_id') . '"' . $sel . '>' . $page->getVar('page_title') . '</option>';
@@ -208,16 +210,16 @@ class PageHandler extends \XoopsPersistableObjectHandler
         $criteria->add(new \Criteria('page_status', 1));
         $pages = $this->getObjects($criteria);
         $cont  = '';
-        if (count($pages) > 0) {
+        if (\count($pages) > 0) {
             $cont = '<optgroup label="' . $module->getVar('name') . '">';
             $sel  = '';
-            if (in_array($module->getVar('mid') . '-0', $value)) {
+            if (\in_array($module->getVar('mid') . '-0', $value)) {
                 $sel = ' selected=selected';
             }
             $cont .= '<option value="' . $module->getVar('mid') . '-0"' . $sel . '>' . _AM_ALLPAGES . '</option>';
             foreach ($pages as $page) {
                 $sel = '';
-                if (in_array($module->getVar('mid') . '-' . $page->getVar('page_id'), $value)) {
+                if (\in_array($module->getVar('mid') . '-' . $page->getVar('page_id'), $value)) {
                     $sel = ' selected=selected';
                 }
                 $cont .= '<option value="' . $module->getVar('mid') . '-' . $page->getVar('page_id') . '"' . $sel . '>' . $page->getVar('page_title') . '</option>';
@@ -225,10 +227,10 @@ class PageHandler extends \XoopsPersistableObjectHandler
             $cont .= '</optgroup>';
         }
         $sel = $sel1 = '';
-        if (in_array('0-1', $value)) {
+        if (\in_array('0-1', $value)) {
             $sel = ' selected=selected';
         }
-        if (in_array('0-0', $value)) {
+        if (\in_array('0-0', $value)) {
             $sel1 = ' selected=selected';
         }
         $ret = '<option value="0-1"' . $sel . '>' . _AM_TOPPAGE . '</option><option value="0-0"' . $sel1 . '>' . _AM_ALLPAGES . '</option>';
