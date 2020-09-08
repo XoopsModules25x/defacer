@@ -18,8 +18,11 @@
  * @author          InstantZero <http://xoops.instant-zero.com>
  */
 
-use XoopsModules\Defacer;
-use XoopsModules\Defacer\Helper;
+use XoopsModules\Defacer\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 

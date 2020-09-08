@@ -19,8 +19,11 @@
 
 use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Defacer;
-use XoopsModules\Defacer\Helper;
+use XoopsModules\Defacer\{Helper
+};
+
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
 require_once __DIR__ . '/admin_header.php';
 
@@ -73,7 +76,6 @@ function defacer_index($start = 0, $limit = 0)
 {
     global $xoopsTpl;
 
-    /** @var \XoopsModules\Defacer\Helper $helper */
     $helper = Helper::getInstance();
 
     $grouplistHandler = xoops_getHandler('group');
@@ -109,10 +111,10 @@ function defacer_index($start = 0, $limit = 0)
         if ('*' === mb_substr($page->getVar('page_url'), -1)) {
             $item['permission_vurl'] = 0;
         } elseif (1 == $page->getVar('page_moduleid')) {
-                $item['permission_vurl'] = XOOPS_URL . '/' . $page->getVar('page_url');
-            } else {
-                $item['permission_vurl'] = XOOPS_URL . '/modules/' . $page->getVar('dirname') . '/' . $page->getVar('page_url');
-            }
+            $item['permission_vurl'] = XOOPS_URL . '/' . $page->getVar('page_url');
+        } else {
+            $item['permission_vurl'] = XOOPS_URL . '/modules/' . $page->getVar('dirname') . '/' . $page->getVar('page_url');
+        }
 
         $xoopsTpl->append('items', $item);
     }
@@ -124,7 +126,6 @@ function defacer_index($start = 0, $limit = 0)
 
 function defacer_add()
 {
-    /** @var \XoopsModules\Defacer\Helper $helper */
     $helper = Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -148,7 +149,6 @@ function defacer_add()
  */
 function defacer_edit($itemid)
 {
-    /** @var \XoopsModules\Defacer\Helper $helper */
     $helper = Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -172,7 +172,6 @@ function defacer_edit($itemid)
  */
 function defacer_del($itemid)
 {
-    /** @var \XoopsModules\Defacer\Helper $helper */
     $helper = Helper::getInstance();
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -215,7 +214,6 @@ function defacer_confirmdel($itemid)
  */
 function defacer_form($itemid = 0)
 {
-    /** @var \XoopsModules\Defacer\Helper $helper */
     $helper = Helper::getInstance();
     $obj    = $helper->getHandler('Permission')->get($itemid);
 

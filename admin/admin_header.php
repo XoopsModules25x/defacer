@@ -18,23 +18,23 @@
  */
 
 use Xmf\Module\Admin;
-use XoopsModules\Defacer;
-use XoopsModules\Defacer\Helper;
+use XoopsModules\Defacer\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
-//require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-//require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-$path = dirname(__DIR__, 3);
-require_once $path . '/mainfile.php';
-require_once $path . '/include/cp_functions.php';
-require_once $path . '/include/cp_header.php';
-require_once $path . '/class/xoopsformloader.php';
+require dirname(__DIR__) . '/preloads/autoloader.php';
 
-require_once dirname(__DIR__) . '/include/common.php';
+require dirname(__DIR__, 3) . '/include/cp_header.php';
+require dirname(__DIR__, 3) . '/class/xoopsformloader.php';
+require  dirname(__DIR__) . '/include/common.php';
+
 require_once __DIR__ . '/admin_functions.php';
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-/** @var \XoopsModules\Defacer\Helper $helper */
+/** @var Helper $helper */
 $helper      = Helper::getInstance();
 $adminObject = Admin::getInstance();
 

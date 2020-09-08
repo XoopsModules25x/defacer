@@ -18,11 +18,13 @@
  */
 
 use Xmf\Module\Admin;
-use XoopsModules\Defacer;
-use XoopsModules\Defacer\Helper;
+use XoopsModules\Defacer\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
 //require_once  dirname(__DIR__) . '/include/common.php';
-/** @var \XoopsModules\Defacer\Helper $helper */
 $helper = Helper::getInstance();
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');

@@ -8,8 +8,11 @@
  * @link            https://xoops.org XOOPS
  */
 
-use XoopsModules\Defacer;
-use XoopsModules\Defacer\Helper;
+use XoopsModules\Defacer\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
 /**
  * Prepares system prior to attempting to uninstall module

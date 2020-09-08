@@ -17,8 +17,11 @@
  * @author       XOOPS Development Team
  */
 
-use XoopsModules\Defacer;
-use XoopsModules\Defacer\Helper;
+use XoopsModules\Defacer\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
 //require_once __DIR__ . '/setup.php';
 

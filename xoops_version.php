@@ -24,7 +24,7 @@ require_once __DIR__ . '/preloads/autoloader.php';
  */
 $modversion['version']             = 1.30;
 $modversion['module_status']       = 'Beta 1';
-$modversion['release_date']        = '2018/04/03';
+$modversion['release_date']        = '2020/09/08';
 $modversion['name']                = _MI_DEFACER_MD_NAME;
 $modversion['description']         = _MI_DEFACER_MD_DSC;
 $modversion['author']              = 'Trabis (www.xuups.com)';
