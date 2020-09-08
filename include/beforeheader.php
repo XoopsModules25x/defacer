@@ -18,17 +18,18 @@
  */
 
 use XoopsModules\Defacer\{
-    Helper
+    Helper,
+    Utility
 };
-/** @var Admin $adminObject */
 /** @var Helper $helper */
+/** @var Utility $utility */
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 
-/** @var \XoopsModules\Defacer\Helper $helper */
 $helper = Helper::getInstance();
+$utility = new Utility();
 if (is_object($helper->getModule()) && $helper->getModule()->getVar('isactive')) {
     $GLOBALS['xoopsLogger']->startTime('Defacer Header');
 
@@ -36,7 +37,7 @@ if (is_object($helper->getModule()) && $helper->getModule()->getVar('isactive'))
         //Do permissions
         if (!$helper->getConfig('disable_permissions')) {
             $objs   = $helper->getHandler('Permission')->getObjects(null, true);
-            $pageid = defacer_getPageInfo(array_keys($objs));
+            $pageid = $utility::getPageInfo(array_keys($objs));
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {
                 $groups = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
                 if (!array_intersect($objs[$pageid]->getVar('permission_groups'), $groups)) {
