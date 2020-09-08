@@ -17,13 +17,19 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
-use XoopsModules\Defacer;
+use XoopsModules\Defacer\{
+    Helper,
+    Utility
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once __DIR__ . '/common.php';
 $debug  = true;
-$helper = Defacer\Helper::getInstance($debug);
+$helper = Helper::getInstance($debug);
+$utility = new Utility();
 
 if ((null !== $helper) && is_object($helper->getModule()) && $helper->getModule()->getVar('isactive')) {
     $GLOBALS['xoopsLogger']->startTime('Defacer Footer');
@@ -32,7 +38,7 @@ if ((null !== $helper) && is_object($helper->getModule()) && $helper->getModule(
         //Do metas
         if (!$helper->getConfig('disable_metas')) {
             $objs   = $helper->getHandler('Meta')->getObjects(null, true);
-            $pageid = defacer_getPageInfo(array_keys($objs));
+            $pageid = $utility::getPageInfo(array_keys($objs));
 
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {
                 $obj = $objs[$pageid];
