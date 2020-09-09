@@ -23,8 +23,6 @@ use XoopsModules\Defacer;
 
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
-require_once __DIR__ . '/functions.php';
-
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
