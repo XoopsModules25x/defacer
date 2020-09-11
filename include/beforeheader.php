@@ -50,7 +50,7 @@ if (is_object($helper->getModule()) && $helper->getModule()->getVar('isactive'))
         //Do themes
         if (!$helper->getConfig('disable_themes')) {
             $objs   = $helper->getHandler('Theme')->getObjects(null, true);
-            $pageid = defacer_getPageInfo(array_keys($objs));
+            $pageid = $utility::getPageInfo(array_keys($objs));
             if (isset($objs[$pageid]) && is_object($objs[$pageid])) {
                 $theme = $objs[$pageid]->getVar('theme_name');
                 if (empty($theme) || (!file_exists(XOOPS_ROOT_PATH . "/themes/{$theme}/theme.html") && !file_exists(XOOPS_ROOT_PATH . "/themes/{$theme}/theme.tpl"))) {
